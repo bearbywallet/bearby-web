@@ -4,7 +4,6 @@
 
 <section id="features" class="features">
 	<div class="features__inner">
-		<!-- 2×2 security features grid -->
 		<ul class="features__grid" role="list">
 			{#each features as feature (feature.title)}
 				<li class="features__card">
@@ -14,17 +13,16 @@
 			{/each}
 		</ul>
 
-		<!-- Large showcase cards: In-app dApps + Native Bitcoin -->
 		<div class="showcase">
 			<div class="showcase__card showcase__card--dapps">
 				<div class="showcase__content">
 					<h3 class="showcase__title">In app dApps and browsers</h3>
 					<p class="showcase__body">
-						Summarize long texts in seconds or generate professional content from scratch. Perfect for
-						professionals!
+						Access decentralized applications directly within Bearby. Browse, connect, and interact
+						with dApps seamlessly without leaving your wallet.
 					</p>
 				</div>
-				<div class="showcase__visual showcase__visual--phone" aria-hidden="true">
+				<div class="showcase__visual" aria-hidden="true">
 					<div class="mock-phone">
 						<div class="mock-phone__screen">
 							<div class="mock-phone__toolbar">
@@ -46,11 +44,11 @@
 				<div class="showcase__content">
 					<h3 class="showcase__title">Native Bitcoin Support</h3>
 					<p class="showcase__body">
-						Native Bitcoin Support to store and trade your bitcoin securely. Designed to protect assets
-						from Quantum risks.
+						Native Bitcoin Support to store and trade your bitcoin securely. Designed to protect
+						assets from Quantum risks.
 					</p>
 				</div>
-				<div class="showcase__visual showcase__visual--device" aria-hidden="true">
+				<div class="showcase__visual" aria-hidden="true">
 					<div class="mock-hw">
 						<div class="mock-hw__screen"></div>
 						<div class="mock-hw__buttons">
@@ -66,27 +64,26 @@
 
 <style>
 	.features {
-		padding: var(--space-2xl) var(--space-md);
-		border-top: 1px solid var(--color-border);
+		padding: 100px 20px;
+		background: #000;
 	}
 
 	.features__inner {
-		max-width: var(--breakpoint-desktop);
+		max-width: 1140px;
 		margin: 0 auto;
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-lg);
+		gap: 40px;
 	}
 
-	/* ── 2×2 security grid ── */
 	.features__grid {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 1px;
-		background-color: var(--color-border);
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius-lg);
+		background: rgba(230, 230, 230, 0.1);
+		border-radius: 24px;
 		overflow: hidden;
+		border: 1px solid rgba(230, 230, 230, 0.1);
 	}
 
 	@media (max-width: 600px) {
@@ -96,28 +93,34 @@
 	}
 
 	.features__card {
-		background: var(--color-bg);
-		padding: var(--space-md);
+		background: #000;
+		padding: 24px;
+		transition: background 0.2s;
+	}
+
+	.features__card:hover {
+		background: rgba(250, 250, 250, 0.02);
 	}
 
 	.features__card-title {
+		font-family: var(--font-heading);
 		font-size: 1rem;
 		font-weight: 400;
 		color: var(--color-text);
-		margin-bottom: 0.5rem;
+		margin: 0 0 8px 0;
 	}
 
 	.features__card-body {
 		font-size: 0.875rem;
 		color: var(--color-text-muted);
 		line-height: 1.6;
+		margin: 0;
 	}
 
-	/* ── Showcase large cards ── */
 	.showcase {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		gap: var(--space-sm);
+		gap: 16px;
 	}
 
 	@media (max-width: 700px) {
@@ -127,29 +130,40 @@
 	}
 
 	.showcase__card {
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius-xl);
-		padding: var(--space-md);
+		border-radius: 32px;
+		padding: 24px;
 		overflow: hidden;
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-md);
-		background: var(--color-surface);
+		gap: 24px;
+		background: rgba(250, 250, 250, 0.05);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+		border: 1px solid rgba(230, 230, 230, 0.1);
 		min-height: 340px;
 	}
 
+	.showcase__content {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
 	.showcase__title {
+		font-family: var(--font-heading);
 		font-size: clamp(1.25rem, 2.5vw, 1.75rem);
 		font-weight: 400;
 		letter-spacing: -0.02em;
 		color: var(--color-text);
 		line-height: 1.2;
+		margin: 0;
 	}
 
 	.showcase__body {
 		font-size: 0.875rem;
 		color: var(--color-text-muted);
 		line-height: 1.6;
+		margin: 0;
 	}
 
 	.showcase__visual {
@@ -159,26 +173,25 @@
 		justify-content: center;
 	}
 
-	/* Phone mock */
 	.mock-phone {
 		width: 160px;
 		border-radius: 24px;
 		background: #111;
-		border: 1px solid #2a2a2a;
-		box-shadow: 0 0 40px color-mix(in srgb, var(--color-accent-purple) 20%, transparent);
+		border: 1px solid rgba(250, 250, 250, 0.1);
+		box-shadow: 0 0 40px rgba(172, 89, 255, 0.15);
 		overflow: hidden;
 	}
 
 	.mock-phone__screen {
-		padding: 0.75rem;
+		padding: 12px;
 		background: #0d0d0d;
 	}
 
 	.mock-phone__toolbar {
 		background: #1a1a1a;
 		border-radius: 8px;
-		padding: 0.35rem 0.5rem;
-		margin-bottom: 0.5rem;
+		padding: 6px 8px;
+		margin-bottom: 8px;
 	}
 
 	.mock-phone__search {
@@ -190,8 +203,8 @@
 	.mock-phone__content {
 		display: flex;
 		flex-direction: column;
-		gap: 0.4rem;
-		padding: 0.25rem 0;
+		gap: 6px;
+		padding: 4px 0;
 	}
 
 	.mock-phone__row {
@@ -203,26 +216,25 @@
 	.mock-phone__btn {
 		height: 22px;
 		width: 70%;
-		background: var(--color-accent-purple);
+		background: linear-gradient(135deg, #e8006f 0%, #ac59ff 100%);
 		border-radius: 6px;
-		opacity: 0.7;
-		margin: 0.2rem 0;
+		opacity: 0.8;
+		margin: 4px 0;
 	}
 
-	/* HW device mock */
 	.mock-hw {
 		width: 140px;
 		height: 190px;
 		border-radius: 16px;
 		background: #1a1a1a;
-		border: 1px solid #2a2a2a;
+		border: 1px solid rgba(250, 250, 250, 0.1);
 		box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		gap: 1rem;
-		padding: 1rem;
+		gap: 16px;
+		padding: 16px;
 	}
 
 	.mock-hw__screen {
@@ -230,12 +242,12 @@
 		height: 80px;
 		background: #111;
 		border-radius: 8px;
-		border: 1px solid #333;
+		border: 1px solid rgba(250, 250, 250, 0.1);
 	}
 
 	.mock-hw__buttons {
 		display: flex;
-		gap: 0.5rem;
+		gap: 8px;
 	}
 
 	.mock-hw__btn {

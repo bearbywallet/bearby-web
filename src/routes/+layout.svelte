@@ -21,7 +21,6 @@
 
 <Footer />
 
-<!-- Hidden locale links for Paraglide hreflang -->
 <div style="display:none">
 	{#each locales as locale (locale)}
 		<a href={localizeHref(page.url.pathname, { locale })}>{locale}</a>

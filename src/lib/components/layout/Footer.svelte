@@ -1,10 +1,13 @@
 <script lang="ts">
+	import logo from '$lib/assets/logo.svg';
 	const year = new Date().getFullYear();
 </script>
 
 <footer class="footer">
-	<!-- Giant background wordmark -->
-	<div class="footer__wordmark" aria-hidden="true">Bearby</div>
+	<div class="footer__wordmark" aria-hidden="true">
+		<img src={logo} alt="" class="footer__logo" />
+		Bearby
+	</div>
 
 	<div class="footer__bar">
 		<div class="footer__bar-inner">
@@ -14,7 +17,12 @@
 
 			<p class="footer__credit">Developed and Maintained by Rinat Khasanshin</p>
 
-			<a href="https://github.com/zilpay" class="footer__link" target="_blank" rel="noopener noreferrer">
+			<a
+				href="https://github.com/zilpay"
+				class="footer__link"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
 				Old Bearby
 			</a>
 		</div>
@@ -25,37 +33,46 @@
 	.footer {
 		position: relative;
 		overflow: hidden;
-		border-top: 1px solid var(--color-border);
-		margin-top: 0;
+		background: #000;
 	}
 
-	/* Giant "Bearby" watermark text */
 	.footer__wordmark {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 24px;
 		font-family: var(--font-heading);
-		font-size: clamp(120px, 20vw, 260px);
+		font-size: clamp(80px, 15vw, 180px);
 		font-weight: 400;
-		line-height: 0.85;
+		line-height: 0.9;
 		letter-spacing: -0.04em;
-		color: var(--color-text);
+		color: rgba(250, 250, 250, 0.05);
 		text-align: center;
-		padding: var(--space-xl) var(--space-md) 0;
+		padding: 60px 20px 0;
 		user-select: none;
 		pointer-events: none;
 	}
 
-	/* Bottom bar */
+	.footer__logo {
+		width: clamp(60px, 10vw, 120px);
+		height: clamp(60px, 10vw, 120px);
+		opacity: 0.1;
+		object-fit: contain;
+	}
+
 	.footer__bar {
-		border-top: 1px solid var(--color-border);
-		padding: var(--space-sm) var(--space-md);
+		border-top: 1px solid rgba(230, 230, 230, 0.1);
+		padding: 16px 20px;
+		margin-top: 40px;
 	}
 
 	.footer__bar-inner {
-		max-width: var(--breakpoint-desktop);
+		max-width: 1140px;
 		margin: 0 auto;
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		gap: var(--space-sm);
+		gap: 16px;
 	}
 
 	.footer__link {
@@ -72,12 +89,13 @@
 	.footer__copy {
 		font-size: 0.8125rem;
 		color: var(--color-text-muted);
+		margin: 0;
 	}
 
 	.footer__credit {
 		font-size: 0.8125rem;
 		color: var(--color-text-muted);
-		margin-left: auto;
+		margin: 0 0 0 auto;
 	}
 
 	@media (max-width: 600px) {

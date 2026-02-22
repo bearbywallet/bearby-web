@@ -15,7 +15,8 @@
 		<ul class="integrations__list" role="list">
 			{#each chains as chain (chain.name)}
 				<li class="integrations__item">
-					<span class="integrations__dot" style="background:{chain.color}" aria-hidden="true"></span>
+					<span class="integrations__dot" style="background:{chain.color}" aria-hidden="true"
+					></span>
 					<span class="integrations__name">{chain.name}</span>
 				</li>
 			{/each}
@@ -25,16 +26,16 @@
 
 <style>
 	.integrations {
-		padding: var(--space-2xl) var(--space-md);
-		border-top: 1px solid var(--color-border);
+		padding: 100px 20px;
+		background: #000;
 	}
 
 	.integrations__inner {
-		max-width: var(--breakpoint-desktop);
+		max-width: 1140px;
 		margin: 0 auto;
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		gap: var(--space-xl);
+		gap: 60px;
 		align-items: start;
 	}
 
@@ -44,39 +45,52 @@
 		}
 	}
 
+	.integrations__text {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
 	.integrations__title {
+		font-family: var(--font-heading);
 		font-size: clamp(1.5rem, 3vw, 2.25rem);
+		font-weight: 400;
 		letter-spacing: -0.02em;
 		color: var(--color-text);
 		line-height: 1.2;
-		margin-bottom: var(--space-sm);
+		margin: 0;
 	}
 
 	.integrations__body {
 		font-size: 0.9375rem;
 		color: var(--color-text-muted);
 		line-height: 1.7;
+		margin: 0;
 	}
 
 	.integrations__list {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		gap: var(--space-xs);
+		gap: 8px;
+		margin: 0;
+		padding: 0;
 	}
 
 	.integrations__item {
 		display: flex;
 		align-items: center;
-		gap: 0.625rem;
-		padding: 0.625rem 0.875rem;
-		background: var(--color-surface);
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius-md);
+		gap: 10px;
+		padding: 12px 16px;
+		background: rgba(250, 250, 250, 0.05);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+		border-radius: 12px;
+		border: 1px solid rgba(230, 230, 230, 0.1);
 		transition: border-color 0.2s;
 	}
 
 	.integrations__item:hover {
-		border-color: var(--color-accent-purple);
+		border-color: rgba(172, 89, 255, 0.5);
 	}
 
 	.integrations__dot {

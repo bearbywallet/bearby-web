@@ -1,6 +1,5 @@
 <section id="about" class="about">
 	<div class="about__inner">
-		<!-- Left: node network visualization -->
 		<div class="about__viz" aria-hidden="true">
 			<svg class="about__network" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg">
 				<defs>
@@ -17,7 +16,6 @@
 					</filter>
 				</defs>
 
-				<!-- Connection lines -->
 				<g stroke="#ac59ff" stroke-opacity="0.18" stroke-width="1">
 					<line x1="190" y1="190" x2="130" y2="140" />
 					<line x1="190" y1="190" x2="250" y2="140" />
@@ -59,7 +57,6 @@
 					<line x1="340" y1="160" x2="350" y2="220" />
 				</g>
 
-				<!-- Outer faint nodes -->
 				<g fill="#ac59ff" fill-opacity="0.25" filter="url(#glow)">
 					<circle cx="140" cy="40" r="3" />
 					<circle cx="240" cy="40" r="3" />
@@ -72,7 +69,6 @@
 					<circle cx="190" cy="360" r="3" />
 				</g>
 
-				<!-- Mid-tier nodes -->
 				<g fill="#ac59ff" fill-opacity="0.55" filter="url(#glow)">
 					<circle cx="80" cy="100" r="4.5" />
 					<circle cx="300" cy="100" r="4.5" />
@@ -80,10 +76,8 @@
 					<circle cx="300" cy="200" r="5" />
 					<circle cx="190" cy="70" r="5" />
 					<circle cx="190" cy="320" r="4.5" />
-					<circle cx="80" cy="190" r="4" />
 				</g>
 
-				<!-- Primary nodes -->
 				<g fill="url(#node-grad)" filter="url(#glow)">
 					<circle cx="130" cy="140" r="7" />
 					<circle cx="250" cy="140" r="7" />
@@ -91,16 +85,12 @@
 					<circle cx="250" cy="260" r="7" />
 				</g>
 
-				<!-- Center node -->
 				<circle cx="190" cy="190" r="11" fill="#ac59ff" filter="url(#glow)" />
 				<circle cx="190" cy="190" r="5" fill="white" fill-opacity="0.7" />
-
-				<!-- Ambient glow -->
 				<ellipse cx="190" cy="190" rx="100" ry="100" fill="#ac59ff" fill-opacity="0.04" />
 			</svg>
 		</div>
 
-		<!-- Right: text content -->
 		<div class="about__content">
 			<h2 class="about__title">Wallet that can never be stopped</h2>
 			<p class="about__body">
@@ -128,16 +118,16 @@
 
 <style>
 	.about {
-		padding: var(--space-2xl) var(--space-md);
-		border-top: 1px solid var(--color-border);
+		padding: 100px 20px;
+		background: #000;
 	}
 
 	.about__inner {
-		max-width: var(--breakpoint-desktop);
+		max-width: 1140px;
 		margin: 0 auto;
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: var(--space-xl);
+		gap: 60px;
 		align-items: center;
 	}
 
@@ -147,7 +137,6 @@
 		}
 	}
 
-	/* ── Network visualization ── */
 	.about__viz {
 		display: flex;
 		align-items: center;
@@ -161,45 +150,63 @@
 		opacity: 0.9;
 	}
 
-	/* ── Text ── */
+	.about__content {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+	}
+
 	.about__title {
+		font-family: var(--font-heading);
 		font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+		font-weight: 400;
 		letter-spacing: -0.025em;
 		color: var(--color-text);
 		line-height: 1.15;
-		margin-bottom: var(--space-sm);
+		margin: 0;
 	}
 
 	.about__body {
 		font-size: 1rem;
 		color: var(--color-text-muted);
 		line-height: 1.7;
-		margin-bottom: var(--space-lg);
+		margin: 0;
 	}
 
 	.about__features {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		gap: var(--space-sm);
+		gap: 16px;
+		margin-top: 8px;
 	}
 
 	.about__feature {
-		background: var(--color-surface);
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius-lg);
-		padding: var(--space-sm);
+		background: rgba(250, 250, 250, 0.05);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+		border-radius: 20px;
+		border: 1px solid rgba(230, 230, 230, 0.1);
+		padding: 20px;
 	}
 
 	.about__feature-title {
-		font-size: 0.9375rem;
+		font-family: var(--font-heading);
+		font-size: 1rem;
 		font-weight: 400;
 		color: var(--color-text);
-		margin-bottom: 0.375rem;
+		margin: 0 0 8px 0;
 	}
 
 	.about__feature-body {
-		font-size: 0.8125rem;
+		font-size: 0.875rem;
 		color: var(--color-text-muted);
 		line-height: 1.5;
+		margin: 0;
+	}
+
+	@media (max-width: 600px) {
+		.about__features {
+			grid-template-columns: 1fr;
+		}
 	}
 </style>
