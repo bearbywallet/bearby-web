@@ -1,52 +1,30 @@
 <script lang="ts">
-	interface Props {
-		title: string;
-		body: string;
-		icon?: string;
-	}
-
-	let { title, body, icon = '' }: Props = $props();
+	let { children, class: className = '' } = $props();
 </script>
 
-<article class="card">
-	{#if icon}
-		<div class="card__icon" aria-hidden="true">{icon}</div>
-	{/if}
-	<h3 class="card__title">{title}</h3>
-	<p class="card__body">{body}</p>
-</article>
+<div class="card {className}">
+	{@render children()}
+</div>
 
 <style>
 	.card {
-		background-color: var(--color-surface);
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius-lg);
-		padding: var(--space-md);
+		background: var(--bg-card);
+		border: 1px solid var(--border-color);
+		border-radius: var(--border-radius-lg);
+		padding: 32px;
+		transition:
+			background 0.2s,
+			border-color 0.2s;
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-xs);
-		transition: border-color 0.2s;
+		overflow: hidden;
+		position: relative;
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
 	}
 
 	.card:hover {
-		border-color: var(--color-accent);
-	}
-
-	.card__icon {
-		font-size: 2rem;
-		line-height: 1;
-		margin-bottom: 0.25rem;
-	}
-
-	.card__title {
-		font-size: 1.125rem;
-		font-weight: 400;
-		color: var(--color-text);
-	}
-
-	.card__body {
-		font-size: 0.9375rem;
-		color: var(--color-text-muted);
-		line-height: 1.6;
+		background: rgba(250, 250, 250, 0.04);
+		border-color: var(--border-hover);
 	}
 </style>

@@ -1,259 +1,222 @@
 <script lang="ts">
 	import { features } from '$lib/data/features';
+	import Card from '$lib/components/ui/Card.svelte';
 </script>
 
-<section id="features" class="features">
-	<div class="features__inner">
-		<ul class="features__grid" role="list">
-			{#each features as feature (feature.title)}
-				<li class="features__card">
-					<h3 class="features__card-title">{feature.title}</h3>
-					<p class="features__card-body">{feature.description}</p>
-				</li>
+<section id="features" class="features-section">
+	<div class="container">
+		<div class="features-bento">
+			{#each features as feature, i (feature.title)}
+				<Card class="feature-card">
+					<div class="feature-icon">
+						{#if i === 0}
+							<svg
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="var(--brand-green)"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								><path
+									d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"
+								></path></svg
+							>
+						{:else if i === 1}
+							<svg
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="var(--text-primary)"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path
+									d="M7 11V7a5 5 0 0 1 10 0v4"
+								></path></svg
+							>
+						{:else if i === 2}
+							<svg
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="var(--text-primary)"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg
+							>
+						{:else}
+							<svg
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="var(--text-primary)"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline
+									points="22 4 12 14.01 9 11.01"
+								></polyline></svg
+							>
+						{/if}
+					</div>
+					<h3 class="feature-title">
+						{#if i === 0}
+							<span class="highlight">{feature.title}</span>
+						{:else}
+							{feature.title}
+						{/if}
+					</h3>
+					<p class="feature-desc">{feature.description}</p>
+				</Card>
 			{/each}
-		</ul>
+		</div>
 
-		<div class="showcase">
-			<div class="showcase__card showcase__card--dapps">
-				<div class="showcase__content">
-					<h3 class="showcase__title">In app dApps and browsers</h3>
-					<p class="showcase__body">
-						Access decentralized applications directly within Bearby. Browse, connect, and interact
-						with dApps seamlessly without leaving your wallet.
+		<div class="showcase-bento">
+			<Card class="showcase-card showcase-left">
+				<div class="showcase-content">
+					<h2 class="showcase-title">In app dApps and browsers</h2>
+					<p class="showcase-desc">
+						Summarize long texts in seconds or generate professional content from scratch. Perfect
+						for professionals!
 					</p>
 				</div>
-				<div class="showcase__visual" aria-hidden="true">
-					<div class="mock-phone">
-						<div class="mock-phone__screen">
-							<div class="mock-phone__toolbar">
-								<div class="mock-phone__search">dapp.example.com</div>
-							</div>
-							<div class="mock-phone__content">
-								<div class="mock-phone__row" style="width:70%"></div>
-								<div class="mock-phone__row" style="width:50%"></div>
-								<div class="mock-phone__btn"></div>
-								<div class="mock-phone__row" style="width:80%"></div>
-								<div class="mock-phone__row" style="width:40%"></div>
-							</div>
-						</div>
-					</div>
+				<div class="showcase-image-wrap">
+					<img src="/img/phone-dapps.png" alt="dApps Interface" class="showcase-image" />
 				</div>
-			</div>
+			</Card>
 
-			<div class="showcase__card showcase__card--bitcoin">
-				<div class="showcase__content">
-					<h3 class="showcase__title">Native Bitcoin Support</h3>
-					<p class="showcase__body">
+			<Card class="showcase-card showcase-right">
+				<div class="showcase-content">
+					<h2 class="showcase-title">Native Bitcoin Support</h2>
+					<p class="showcase-desc">
 						Native Bitcoin Support to store and trade your bitcoin securely. Designed to protect
 						assets from Quantum risks.
 					</p>
 				</div>
-				<div class="showcase__visual" aria-hidden="true">
-					<div class="mock-hw">
-						<div class="mock-hw__screen"></div>
-						<div class="mock-hw__buttons">
-							<div class="mock-hw__btn"></div>
-							<div class="mock-hw__btn"></div>
-						</div>
-					</div>
+				<div class="showcase-image-wrap">
+					<img src="/img/phone-bitcoin.png" alt="Hardware Wallet" class="showcase-image hw-image" />
 				</div>
-			</div>
+			</Card>
 		</div>
 	</div>
 </section>
 
 <style>
-	.features {
-		padding: 100px 20px;
-		background: #000;
+	.features-section {
+		padding: 24px 0;
 	}
 
-	.features__inner {
-		max-width: 1140px;
-		margin: 0 auto;
-		display: flex;
-		flex-direction: column;
-		gap: 40px;
-	}
-
-	.features__grid {
+	.features-bento {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 1px;
-		background: rgba(230, 230, 230, 0.1);
-		border-radius: 24px;
-		overflow: hidden;
-		border: 1px solid rgba(230, 230, 230, 0.1);
-	}
-
-	@media (max-width: 600px) {
-		.features__grid {
-			grid-template-columns: 1fr;
-		}
-	}
-
-	.features__card {
-		background: #000;
-		padding: 24px;
-		transition: background 0.2s;
-	}
-
-	.features__card:hover {
-		background: rgba(250, 250, 250, 0.02);
-	}
-
-	.features__card-title {
-		font-family: var(--font-heading);
-		font-size: 1rem;
-		font-weight: 400;
-		color: var(--color-text);
-		margin: 0 0 8px 0;
-	}
-
-	.features__card-body {
-		font-size: 0.875rem;
-		color: var(--color-text-muted);
-		line-height: 1.6;
-		margin: 0;
-	}
-
-	.showcase {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: repeat(4, 1fr);
 		gap: 16px;
+		margin-bottom: 16px;
 	}
 
-	@media (max-width: 700px) {
-		.showcase {
-			grid-template-columns: 1fr;
-		}
+	:global(.feature-card) {
+		padding: 24px !important;
 	}
 
-	.showcase__card {
-		border-radius: 32px;
-		padding: 24px;
-		overflow: hidden;
-		display: flex;
-		flex-direction: column;
-		gap: 24px;
-		background: rgba(250, 250, 250, 0.05);
-		backdrop-filter: blur(10px);
-		-webkit-backdrop-filter: blur(10px);
-		border: 1px solid rgba(230, 230, 230, 0.1);
-		min-height: 340px;
+	.feature-icon {
+		margin-bottom: 16px;
 	}
 
-	.showcase__content {
-		display: flex;
-		flex-direction: column;
-		gap: 12px;
-	}
-
-	.showcase__title {
-		font-family: var(--font-heading);
-		font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-		font-weight: 400;
-		letter-spacing: -0.02em;
-		color: var(--color-text);
-		line-height: 1.2;
-		margin: 0;
-	}
-
-	.showcase__body {
-		font-size: 0.875rem;
-		color: var(--color-text-muted);
-		line-height: 1.6;
-		margin: 0;
-	}
-
-	.showcase__visual {
-		flex: 1;
-		display: flex;
-		align-items: flex-end;
-		justify-content: center;
-	}
-
-	.mock-phone {
-		width: 160px;
-		border-radius: 24px;
-		background: #111;
-		border: 1px solid rgba(250, 250, 250, 0.1);
-		box-shadow: 0 0 40px rgba(172, 89, 255, 0.15);
-		overflow: hidden;
-	}
-
-	.mock-phone__screen {
-		padding: 12px;
-		background: #0d0d0d;
-	}
-
-	.mock-phone__toolbar {
-		background: #1a1a1a;
-		border-radius: 8px;
-		padding: 6px 8px;
+	.feature-title {
+		font-size: 1rem;
+		font-weight: 500;
+		color: var(--text-primary);
 		margin-bottom: 8px;
 	}
 
-	.mock-phone__search {
-		font-size: 0.55rem;
-		color: #555;
-		font-family: monospace;
+	.highlight {
+		background: rgba(10, 201, 77, 0.2);
+		color: var(--brand-green);
+		padding: 2px 8px;
+		border-radius: 4px;
+		display: inline-block;
 	}
 
-	.mock-phone__content {
-		display: flex;
-		flex-direction: column;
-		gap: 6px;
-		padding: 4px 0;
+	.feature-desc {
+		font-size: 0.875rem;
+		color: var(--text-secondary);
+		line-height: 1.5;
 	}
 
-	.mock-phone__row {
-		height: 6px;
-		background: #1e1e1e;
-		border-radius: 3px;
-	}
-
-	.mock-phone__btn {
-		height: 22px;
-		width: 70%;
-		background: linear-gradient(135deg, #e8006f 0%, #ac59ff 100%);
-		border-radius: 6px;
-		opacity: 0.8;
-		margin: 4px 0;
-	}
-
-	.mock-hw {
-		width: 140px;
-		height: 190px;
-		border-radius: 16px;
-		background: #1a1a1a;
-		border: 1px solid rgba(250, 250, 250, 0.1);
-		box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
+	.showcase-bento {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
 		gap: 16px;
-		padding: 16px;
 	}
 
-	.mock-hw__screen {
-		width: 100%;
-		height: 80px;
-		background: #111;
-		border-radius: 8px;
-		border: 1px solid rgba(250, 250, 250, 0.1);
+	:global(.showcase-card) {
+		display: flex !important;
+		flex-direction: column;
+		padding: 48px 48px 0 48px !important;
+		overflow: hidden;
+		height: 600px;
+		justify-content: space-between;
 	}
 
-	.mock-hw__buttons {
+	.showcase-content {
+		text-align: center;
+		margin-bottom: 48px;
+	}
+
+	.showcase-title {
+		font-size: clamp(1.5rem, 3vw, 2.5rem);
+		font-weight: 500;
+		color: var(--text-primary);
+		margin-bottom: 16px;
+	}
+
+	.showcase-desc {
+		font-size: 1rem;
+		color: var(--text-secondary);
+		line-height: 1.6;
+		max-width: 400px;
+		margin: 0 auto;
+	}
+
+	.showcase-image-wrap {
+		flex: 1;
 		display: flex;
-		gap: 8px;
+		justify-content: center;
+		align-items: flex-end;
 	}
 
-	.mock-hw__btn {
-		width: 28px;
-		height: 10px;
-		border-radius: 5px;
-		background: #333;
+	.showcase-image {
+		max-width: 100%;
+		max-height: 400px;
+		object-fit: contain;
+		object-position: bottom;
+	}
+
+	.hw-image {
+		max-height: 350px;
+	}
+
+	@media (max-width: 1024px) {
+		.features-bento {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 768px) {
+		.features-bento {
+			grid-template-columns: 1fr;
+		}
+		.showcase-bento {
+			grid-template-columns: 1fr;
+		}
+		:global(.showcase-card) {
+			height: 500px;
+			padding: 32px 32px 0 32px !important;
+		}
 	}
 </style>

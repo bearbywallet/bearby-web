@@ -1,112 +1,82 @@
 <script lang="ts">
-	import logo from '$lib/assets/logo.svg';
 	const year = new Date().getFullYear();
 </script>
 
 <footer class="footer">
-	<div class="footer__wordmark" aria-hidden="true">
-		<img src={logo} alt="" class="footer__logo" />
-		Bearby
-	</div>
+	<div class="container">
+		<div class="footer-giant">Bearby</div>
 
-	<div class="footer__bar">
-		<div class="footer__bar-inner">
-			<a href="/privacy-policy" class="footer__link">Privacy Policy</a>
+		<div class="footer-bottom">
+			<div class="footer-links-left">
+				<a href="/privacy-policy" class="footer-link">Privacy Policy</a>
+				<span class="footer-copy">©{year} Rinat.IP.</span>
+			</div>
 
-			<p class="footer__copy">©{year} Zilpay ®</p>
-
-			<p class="footer__credit">Developed and Maintained by Rinat Khasanshin</p>
-
-			<a
-				href="https://github.com/zilpay"
-				class="footer__link"
-				target="_blank"
-				rel="noopener noreferrer"
-			>
-				Old Bearby
-			</a>
+			<div class="footer-links-right">
+				<span class="footer-credit">Developed and Maintained by Rinat Khasanshin</span>
+				<a
+					href="https://github.com/zilpay"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="footer-link">Old Bearby</a
+				>
+			</div>
 		</div>
 	</div>
 </footer>
 
 <style>
 	.footer {
-		position: relative;
+		padding: 0 0 48px 0;
 		overflow: hidden;
-		background: #000;
 	}
 
-	.footer__wordmark {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 24px;
-		font-family: var(--font-heading);
-		font-size: clamp(80px, 15vw, 180px);
-		font-weight: 400;
-		line-height: 0.9;
-		letter-spacing: -0.04em;
-		color: rgba(250, 250, 250, 0.05);
+	.footer-giant {
+		font-size: clamp(4rem, 15vw, 16rem);
+		font-weight: 500;
+		line-height: 0.8;
+		color: var(--text-primary);
 		text-align: center;
-		padding: 60px 20px 0;
-		user-select: none;
-		pointer-events: none;
+		letter-spacing: -0.04em;
+		margin-bottom: 64px;
+		font-family: var(--font-primary);
 	}
 
-	.footer__logo {
-		width: clamp(60px, 10vw, 120px);
-		height: clamp(60px, 10vw, 120px);
-		opacity: 0.1;
-		object-fit: contain;
-	}
-
-	.footer__bar {
-		border-top: 1px solid rgba(230, 230, 230, 0.1);
-		padding: 16px 20px;
-		margin-top: 40px;
-	}
-
-	.footer__bar-inner {
-		max-width: 1140px;
-		margin: 0 auto;
+	.footer-bottom {
 		display: flex;
-		flex-wrap: wrap;
+		justify-content: space-between;
 		align-items: center;
-		gap: 16px;
+		border-top: 1px solid var(--border-color);
+		padding-top: 24px;
+		font-size: 0.875rem;
+		color: var(--text-secondary);
 	}
 
-	.footer__link {
-		font-size: 0.8125rem;
-		color: var(--color-text-muted);
-		text-decoration: none;
+	.footer-links-left,
+	.footer-links-right {
+		display: flex;
+		gap: 32px;
+	}
+
+	.footer-link {
+		color: var(--text-secondary);
 		transition: color 0.2s;
 	}
 
-	.footer__link:hover {
-		color: var(--color-text);
+	.footer-link:hover {
+		color: var(--text-primary);
 	}
 
-	.footer__copy {
-		font-size: 0.8125rem;
-		color: var(--color-text-muted);
-		margin: 0;
-	}
-
-	.footer__credit {
-		font-size: 0.8125rem;
-		color: var(--color-text-muted);
-		margin: 0 0 0 auto;
-	}
-
-	@media (max-width: 600px) {
-		.footer__bar-inner {
-			justify-content: center;
-		}
-
-		.footer__credit {
-			margin-left: 0;
+	@media (max-width: 768px) {
+		.footer-bottom {
+			flex-direction: column;
+			gap: 16px;
 			text-align: center;
-			width: 100%;
+		}
+		.footer-links-left,
+		.footer-links-right {
+			flex-direction: column;
+			gap: 8px;
 		}
 	}
 </style>

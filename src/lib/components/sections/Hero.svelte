@@ -1,171 +1,152 @@
 <script lang="ts">
-	import logo from '$lib/assets/logo.svg';
+	import Button from '$lib/components/ui/Button.svelte';
+	import Card from '$lib/components/ui/Card.svelte';
 </script>
 
-<section id="hero-header" class="hero">
-	<div class="hero__inner">
-		<div class="hero__content">
-			<div class="hero__icon-wrap">
-				<img src={logo} alt="Bearby" class="hero__icon" />
+<section id="hero-header" class="hero-section">
+	<div class="hero-image-container">
+		<img src="/img/hero-phone-dark.png" alt="Bearby Wallet UI" class="hero-image" />
+		<div class="hero-fade-bottom"></div>
+	</div>
+
+	<div class="container hero-content-container">
+		<Card class="hero-card">
+			<div class="hero-card-inner">
+				<div class="icon-wrapper">
+					<img src="/img/app-icon.png" alt="Bearby logo" class="app-icon" />
+				</div>
+
+				<h1 class="hero-title">
+					<span class="text-gradient">Quantam Proof Portal to the</span><br />
+					decentralized world
+				</h1>
+
+				<p class="hero-subtitle">
+					Quantum-resistant, multi-currency decentralized wallet, functioning as a browser extension
+					compatible with the EVM-compatible networks.
+				</p>
+
+				<Button
+					variant="outline"
+					href="https://github.com/zilpay"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<img src="/img/github-icon.svg" alt="Github" class="github-icon" />
+					Open-Source Github
+				</Button>
 			</div>
-
-			<div class="hero__glow" aria-hidden="true"></div>
-
-			<h1 class="hero__title">
-				Quantam Proof Portal to the<br class="hero__br" /> decentralized world
-			</h1>
-
-			<p class="hero__subtitle">
-				Quantum-resistant, multi-currency decentralized wallet, functioning as a browser extension
-				compatible with the EVM-compatible networks.
-			</p>
-
-			<a
-				href="https://github.com/zilpay"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="hero__cta"
-			>
-				Open-Source Github
-			</a>
-		</div>
+		</Card>
 	</div>
 </section>
 
 <style>
-	.hero {
+	.hero-section {
 		position: relative;
-		min-height: 100vh;
+		width: 100%;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
-		padding: 120px 20px 100px;
-		background: #000;
 		overflow: hidden;
 	}
 
-	.hero__inner {
+	.hero-image-container {
 		position: relative;
-		z-index: 1;
 		width: 100%;
-		max-width: 1140px;
+		max-width: 1200px;
+		height: 900px;
 		display: flex;
-		flex-direction: column;
-		align-items: center;
+		justify-content: center;
+		z-index: 1;
 	}
 
-	.hero__content {
+	.hero-image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: top center;
+	}
+
+	.hero-fade-bottom {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 400px;
+		background: linear-gradient(to bottom, transparent, var(--bg-color) 80%);
+		z-index: 2;
+	}
+
+	.hero-content-container {
+		position: relative;
+		z-index: 10;
+		margin-top: -150px;
 		display: flex;
-		flex-direction: column;
-		align-items: center;
+		justify-content: center;
+	}
+
+	:global(.hero-card) {
+		max-width: 800px;
+		width: 100%;
 		text-align: center;
-		gap: 20px;
-		max-width: 680px;
+		padding: 48px;
+		background: #0a0a0a !important;
 	}
 
-	.hero__icon-wrap {
+	.hero-card-inner {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 24px;
+	}
+
+	.icon-wrapper {
 		width: 80px;
 		height: 80px;
-		border-radius: 24px;
-		background: rgba(250, 250, 250, 0.05);
-		backdrop-filter: blur(10px);
-		-webkit-backdrop-filter: blur(10px);
-		border: 1px solid rgba(230, 230, 230, 0.1);
+		background: rgba(255, 255, 255, 0.05);
+		border-radius: 20px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: 16px;
-		margin-bottom: 20px;
+		border: 1px solid var(--border-color);
 	}
 
-	.hero__icon {
-		width: 100%;
-		height: 100%;
+	.app-icon {
+		width: 60px;
+		height: 60px;
 		object-fit: contain;
 	}
 
-	.hero__glow {
-		position: absolute;
-		top: -100px;
-		left: 50%;
-		transform: translateX(-50%);
-		width: 600px;
-		height: 400px;
-		background: radial-gradient(
-			ellipse at center,
-			rgba(172, 89, 255, 0.15) 0%,
-			rgba(232, 0, 111, 0.1) 30%,
-			transparent 70%
-		);
-		pointer-events: none;
-		z-index: -1;
-	}
-
-	.hero__title {
-		font-family: var(--font-heading);
-		font-size: clamp(2.5rem, 6vw, 4rem);
-		font-weight: 400;
-		line-height: 1.1;
-		letter-spacing: -0.025em;
-		background: linear-gradient(135deg, #e8006f 0%, #ac59ff 100%);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
-		margin: 0;
-	}
-
-	.hero__br {
-		display: block;
-	}
-
-	.hero__subtitle {
-		font-size: 1rem;
-		line-height: 1.7;
-		color: var(--color-text-muted);
-		max-width: 520px;
-		margin: 0;
-	}
-
-	.hero__cta {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		gap: 8px;
-		padding: 16px 32px;
-		font-size: 1rem;
+	.hero-title {
+		font-size: clamp(2rem, 5vw, 3.5rem);
 		font-weight: 500;
-		color: var(--color-text);
-		background: rgba(250, 250, 250, 0.05);
-		backdrop-filter: blur(10px);
-		-webkit-backdrop-filter: blur(10px);
-		border-radius: 38px;
-		border: 1px solid rgba(212, 212, 212, 0.3);
-		text-decoration: none;
-		transition: all 0.2s;
-		box-shadow: inset 0 0 25px 5px rgba(255, 255, 255, 0.05);
+		line-height: 1.1;
+		letter-spacing: -0.02em;
+		color: var(--text-primary);
 	}
 
-	.hero__cta:hover {
-		background: rgba(250, 250, 250, 0.1);
-		border-color: var(--color-text-muted);
+	.hero-subtitle {
+		font-size: 1.125rem;
+		color: var(--text-secondary);
+		max-width: 600px;
+		line-height: 1.6;
 	}
 
-	@media (max-width: 809px) {
-		.hero {
-			padding: 100px 20px 80px;
+	.github-icon {
+		width: 20px;
+		height: 20px;
+		filter: invert(1);
+	}
+
+	@media (max-width: 768px) {
+		.hero-image-container {
+			height: 600px;
 		}
-
-		.hero__icon-wrap {
-			width: 64px;
-			height: 64px;
-			padding: 12px;
+		.hero-content-container {
+			margin-top: -100px;
 		}
-	}
-
-	@media (max-width: 480px) {
-		.hero__br {
-			display: none;
+		:global(.hero-card) {
+			padding: 32px 24px;
 		}
 	}
 </style>

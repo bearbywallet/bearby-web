@@ -1,9 +1,11 @@
 <script lang="ts">
 	import Hero from '$lib/components/sections/Hero.svelte';
-	import About from '$lib/components/sections/About.svelte';
-	import Integrations from '$lib/components/sections/Integrations.svelte';
+	import WalletSection from '$lib/components/sections/WalletSection.svelte';
 	import Features from '$lib/components/sections/Features.svelte';
+	import ExtraFeatures from '$lib/components/sections/About.svelte';
+	import Integrations from '$lib/components/sections/Integrations.svelte';
 	import Downloads from '$lib/components/sections/Downloads.svelte';
+	import Footer from '$lib/components/layout/Footer.svelte';
 </script>
 
 <svelte:head>
@@ -14,8 +16,20 @@
 	/>
 </svelte:head>
 
-<Hero />
-<About />
-<Integrations />
-<Features />
-<Downloads />
+<main class="page-wrapper">
+	<Hero />
+	<WalletSection />
+	<Features />
+	<ExtraFeatures />
+	<Integrations />
+	<Downloads />
+	<Footer />
+</main>
+
+<style>
+	.page-wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 32px;
+	}
+</style>
