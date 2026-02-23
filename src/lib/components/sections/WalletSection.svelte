@@ -1,155 +1,166 @@
 <script lang="ts">
-	import Card from '$lib/components/ui/Card.svelte';
+	type Feature = { title: string; desc: string; iconType: 'circle' | 'shield' };
+
+	const features: Feature[] = [
+		{
+			title: 'Failproof System',
+			desc: 'Stay 100% operational regardless of how many nodes are offline.',
+			iconType: 'circle'
+		},
+		{
+			title: '100% Secure',
+			desc: 'Uncompromising network resilience with zero sacrifice to security.',
+			iconType: 'shield'
+		}
+	];
 </script>
 
-<section class="wallet-section">
+<section id="wallet" class="wallet-section">
 	<div class="container">
-		<Card class="wallet-card">
-			<div class="wallet-grid">
-				<div class="visual-col">
-					<img src="/img/network-sphere.png" alt="Network nodes" class="network-img" />
-				</div>
+		<div class="wallet-card">
+			<div class="visual-col">
+				<img src="/img/network-sphere.png" alt="Network nodes" class="network-img" />
+			</div>
 
-				<div class="content-col">
-					<h2 class="title">Wallet that can never be stopped</h2>
-					<p class="subtitle">
-						The wallet that connects to dozens of independent nodes simultaneously — unlike
-						traditional wallets relying on a single point of failure.
-					</p>
+			<div class="content-col">
+				<h2 class="title">Wallet that can never be stopped</h2>
+				<p class="description">
+					The wallet that connects to dozens of independent nodes simultaneously — unlike traditional
+					wallets relying on a single point of failure.
+				</p>
 
-					<div class="features-row">
+				<div class="features-row">
+					{#each features as feature (feature.title)}
 						<div class="feature-item">
-							<div class="icon-circle"></div>
-							<h3>Failproof System</h3>
-							<p>Stay 100% operational regardless of how many nodes are offline.</p>
+							<span class="feature-icon">
+								{#if feature.iconType === 'circle'}
+									<svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<circle cx="18.5" cy="18.5" r="17.5" stroke="currentColor" stroke-width="1.5" />
+										<circle cx="18.5" cy="18.5" r="6" fill="currentColor" />
+									</svg>
+								{:else}
+									<svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M18.5 3.5L6 8.5V18c0 7.732 5.373 14.963 12.5 17 7.127-2.037 12.5-9.268 12.5-17V8.5L18.5 3.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+										<path d="m13 18.5 3.5 3.5 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+									</svg>
+								{/if}
+							</span>
+							<h3 class="feature-title">{feature.title}</h3>
+							<p class="feature-desc">{feature.desc}</p>
 						</div>
-
-						<div class="feature-item">
-							<div class="icon-shield">
-								<svg
-									width="24"
-									height="24"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path
-										d="m9 12 2 2 4-4"
-									></path></svg
-								>
-							</div>
-							<h3>100% Secure</h3>
-							<p>Uncompromising network resilience with zero sacrifice to security.</p>
-						</div>
-					</div>
+					{/each}
 				</div>
 			</div>
-		</Card>
+		</div>
 	</div>
 </section>
 
 <style>
 	.wallet-section {
-		padding: 24px 0;
+		padding: 8px 8px 0;
 	}
 
-	:global(.wallet-card) {
-		padding: 0 !important;
-		background: #0a0a0a !important;
-	}
-
-	.wallet-grid {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
+	.wallet-card {
+		background: var(--gray-950);
+		border: 1px solid var(--gray-800);
+		border-radius: var(--border-radius-2xl);
+		padding: 70px;
+		display: flex;
+		flex-direction: row;
 		align-items: center;
 		gap: 48px;
+		overflow: hidden;
 	}
 
 	.visual-col {
-		padding: 48px;
+		flex: 1 0 0;
+		max-width: 350px;
+		max-height: 450px;
 		display: flex;
-		justify-content: center;
 		align-items: center;
+		justify-content: center;
 	}
 
 	.network-img {
 		width: 100%;
-		max-width: 400px;
+		height: auto;
 		object-fit: contain;
 	}
 
 	.content-col {
-		padding: 64px 64px 64px 0;
+		flex: 1 0 0;
 		display: flex;
 		flex-direction: column;
 		gap: 24px;
 	}
 
 	.title {
-		font-size: clamp(2rem, 4vw, 3rem);
-		color: var(--text-primary);
+		font-size: clamp(2rem, 4vw, 3.25rem);
+		font-weight: 600;
+		line-height: 1.2;
+		color: var(--gray-300);
+		font-family: var(--font-secondary);
 	}
 
-	.subtitle {
+	.description {
 		font-size: 1.125rem;
-		color: var(--text-secondary);
 		line-height: 1.6;
-		margin-bottom: 24px;
+		color: var(--gray-400);
 	}
 
 	.features-row {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 32px;
+		margin-top: 8px;
 	}
 
 	.feature-item {
 		display: flex;
 		flex-direction: column;
-		gap: 12px;
+		gap: 10px;
 	}
 
-	.icon-circle {
-		width: 24px;
-		height: 24px;
-		border-radius: 50%;
-		border: 2px solid var(--text-primary);
-		margin-bottom: 8px;
+	.feature-icon {
+		color: var(--gray-300);
+		display: block;
+		width: 37px;
+		height: 37px;
 	}
 
-	.icon-shield {
-		color: var(--text-primary);
-		margin-bottom: 8px;
-	}
-
-	.feature-item h3 {
-		font-size: 1rem;
+	.feature-title {
+		font-size: 1.125rem;
 		font-weight: 600;
 		font-family: var(--font-secondary);
-		color: var(--text-primary);
+		color: var(--gray-300);
 	}
 
-	.feature-item p {
-		font-size: 0.875rem;
-		color: var(--text-secondary);
+	.feature-desc {
+		font-size: 0.9375rem;
 		line-height: 1.6;
+		color: var(--gray-400);
 	}
 
 	@media (max-width: 900px) {
-		.wallet-grid {
-			grid-template-columns: 1fr;
-			gap: 0;
+		.wallet-card {
+			flex-direction: column;
+			padding: 50px;
+			gap: 40px;
 		}
-		.content-col {
-			padding: 0 32px 48px;
-		}
+
 		.visual-col {
-			padding: 32px;
+			max-width: 300px;
 		}
+
 		.features-row {
 			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 600px) {
+		.wallet-card {
+			padding: 32px 24px;
+			border-radius: var(--border-radius-xl);
 		}
 	}
 </style>
