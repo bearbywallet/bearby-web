@@ -1,13 +1,12 @@
 <script lang="ts">
 	import { features } from '$lib/data/features';
-	import Card from '$lib/components/ui/Card.svelte';
 </script>
 
 <section id="features" class="features-section">
 	<div class="container">
-		<div class="features-bento">
+		<div class="features-grid">
 			{#each features as feature, i (feature.title)}
-				<Card class="feature-card">
+				<div class="feature-card">
 					<div class="feature-icon">
 						{#if i === 0}
 							<svg
@@ -15,7 +14,7 @@
 								height="24"
 								viewBox="0 0 24 24"
 								fill="none"
-								stroke="var(--brand-green)"
+								stroke="var(--text-primary)"
 								stroke-width="2"
 								stroke-linecap="round"
 								stroke-linejoin="round"
@@ -65,20 +64,16 @@
 							>
 						{/if}
 					</div>
-					<h3 class="feature-title">
-						{#if i === 0}
-							<span class="highlight">{feature.title}</span>
-						{:else}
-							{feature.title}
-						{/if}
-					</h3>
-					<p class="feature-desc">{feature.description}</p>
-				</Card>
+					<div class="feature-content">
+						<h3 class="feature-title">{feature.title}</h3>
+						<p class="feature-desc">{feature.description}</p>
+					</div>
+				</div>
 			{/each}
 		</div>
 
-		<div class="showcase-bento">
-			<Card class="showcase-card showcase-left">
+		<div class="showcase-grid">
+			<div class="showcase-card">
 				<div class="showcase-content">
 					<h2 class="showcase-title">In app dApps and browsers</h2>
 					<p class="showcase-desc">
@@ -89,9 +84,9 @@
 				<div class="showcase-image-wrap">
 					<img src="/img/phone-dapps.png" alt="dApps Interface" class="showcase-image" />
 				</div>
-			</Card>
+			</div>
 
-			<Card class="showcase-card showcase-right">
+			<div class="showcase-card">
 				<div class="showcase-content">
 					<h2 class="showcase-title">Native Bitcoin Support</h2>
 					<p class="showcase-desc">
@@ -102,85 +97,120 @@
 				<div class="showcase-image-wrap">
 					<img src="/img/phone-bitcoin.png" alt="Hardware Wallet" class="showcase-image hw-image" />
 				</div>
-			</Card>
+			</div>
 		</div>
 	</div>
 </section>
 
 <style>
 	.features-section {
-		padding: 24px 0;
+		padding: 0 0 100px;
 	}
 
-	.features-bento {
+	.features-grid {
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		gap: 16px;
-		margin-bottom: 16px;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-template-rows: repeat(2, minmax(0, 1fr));
+		gap: 50px;
+		padding: 100px;
+		background-color: var(--gray-950);
+		border: 1px solid var(--gray-800);
+		border-radius: 40px;
+		overflow: hidden;
 	}
 
-	:global(.feature-card) {
-		padding: 24px !important;
+	.feature-card {
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		gap: 20px;
 	}
 
 	.feature-icon {
-		margin-bottom: 16px;
+		flex: none;
+		width: 48px;
+		height: 48px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: rgba(255, 255, 255, 0.03);
+		border-radius: 12px;
+	}
+
+	.feature-content {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
 	}
 
 	.feature-title {
-		font-size: 1rem;
+		font-family: var(--font-secondary);
+		font-size: 18px;
 		font-weight: 500;
+		font-style: normal;
 		color: var(--text-primary);
-		margin-bottom: 8px;
-	}
-
-	.highlight {
-		background: rgba(10, 201, 77, 0.2);
-		color: var(--brand-green);
-		padding: 2px 8px;
-		border-radius: 4px;
-		display: inline-block;
+		line-height: 1.4em;
+		letter-spacing: 0em;
 	}
 
 	.feature-desc {
-		font-size: 0.875rem;
-		color: var(--text-secondary);
-		line-height: 1.5;
+		font-family: var(--font-secondary);
+		font-size: 14px;
+		font-weight: 400;
+		font-style: normal;
+		color: var(--gray-400);
+		line-height: 1.6em;
+		letter-spacing: 0em;
 	}
 
-	.showcase-bento {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 16px;
+	.showcase-grid {
+		display: flex;
+		flex-direction: row;
+		gap: 10px;
+		margin-top: 10px;
 	}
 
-	:global(.showcase-card) {
-		display: flex !important;
+	.showcase-card {
+		flex: 1;
+		display: flex;
 		flex-direction: column;
-		padding: 48px 48px 0 48px !important;
-		overflow: hidden;
-		height: 600px;
+		align-items: center;
 		justify-content: space-between;
+		gap: 10px;
+		padding: 100px 50px;
+		background: var(--bg-card);
+		border: 1px solid var(--border-color);
+		border-radius: 40px;
+		overflow: hidden;
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
 	}
 
 	.showcase-content {
 		text-align: center;
-		margin-bottom: 48px;
+		max-width: 400px;
 	}
 
 	.showcase-title {
-		font-size: clamp(1.5rem, 3vw, 2.5rem);
+		font-family: var(--font-primary);
+		font-size: 48px;
 		font-weight: 500;
+		font-style: normal;
 		color: var(--text-primary);
-		margin-bottom: 16px;
+		line-height: 1.1em;
+		letter-spacing: -0.02em;
+		margin-bottom: 20px;
 	}
 
 	.showcase-desc {
-		font-size: 1rem;
-		color: var(--text-secondary);
-		line-height: 1.6;
-		max-width: 400px;
-		margin: 0 auto;
+		font-family: var(--font-secondary);
+		font-size: 14px;
+		font-weight: 400;
+		font-style: normal;
+		color: var(--gray-400);
+		line-height: 1.6em;
+		letter-spacing: 0em;
 	}
 
 	.showcase-image-wrap {
@@ -188,35 +218,57 @@
 		display: flex;
 		justify-content: center;
 		align-items: flex-end;
+		width: 100%;
 	}
 
 	.showcase-image {
-		max-width: 100%;
-		max-height: 400px;
+		max-width: 280px;
+		max-height: 500px;
 		object-fit: contain;
 		object-position: bottom;
 	}
 
 	.hw-image {
-		max-height: 350px;
+		max-height: 450px;
 	}
 
-	@media (max-width: 1024px) {
-		.features-bento {
-			grid-template-columns: repeat(2, 1fr);
+	@media (min-width: 810px) and (max-width: 1199.98px) {
+		.features-grid {
+			padding: 50px;
+		}
+
+		.showcase-card {
+			padding: 50px;
 		}
 	}
 
-	@media (max-width: 768px) {
-		.features-bento {
-			grid-template-columns: 1fr;
+	@media (max-width: 809.98px) {
+		.features-section {
+			padding: 0 0 70px;
 		}
-		.showcase-bento {
-			grid-template-columns: 1fr;
+
+		.features-grid {
+			grid-template-columns: repeat(1, minmax(0, 1fr));
+			gap: 29px;
+			padding: 50px;
+			border-radius: 24px;
 		}
-		:global(.showcase-card) {
-			height: 500px;
-			padding: 32px 32px 0 32px !important;
+
+		.showcase-grid {
+			flex-direction: column;
+		}
+
+		.showcase-card {
+			padding: 50px 30px;
+		}
+
+		.showcase-title {
+			font-size: 32px;
+		}
+
+		.showcase-image {
+			max-width: 220px;
+			max-height: 400px;
 		}
 	}
 </style>
