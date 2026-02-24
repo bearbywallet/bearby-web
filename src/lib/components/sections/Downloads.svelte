@@ -1,5 +1,8 @@
 <script lang="ts">
-	import { downloads } from '$lib/data/downloads';
+	import { getDownloads } from '$lib/data/downloads';
+	import * as m from '$lib/paraglide/messages';
+
+	const downloads = getDownloads();
 
 	let expanded = $state(false);
 
@@ -84,7 +87,7 @@
 		{/if}
 		{#if secondaryDownloads.length > 0}
 			<button class="expand-btn" onclick={() => (expanded = !expanded)}>
-				<span class="expand-text">{expanded ? 'Show Less' : 'Show More'}</span>
+				<span class="expand-text">{expanded ? m.dl_show_less() : m.dl_show_more()}</span>
 				<svg
 					class="expand-icon"
 					class:rotated={expanded}

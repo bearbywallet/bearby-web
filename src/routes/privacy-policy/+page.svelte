@@ -1,44 +1,42 @@
+<script lang="ts">
+	import * as m from '$lib/paraglide/messages';
+</script>
+
 <svelte:head>
-	<title>Privacy Policy — Bearby</title>
-	<meta name="description" content="Bearby Privacy Policy — we collect no user data." />
+	<title>{m.privacy_page_title()}</title>
+	<meta name="description" content={m.privacy_meta_desc()} />
 </svelte:head>
 
 <article class="privacy">
 	<div class="privacy__inner">
-		<h1 class="privacy__title">Privacy Policy</h1>
-		<p class="privacy__updated">Last updated: February 2026</p>
+		<h1 class="privacy__title">{m.privacy_title()}</h1>
+		<p class="privacy__updated">{m.privacy_updated()}</p>
 
 		<section class="privacy__section">
-			<h2>Zero Data Collection</h2>
+			<h2>{m.privacy_zero_data_title()}</h2>
 			<p>
-				Bearby does not collect, store, or transmit any personal data. Your wallet keys, transaction
-				history, and activity remain entirely on your device.
+				{m.privacy_zero_data_desc()}
 			</p>
 		</section>
 
 		<section class="privacy__section">
-			<h2>On-Device Storage</h2>
+			<h2>{m.privacy_storage_title()}</h2>
 			<p>
-				All cryptographic keys and wallet data are stored locally using your device's secure storage.
-				We have no servers, no databases, and no way to access your funds or identity.
+				{m.privacy_storage_desc()}
 			</p>
 		</section>
 
 		<section class="privacy__section">
-			<h2>Open Source</h2>
+			<h2>{m.privacy_opensource_title()}</h2>
 			<p>
-				Bearby is fully open source. You can audit every line of code on
-				<a href="https://github.com/zilpay" target="_blank" rel="noopener noreferrer">GitHub</a>.
+				{@html m.privacy_opensource_desc({ link: '<a href="https://github.com/zilpay" target="_blank" rel="noopener noreferrer">' + m.privacy_github() + '</a>' })}
 			</p>
 		</section>
 
 		<section class="privacy__section">
-			<h2>Contact</h2>
+			<h2>{m.privacy_contact_title()}</h2>
 			<p>
-				Questions? Open an issue or discussion on our
-				<a href="https://github.com/zilpay" target="_blank" rel="noopener noreferrer"
-					>GitHub repository</a
-				>.
+				{@html m.privacy_contact_desc({ link: '<a href="https://github.com/zilpay" target="_blank" rel="noopener noreferrer">' + m.privacy_github_repo() + '</a>' })}
 			</p>
 		</section>
 	</div>
@@ -84,7 +82,7 @@
 		line-height: 1.7;
 	}
 
-	.privacy__section a {
+	.privacy__section :global(a) {
 		color: var(--brand-purple);
 		text-decoration: underline;
 		text-underline-offset: 3px;

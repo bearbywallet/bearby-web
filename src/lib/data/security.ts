@@ -1,33 +1,37 @@
+import * as m from '$lib/paraglide/messages';
+
 export type CryptoPrimitive = {
 	name: string;
 	label: string;
 	description: string;
 };
 
-export const cryptoPrimitives: CryptoPrimitive[] = [
-	{
-		name: 'NTRU Prime',
-		label: 'Post-Quantum',
-		description: 'Lattice-based cryptography providing future-proof resistance against quantum computing attacks.'
-	},
-	{
-		name: 'Cyber',
-		label: 'Blockchain Ops',
-		description: 'Advanced cryptographic library optimized for high-performance blockchain operations.'
-	},
-	{
-		name: 'AES',
-		label: 'Symmetric',
-		description: 'Industry-standard 256-bit symmetric encryption protecting data at rest and in transit.'
-	},
-	{
-		name: 'Kuznechik',
-		label: 'GOST R 34.12',
-		description: 'Russian federal encryption standard adding an independent layer of cryptographic security.'
-	},
-	{
-		name: 'Argon2',
-		label: 'Key Derivation',
-		description: 'Memory-hard function for secure password hashing resistant to GPU and ASIC attacks.'
-	}
-];
+export function getCryptoPrimitives(): CryptoPrimitive[] {
+	return [
+		{
+			name: 'NTRU Prime',
+			label: m.crypto_ntru_label(),
+			description: m.crypto_ntru_desc()
+		},
+		{
+			name: 'Cyber',
+			label: m.crypto_cyber_label(),
+			description: m.crypto_cyber_desc()
+		},
+		{
+			name: 'AES',
+			label: m.crypto_aes_label(),
+			description: m.crypto_aes_desc()
+		},
+		{
+			name: 'Kuznechik',
+			label: m.crypto_kuznechik_label(),
+			description: m.crypto_kuznechik_desc()
+		},
+		{
+			name: 'Argon2',
+			label: m.crypto_argon2_label(),
+			description: m.crypto_argon2_desc()
+		}
+	];
+}

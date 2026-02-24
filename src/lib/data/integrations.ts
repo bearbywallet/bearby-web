@@ -1,15 +1,20 @@
+import * as m from '$lib/paraglide/messages';
+
 export type Chain = {
+	key: string;
 	name: string;
 	color: string;
 };
 
-export const chains: Chain[] = [
-	{ name: 'Ethereum', color: '#627eea' },
-	{ name: 'Binance Chain', color: '#f3ba2f' },
-	{ name: 'Polygon', color: '#8247e5' },
-	{ name: 'Arbitrum', color: '#28a0f0' },
-	{ name: 'Optimism', color: '#ff0420' },
-	{ name: 'Base', color: '#0052ff' },
-	{ name: 'Avalanche', color: '#e84142' },
-	{ name: 'Linea', color: '#61dfff' }
-];
+export function getChains(): Chain[] {
+	return [
+		{ key: 'ethereum', name: m.chain_ethereum(), color: '#627eea' },
+		{ key: 'bnb', name: m.chain_binance(), color: '#f3ba2f' },
+		{ key: 'polygon', name: m.chain_polygon(), color: '#8247e5' },
+		{ key: 'arbitrum', name: m.chain_arbitrum(), color: '#28a0f0' },
+		{ key: 'optimism', name: m.chain_optimism(), color: '#ff0420' },
+		{ key: 'base', name: m.chain_base(), color: '#0052ff' },
+		{ key: 'avalanche', name: m.chain_avalanche(), color: '#e84142' },
+		{ key: 'linea', name: m.chain_linea(), color: '#61dfff' }
+	];
+}

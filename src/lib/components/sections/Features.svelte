@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { features } from '$lib/data/features';
+	import { getFeatures } from '$lib/data/features';
+
+	const features = getFeatures();
 </script>
 
 <section id="features" class="features-section">

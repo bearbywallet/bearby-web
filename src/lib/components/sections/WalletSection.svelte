@@ -1,15 +1,17 @@
 <script lang="ts">
+	import * as m from '$lib/paraglide/messages';
+
 	type Feature = { title: string; desc: string; iconType: 'circle' | 'shield' };
 
 	const features: Feature[] = [
 		{
-			title: 'Failproof System',
-			desc: 'Stay 100% operational regardless of how many nodes are offline.',
+			title: m.wallet_failproof_title(),
+			desc: m.wallet_failproof_desc(),
 			iconType: 'circle'
 		},
 		{
-			title: '100% Secure',
-			desc: 'Uncompromising network resilience with zero sacrifice to security.',
+			title: m.wallet_secure_title(),
+			desc: m.wallet_secure_desc(),
 			iconType: 'shield'
 		}
 	];
@@ -23,10 +25,9 @@
 			</div>
 
 			<div class="content-col">
-				<h2 class="title">Wallet that can never be stopped</h2>
+				<h2 class="title">{m.wallet_title()}</h2>
 				<p class="description">
-					The wallet that connects to dozens of independent nodes simultaneously — unlike traditional
-					wallets relying on a single point of failure.
+					{m.wallet_desc()}
 				</p>
 
 				<div class="features-row">

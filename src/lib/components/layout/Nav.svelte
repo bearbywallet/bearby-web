@@ -1,6 +1,8 @@
 <script lang="ts">
 	import logo from '$lib/assets/logo.svg';
 	import { getTheme, toggleTheme } from '$lib/stores/theme.svelte';
+	import * as m from '$lib/paraglide/messages';
+	import LocaleSwitcher from './LocaleSwitcher.svelte';
 </script>
 
 <nav class="nav" aria-label="Main navigation">
@@ -11,13 +13,14 @@
 		</a>
 
 		<div class="nav-links">
-			<a href="/#about" class="nav-link">About</a>
-			<a href="/#features" class="nav-link">Features</a>
-			<a href="/#secure" class="nav-link">Security</a>
-			<a href="/#integrations" class="nav-link">Integrations</a>
+			<a href="/#about" class="nav-link">{m.nav_about()}</a>
+			<a href="/#features" class="nav-link">{m.nav_features()}</a>
+			<a href="/#secure" class="nav-link">{m.nav_security()}</a>
+			<a href="/#integrations" class="nav-link">{m.nav_integrations()}</a>
 		</div>
 
 		<div class="nav-actions">
+			<LocaleSwitcher />
 			<button class="theme-toggle" onclick={toggleTheme} aria-label="Toggle theme">
 				{#if getTheme() === 'dark'}
 					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -52,7 +55,7 @@
 						points="7,10 12,15 17,10"
 					></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg
 				>
-				Download
+				{m.nav_download()}
 			</a>
 		</div>
 	</div>

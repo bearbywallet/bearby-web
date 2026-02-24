@@ -1,19 +1,21 @@
 <script lang="ts">
-	import { chains } from '$lib/data/integrations';
+	import { getChains } from '$lib/data/integrations';
+	import * as m from '$lib/paraglide/messages';
 	import Card from '$lib/components/ui/Card.svelte';
 
+	const chains = getChains();
 	const col1 = chains.slice(0, 4);
 	const col2 = chains.slice(4);
 
 	const icons: Record<string, string> = {
-		Ethereum: '/img/chain-ethereum.svg',
-		'Binance Chain': '/img/chain-bnb.svg',
-		Polygon: '/img/chain-polygon.svg',
-		Arbitrum: '/img/chain-arbitrum.svg',
-		Optimism: '/img/chain-optimism.svg',
-		Base: '/img/chain-base.svg',
-		Avalanche: '/img/chain-avalanche.svg',
-		Linea: '/img/chain-linea.svg'
+		ethereum: '/img/chain-ethereum.svg',
+		bnb: '/img/chain-bnb.svg',
+		polygon: '/img/chain-polygon.svg',
+		arbitrum: '/img/chain-arbitrum.svg',
+		optimism: '/img/chain-optimism.svg',
+		base: '/img/chain-base.svg',
+		avalanche: '/img/chain-avalanche.svg',
+		linea: '/img/chain-linea.svg'
 	};
 </script>
 
@@ -22,10 +24,9 @@
 		<Card class="integrations-card">
 			<div class="integrations-inner">
 				<div class="integrations-text">
-					<h2 class="integrations-title">Seamless Integrations for a Smarter Workflow</h2>
+					<h2 class="integrations-title">{m.integrations_title()}</h2>
 					<p class="integrations-body">
-						Bearby works effortlessly with your favorite tools, making your workflow smoother and
-						more efficient. Connect, automate, and get things done faster!
+						{m.integrations_desc()}
 					</p>
 				</div>
 
@@ -34,7 +35,7 @@
 						<ul class="ticker-list ticker-up">
 							{#each [...col1, ...col1] as chain, i (i)}
 								<li class="chain-card">
-									<img src={icons[chain.name]} alt={chain.name} class="chain-icon" />
+									<img src={icons[chain.key]} alt={chain.name} class="chain-icon" />
 									<span class="chain-name">{chain.name}</span>
 								</li>
 							{/each}
@@ -45,7 +46,7 @@
 						<ul class="ticker-list ticker-down">
 							{#each [...col2, ...col2] as chain, i (i)}
 								<li class="chain-card">
-									<img src={icons[chain.name]} alt={chain.name} class="chain-icon" />
+									<img src={icons[chain.key]} alt={chain.name} class="chain-icon" />
 									<span class="chain-name">{chain.name}</span>
 								</li>
 							{/each}

@@ -1,10 +1,12 @@
 <script lang="ts">
+	import * as m from '$lib/paraglide/messages';
+
 	let activeTab = $state(0);
 
 	const tabs = [
-		{ label: 'Regional Language Support', image: '/img/phone-dapps.png' },
-		{ label: 'Native Bitcoin Support', image: '/img/bitoin-support.webp' },
-		{ label: 'In app browser for Dapps', image: '/img/browser.png' }
+		{ label: m.about_tab_language(), image: '/img/phone-dapps.png' },
+		{ label: m.about_tab_bitcoin(), image: '/img/bitoin-support.webp' },
+		{ label: m.about_tab_dapps(), image: '/img/browser.png' }
 	];
 </script>
 

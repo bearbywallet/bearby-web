@@ -1,3 +1,7 @@
+<script lang="ts">
+	import * as m from '$lib/paraglide/messages';
+</script>
+
 <section class="showcases">
 	<div class="container">
 		<div class="cards">
@@ -6,8 +10,8 @@
 					<img src="/img/phone-dapps-vertical.png" alt="In app dApps browser" />
 				</div>
 				<div class="text-wrap">
-					<h3>In app dApps and browsers</h3>
-					<p>Summarize long texts in seconds or generate professional content from scratch. Perfect for professionals!</p>
+					<h3>{m.showcase_dapps_title()}</h3>
+					<p>{m.showcase_dapps_desc()}</p>
 				</div>
 			</div>
 			<div class="card card--stretch">
@@ -15,8 +19,8 @@
 					<img src="/img/phone-bitcoin.png" alt="Native Bitcoin Support" />
 				</div>
 				<div class="text-wrap">
-					<h3>Native Bitcoin Support</h3>
-					<p>Native Bitcoin Support to store and trade your bitcoin securely. Designed to protect assets from Quantum risks.</p>
+					<h3>{m.showcase_bitcoin_title()}</h3>
+					<p>{m.showcase_bitcoin_desc()}</p>
 				</div>
 			</div>
 		</div>

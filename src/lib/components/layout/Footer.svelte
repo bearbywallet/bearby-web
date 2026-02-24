@@ -1,4 +1,6 @@
 <script lang="ts">
+	import * as m from '$lib/paraglide/messages';
+
 	const year = new Date().getFullYear();
 </script>
 
@@ -8,8 +10,8 @@
 
 		<div class="footer-bottom">
 			<div class="footer-links-left">
-				<a href="/privacy-policy" class="footer-link">Privacy Policy</a>
-				<span class="footer-copy">©{year} Rinat.IP.</span>
+				<a href="/privacy-policy" class="footer-link">{m.footer_privacy()}</a>
+				<span class="footer-copy">{m.footer_copyright({ year: String(year) })}</span>
 			</div>
 
 			<div class="footer-links-right">
@@ -17,7 +19,7 @@
 					href="https://github.com/zilpay"
 					target="_blank"
 					rel="noopener noreferrer"
-					class="footer-link">Old Bearby</a
+					class="footer-link">{m.footer_old_bearby()}</a
 				>
 			</div>
 		</div>
