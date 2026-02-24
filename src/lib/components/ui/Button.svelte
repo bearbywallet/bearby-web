@@ -7,6 +7,14 @@
 		variant = 'primary',
 		class: className = '',
 		onclick
+	}: {
+		children: () => any;
+		href?: string;
+		target?: string;
+		rel?: string;
+		variant?: string;
+		class?: string;
+		onclick?: () => void;
 	} = $props();
 </script>
 
