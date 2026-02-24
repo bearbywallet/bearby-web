@@ -4,6 +4,7 @@ export type Download = {
 	platform: string;
 	count: string;
 	action: string;
+	secondary?: boolean;
 };
 
 export const downloads: Download[] = [
@@ -48,5 +49,53 @@ export const downloads: Download[] = [
 		platform: 'huawei',
 		count: '800+ Downloads',
 		action: 'Download'
+	},
+	{
+		label: 'Android APK',
+		href: '#',
+		platform: 'apk',
+		count: 'Direct Download',
+		action: 'Download APK',
+		secondary: true
+	},
+	{
+		label: 'Windows',
+		href: '#',
+		platform: 'windows',
+		count: 'Desktop App',
+		action: 'Download',
+		secondary: true
+	},
+	{
+		label: 'macOS',
+		href: '#',
+		platform: 'macos',
+		count: 'Desktop App',
+		action: 'Download',
+		secondary: true
+	},
+	{
+		label: 'Linux',
+		href: '#',
+		platform: 'linux',
+		count: 'Desktop App',
+		action: 'Download',
+		secondary: true
+	},
+	{
+		label: 'Old Bearby (Chrome)',
+		href: '#',
+		platform: 'old-chrome',
+		count: 'Legacy Extension',
+		action: 'Install',
+		secondary: true
+	},
+	{
+		label: 'Old Bearby (Firefox)',
+		href: '#',
+		platform: 'old-firefox',
+		count: 'Legacy Add-on',
+		action: 'Install',
+		secondary: true
 	}
 ];
