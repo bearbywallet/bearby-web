@@ -1,105 +1,146 @@
 <script lang="ts">
-	import Card from '$lib/components/ui/Card.svelte';
+	let activeTab = $state(0);
+
+	const tabs = [
+		{ label: 'Regional Language Support', image: '/img/phone-dapps.png' },
+		{ label: 'Native Bitcoin Support', image: '/img/bitoin-support.webp' },
+		{ label: 'In app browser for Dapps', image: '/img/browser.png' }
+	];
 </script>
 
-<section id="about" class="extra-features">
+<section id="about">
 	<div class="container">
-		<div class="showcase-banner">
-			<img src="/img/feature-showcase.png" alt="Encryption Setup" class="banner-image" />
-		</div>
-
-		<div class="split-features">
-			<div class="features-list">
-				<button class="list-item active"> Regional Language Support </button>
-				<button class="list-item"> Native Bitcoin Support </button>
-				<button class="list-item"> In app browser for Dapps </button>
+		<div class="productivity-tab">
+			<div class="tabs-col">
+				{#each tabs as tab, i (tab.label)}
+					<button
+						class="tab-btn"
+						class:active={activeTab === i}
+						onclick={() => (activeTab = i)}
+					>
+						{tab.label}
+					</button>
+				{/each}
 			</div>
 
-			<div class="mockup-container">
-				<img src="/img/phone-mockup-1.png" alt="Bearby App Mockup" class="mockup-image" />
+			<div class="image-col">
+				<div class="image-card">
+					{#each tabs as tab, i (tab.label)}
+						<div class="image-wrapper" class:visible={activeTab === i}>
+							<img src={tab.image} alt={tab.label} />
+						</div>
+					{/each}
+				</div>
 			</div>
 		</div>
 	</div>
 </section>
 
 <style>
-	.extra-features {
-		padding: 24px 0 64px 0;
+	section {
+		padding: 0 0 8px;
 	}
 
-	.showcase-banner {
-		width: 100%;
-		margin-bottom: 24px;
-		border-radius: var(--border-radius-lg);
-		overflow: hidden;
-		border: 1px solid var(--border-color);
+	.productivity-tab {
+		display: flex;
+		flex-direction: row;
+		gap: 10px;
+		align-items: stretch;
 	}
 
-	.banner-image {
-		width: 100%;
-		height: auto;
-		display: block;
-	}
-
-	.split-features {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 24px;
-	}
-
-	.features-list {
+	/* ── Left: tabs ── */
+	.tabs-col {
+		flex: 1 0 0;
 		display: flex;
 		flex-direction: column;
-		gap: 16px;
-	}
-
-	.list-item {
-		padding: 24px 32px;
-		display: flex;
-		align-items: center;
-		background: transparent;
-		border: 1px solid transparent;
-		border-radius: 40px;
-		font-size: 1.125rem;
-		font-weight: 500;
-		color: var(--text-secondary);
-		text-align: left;
-		transition: all 0.2s;
-	}
-
-	.list-item:hover {
-		color: var(--text-primary);
-	}
-
-	.list-item.active {
-		background: rgba(255, 255, 255, 0.05);
-		border-color: var(--border-color);
-		color: var(--text-primary);
-	}
-
-	.mockup-container {
-		background: var(--bg-card);
-		border: 1px solid var(--border-color);
-		border-radius: var(--border-radius-lg);
-		display: flex;
 		justify-content: center;
-		align-items: center;
-		padding: 48px;
+		gap: 10px;
 		overflow: hidden;
 	}
 
-	.mockup-image {
-		max-width: 100%;
-		max-height: 400px;
-		object-fit: contain;
+	.tab-btn {
+		width: 100%;
+		padding: 30px 50px;
+		border-radius: 50px;
+		background-color: var(--gray-950);
+		border: 1px solid var(--gray-900);
+		box-shadow: none;
+		color: var(--gray-400);
+		font-family: var(--font-secondary);
+		font-size: 20px;
+		font-weight: 400;
+		text-align: left;
+		cursor: pointer;
+		transition:
+			color 0.2s,
+			border-color 0.2s,
+			box-shadow 0.2s;
 	}
 
+	.tab-btn.active {
+		border-color: var(--gray-700);
+		box-shadow: rgba(255, 255, 255, 0.25) 0px 0px 30px 0px inset;
+		color: var(--gray-200);
+	}
+
+	.tab-btn:hover:not(.active) {
+		border-color: var(--gray-800);
+		color: var(--gray-300);
+	}
+
+	/* ── Right: image card ── */
+	.image-col {
+		flex: 1 0 0;
+		display: flex;
+		flex-direction: column;
+		align-self: stretch;
+	}
+
+	.image-card {
+		flex: 1 0 0;
+		position: relative;
+		background-color: var(--gray-950);
+		border: 1px solid var(--gray-800);
+		border-radius: var(--border-radius-2xl);
+		padding: 20px;
+		overflow: hidden;
+		min-height: 380px;
+	}
+
+	.image-wrapper {
+		position: absolute;
+		inset: 20px;
+		opacity: 0;
+		transition: opacity 0.35s ease;
+		-webkit-mask: linear-gradient(rgb(0, 0, 0) 58%, rgba(0, 0, 0, 0) 100%);
+		mask: linear-gradient(rgb(0, 0, 0) 58%, rgba(0, 0, 0, 0) 100%);
+	}
+
+	.image-wrapper.visible {
+		opacity: 1;
+	}
+
+	.image-wrapper img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: top center;
+		border-radius: calc(var(--border-radius-2xl) - 20px);
+	}
+
+	/* ── Responsive ── */
 	@media (max-width: 768px) {
-		.split-features {
-			grid-template-columns: 1fr;
+		.productivity-tab {
+			flex-direction: column;
 		}
-		.mockup-container {
-			padding: 32px;
+
+		.tab-btn {
+			padding: 20px 30px;
+			font-size: 17px;
+		}
+
+		.image-card {
+			min-height: 300px;
 		}
 	}
 </style>
