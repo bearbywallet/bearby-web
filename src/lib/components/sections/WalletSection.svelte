@@ -61,8 +61,8 @@
 	}
 
 	.wallet-card {
-		background: var(--gray-950);
-		border: 1px solid var(--gray-800);
+		background: var(--bg-card);
+		border: 1px solid var(--border-card);
 		border-radius: var(--card-radius);
 		padding: 70px;
 		display: flex;
@@ -98,14 +98,14 @@
 		font-size: clamp(2rem, 4vw, 3.25rem);
 		font-weight: 600;
 		line-height: 1.2;
-		color: var(--gray-300);
+		color: var(--text-primary);
 		font-family: var(--font-secondary);
 	}
 
 	.description {
 		font-size: 1.125rem;
 		line-height: 1.6;
-		color: var(--gray-400);
+		color: var(--text-secondary);
 	}
 
 	.features-row {
@@ -122,7 +122,7 @@
 	}
 
 	.feature-icon {
-		color: var(--gray-300);
+		color: var(--text-primary);
 		display: block;
 		width: 37px;
 		height: 37px;
@@ -132,13 +132,13 @@
 		font-size: 1.125rem;
 		font-weight: 600;
 		font-family: var(--font-secondary);
-		color: var(--gray-300);
+		color: var(--text-primary);
 	}
 
 	.feature-desc {
 		font-size: 0.9375rem;
 		line-height: 1.6;
-		color: var(--gray-400);
+		color: var(--text-secondary);
 	}
 
 	@media (max-width: 900px) {

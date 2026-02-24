@@ -75,7 +75,7 @@
 		justify-content: space-between;
 		gap: 30px;
 		padding: 12px 16px 12px 24px;
-		background: var(--bg-subtle);
+		background: var(--bg-nav);
 		backdrop-filter: blur(10px);
 		-webkit-backdrop-filter: blur(10px);
 		border-radius: 40px;

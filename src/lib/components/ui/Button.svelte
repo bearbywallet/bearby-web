@@ -49,12 +49,12 @@
 	}
 
 	.btn-secondary {
-		background: var(--gray-900);
+		background: var(--bg-card);
 		border: 1px solid var(--border-color);
 		border-radius: var(--border-radius-md);
 	}
 
 	.btn-secondary:hover {
-		background: var(--gray-800);
+		background: var(--bg-card-hover);
 	}
 </style>

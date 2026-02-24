@@ -50,6 +50,7 @@
 
 	.hero-header {
 		width: 100%;
+		background: var(--bg-color);
 	}
 
 	@keyframes heroPhoneIn {
@@ -82,9 +83,16 @@
 		align-items: center;
 		justify-content: center;
 		overflow: visible;
-		-webkit-mask: linear-gradient(#000 50%, #0000 100%);
-		mask: linear-gradient(#000 50%, #0000 100%);
 		animation: heroPhoneIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+	}
+
+	.hero-wrap::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		background: linear-gradient(to bottom, transparent 30%, var(--bg-color) 75%);
+		z-index: 1;
 	}
 
 	.hero-phone {
@@ -94,8 +102,6 @@
 		width: 100%;
 		height: 100%;
 		object-fit: contain;
-		-webkit-mask: linear-gradient(#000 86%, #0000 100%);
-		mask: linear-gradient(#000 86%, #0000 100%);
 	}
 
 	.hero-cta {
@@ -190,9 +196,8 @@
 			min-height: 80vh;
 		}
 
-		.hero-phone {
-			-webkit-mask: linear-gradient(#000 76%, #0000 94%);
-			mask: linear-gradient(#000 76%, #0000 94%);
+		.hero-wrap::after {
+			background: linear-gradient(to bottom, transparent 50%, var(--bg-color) 94%);
 		}
 
 		.hero-cta {
@@ -212,13 +217,13 @@
 		.hero-wrap {
 			min-height: 720px;
 			padding: 80px 0 100px;
-			-webkit-mask: linear-gradient(#000 50%, #0000 94%);
-			mask: linear-gradient(#000 50%, #0000 94%);
+		}
+
+		.hero-wrap::after {
+			background: linear-gradient(to bottom, transparent 50%, var(--bg-color) 94%);
 		}
 
 		.hero-phone {
-			-webkit-mask: unset;
-			mask: unset;
 			max-height: 370px;
 			height: 370px;
 			object-fit: contain;

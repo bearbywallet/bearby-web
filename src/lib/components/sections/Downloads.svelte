@@ -152,12 +152,7 @@
 		border: 1px solid var(--border-hover);
 		background: var(--bg-subtle);
 		backdrop-filter: blur(10px);
-		box-shadow:
-			rgba(0, 0, 0, 0.59) 0px -0.3px 1.14px -1.67px inset,
-			rgba(0, 0, 0, 0.49) 0px -1.14px 4.35px -3.33px inset,
-			rgba(0, 0, 0, 0.18) 0px 0.6px 0.6px -1.25px,
-			rgba(0, 0, 0, 0.16) 0px 2.29px 2.29px -2.5px,
-			rgba(0, 0, 0, 0.06) 0px 10px 10px -3.75px;
+		box-shadow: none;
 		font-family: 'Inter', sans-serif;
 		font-size: 16px;
 		font-weight: 400;
