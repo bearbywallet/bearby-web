@@ -2,31 +2,22 @@
 	import { chains } from '$lib/data/integrations';
 	import Card from '$lib/components/ui/Card.svelte';
 
-	const getChainIcon = (name: string) => {
-		switch (name) {
-			case 'Ethereum':
-				return '/img/chain-ethereum.svg';
-			case 'Binance Chain':
-				return '/img/chain-bnb.svg';
-			case 'Polygon':
-				return '/img/chain-polygon.svg';
-			case 'Arbitrum':
-				return '/img/chain-arbitrum.svg';
-			case 'Optimism':
-				return '/img/chain-optimism.svg';
-			case 'Base':
-				return '/img/chain-base.svg';
-			case 'Avalanche':
-				return '/img/chain-avalanche.svg';
-			case 'Linea':
-				return '/img/chain-linea.svg';
-			default:
-				return '';
-		}
+	const col1 = chains.slice(0, 4);
+	const col2 = chains.slice(4);
+
+	const icons: Record<string, string> = {
+		Ethereum: '/img/chain-ethereum.svg',
+		'Binance Chain': '/img/chain-bnb.svg',
+		Polygon: '/img/chain-polygon.svg',
+		Arbitrum: '/img/chain-arbitrum.svg',
+		Optimism: '/img/chain-optimism.svg',
+		Base: '/img/chain-base.svg',
+		Avalanche: '/img/chain-avalanche.svg',
+		Linea: '/img/chain-linea.svg'
 	};
 </script>
 
-<section class="integrations">
+<section class="integrations" id="integrations">
 	<div class="container">
 		<Card class="integrations-card">
 			<div class="integrations-inner">
@@ -38,13 +29,28 @@
 					</p>
 				</div>
 
-				<div class="integrations-grid">
-					{#each chains as chain (chain.name)}
-						<div class="chain-item">
-							<img src={getChainIcon(chain.name)} alt={chain.name} class="chain-icon" />
-							<span class="chain-name">{chain.name}</span>
-						</div>
-					{/each}
+				<div class="integrations-columns">
+					<div class="ticker-col">
+						<ul class="ticker-list ticker-up">
+							{#each [...col1, ...col1] as chain, i (i)}
+								<li class="chain-card">
+									<img src={icons[chain.name]} alt={chain.name} class="chain-icon" />
+									<span class="chain-name">{chain.name}</span>
+								</li>
+							{/each}
+						</ul>
+					</div>
+
+					<div class="ticker-col">
+						<ul class="ticker-list ticker-down">
+							{#each [...col2, ...col2] as chain, i (i)}
+								<li class="chain-card">
+									<img src={icons[chain.name]} alt={chain.name} class="chain-icon" />
+									<span class="chain-name">{chain.name}</span>
+								</li>
+							{/each}
+						</ul>
+					</div>
 				</div>
 			</div>
 		</Card>
@@ -53,83 +59,143 @@
 
 <style>
 	.integrations {
-		padding: 24px 0;
+		padding: 8px 0 0;
 	}
 
 	:global(.integrations-card) {
-		padding: 64px !important;
+		padding: 48px !important;
+		border-radius: 48px !important;
 	}
 
 	.integrations-inner {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		gap: 64px;
+		gap: 48px;
 		align-items: center;
 	}
 
 	.integrations-text {
 		display: flex;
 		flex-direction: column;
-		gap: 24px;
+		gap: 20px;
 	}
 
 	.integrations-title {
-		font-size: clamp(2rem, 4vw, 2.5rem);
+		font-family: var(--font-primary);
+		font-size: clamp(1.75rem, 3vw, 2.5rem);
 		font-weight: 500;
 		color: var(--text-primary);
-		line-height: 1.2;
+		line-height: 1.15;
 	}
 
 	.integrations-body {
-		font-size: 1.125rem;
+		font-size: 0.9375rem;
 		color: var(--text-secondary);
 		line-height: 1.6;
 	}
 
-	.integrations-grid {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 16px;
+	/* Right side: two scrolling columns */
+	.integrations-columns {
+		display: flex;
+		gap: 10px;
+		height: 380px;
 	}
 
-	.chain-item {
+	.ticker-col {
+		flex: 1;
+		overflow: hidden;
+		mask-image: linear-gradient(
+			rgba(0, 0, 0, 0) 0%,
+			rgb(0, 0, 0) 15%,
+			rgb(0, 0, 0) 85%,
+			rgba(0, 0, 0, 0) 100%
+		);
+		-webkit-mask-image: linear-gradient(
+			rgba(0, 0, 0, 0) 0%,
+			rgb(0, 0, 0) 15%,
+			rgb(0, 0, 0) 85%,
+			rgba(0, 0, 0, 0) 100%
+		);
+	}
+
+	.ticker-list {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		will-change: transform;
+	}
+
+	.ticker-up {
+		animation: scrollUp 11s linear infinite;
+	}
+
+	.ticker-down {
+		animation: scrollDown 11s linear infinite;
+	}
+
+	@keyframes scrollUp {
+		from {
+			transform: translateY(0);
+		}
+		to {
+			transform: translateY(-50%);
+		}
+	}
+
+	@keyframes scrollDown {
+		from {
+			transform: translateY(-50%);
+		}
+		to {
+			transform: translateY(0);
+		}
+	}
+
+	/* Individual chain card */
+	.chain-card {
 		display: flex;
 		align-items: center;
-		gap: 12px;
-		padding: 16px 24px;
-		background: rgba(255, 255, 255, 0.03);
-		border: 1px solid var(--border-color);
-		border-radius: 40px;
-		transition: all 0.2s;
-	}
-
-	.chain-item:hover {
-		background: rgba(255, 255, 255, 0.08);
-		border-color: var(--border-hover);
+		gap: 14px;
+		padding: 18px 20px;
+		background: var(--gray-950);
+		border: 1px solid var(--gray-900);
+		border-radius: 19px;
+		height: 84px;
+		flex-shrink: 0;
+		box-sizing: border-box;
 	}
 
 	.chain-icon {
-		width: 24px;
-		height: 24px;
+		width: 44px;
+		height: 44px;
 		object-fit: contain;
+		border-radius: 10px;
+		flex-shrink: 0;
 	}
 
 	.chain-name {
+		font-family: var(--font-secondary);
 		font-size: 1rem;
 		font-weight: 500;
-		color: var(--text-primary);
+		color: var(--gray-300);
+		white-space: nowrap;
 	}
 
 	@media (max-width: 900px) {
 		.integrations-inner {
 			grid-template-columns: 1fr;
-			gap: 48px;
+			gap: 32px;
 		}
+
 		:global(.integrations-card) {
 			padding: 32px !important;
 		}
-		.integrations-grid {
-			grid-template-columns: 1fr;
+
+		.integrations-columns {
+			height: 300px;
 		}
 	}
 </style>
