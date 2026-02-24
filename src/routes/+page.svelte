@@ -3,6 +3,7 @@
 	import WalletSection from '$lib/components/sections/WalletSection.svelte';
 	import Features from '$lib/components/sections/Features.svelte';
 	import Showcases from '$lib/components/sections/Showcases.svelte';
+	import BitcoinLandscape from '$lib/components/sections/BitcoinLandscape.svelte';
 	import ExtraFeatures from '$lib/components/sections/About.svelte';
 	import Integrations from '$lib/components/sections/Integrations.svelte';
 	import Downloads from '$lib/components/sections/Downloads.svelte';
@@ -22,6 +23,7 @@
 	<WalletSection />
 	<Features />
 	<Showcases />
+	<BitcoinLandscape />
 	<ExtraFeatures />
 	<Integrations />
 	<Downloads />
