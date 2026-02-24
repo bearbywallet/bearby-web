@@ -87,7 +87,7 @@
 		gap: 30px;
 		background: rgb(10, 10, 10);
 		border: 1px solid rgb(38, 38, 38);
-		border-radius: 48px;
+		border-radius: var(--card-radius);
 		padding: 30px 20px;
 		text-decoration: none;
 		color: rgb(245, 245, 245);

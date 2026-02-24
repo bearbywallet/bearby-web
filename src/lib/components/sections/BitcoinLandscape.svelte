@@ -16,7 +16,7 @@
 		width: 100%;
 		min-height: 600px;
 		max-height: 600px;
-		border-radius: var(--border-radius-2xl);
+		border-radius: var(--card-radius);
 		border: 1px solid var(--gray-900);
 		overflow: hidden;
 	}

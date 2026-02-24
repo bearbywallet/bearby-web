@@ -63,7 +63,7 @@
 	.wallet-card {
 		background: var(--gray-950);
 		border: 1px solid var(--gray-800);
-		border-radius: var(--border-radius-2xl);
+		border-radius: var(--card-radius);
 		padding: 70px;
 		display: flex;
 		flex-direction: row;

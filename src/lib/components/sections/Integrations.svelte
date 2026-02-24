@@ -64,7 +64,7 @@
 
 	:global(.integrations-card) {
 		padding: 48px !important;
-		border-radius: 48px !important;
+		border-radius: var(--card-radius) !important;
 	}
 
 	.integrations-inner {

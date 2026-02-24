@@ -42,7 +42,7 @@
 		align-items: stretch;
 		background: var(--gray-950);
 		border: 1px solid var(--gray-800);
-		border-radius: var(--border-radius-2xl);
+		border-radius: var(--card-radius);
 		padding: 50px;
 		min-height: 380px;
 	}
@@ -90,7 +90,7 @@
 		flex: 1 0 0;
 		position: relative;
 		overflow: hidden;
-		border-radius: calc(var(--border-radius-2xl) - 20px);
+		border-radius: calc(var(--card-radius) - 20px);
 	}
 
 	.image-wrapper {
@@ -111,7 +111,7 @@
 		height: 100%;
 		object-fit: cover;
 		object-position: top center;
-		border-radius: calc(var(--border-radius-2xl) - 20px);
+		border-radius: calc(var(--card-radius) - 20px);
 	}
 
 	@media (max-width: 768px) {

@@ -88,7 +88,7 @@
 		padding: 100px;
 		background-color: var(--gray-950);
 		border: 1px solid var(--gray-800);
-		border-radius: 40px;
+		border-radius: var(--card-radius);
 		overflow: hidden;
 	}
 

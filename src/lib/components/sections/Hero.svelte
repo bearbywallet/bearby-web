@@ -77,7 +77,7 @@
 
 	.hero-cta {
 		width: 100%;
-		max-width: 1140px;
+		max-width: var(--section-max-width);
 		margin: 0 auto;
 		padding: 0 24px;
 	}
@@ -87,7 +87,7 @@
 		-webkit-backdrop-filter: blur(5px);
 		backdrop-filter: blur(5px);
 		border: 1px solid #262626;
-		border-radius: 48px;
+		border-radius: var(--card-radius);
 		padding: 75px;
 		display: flex;
 		flex-direction: column;
