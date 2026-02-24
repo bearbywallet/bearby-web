@@ -10,27 +10,21 @@
 
 <section id="about">
 	<div class="container">
-		<div class="productivity-tab">
+		<div class="productivity-card">
 			<div class="tabs-col">
 				{#each tabs as tab, i (tab.label)}
-					<button
-						class="tab-btn"
-						class:active={activeTab === i}
-						onclick={() => (activeTab = i)}
-					>
+					<button class="tab-btn" class:active={activeTab === i} onclick={() => (activeTab = i)}>
 						{tab.label}
 					</button>
 				{/each}
 			</div>
 
 			<div class="image-col">
-				<div class="image-card">
-					{#each tabs as tab, i (tab.label)}
-						<div class="image-wrapper" class:visible={activeTab === i}>
-							<img src={tab.image} alt={tab.label} />
-						</div>
-					{/each}
-				</div>
+				{#each tabs as tab, i (tab.label)}
+					<div class="image-wrapper" class:visible={activeTab === i}>
+						<img src={tab.image} alt={tab.label} />
+					</div>
+				{/each}
 			</div>
 		</div>
 	</div>
@@ -38,17 +32,21 @@
 
 <style>
 	section {
-		padding: 0 0 8px;
+		padding: 0;
 	}
 
-	.productivity-tab {
+	.productivity-card {
 		display: flex;
 		flex-direction: row;
 		gap: 10px;
 		align-items: stretch;
+		background: var(--gray-950);
+		border: 1px solid var(--gray-800);
+		border-radius: var(--border-radius-2xl);
+		padding: 50px;
+		min-height: 380px;
 	}
 
-	/* ── Left: tabs ── */
 	.tabs-col {
 		flex: 1 0 0;
 		display: flex;
@@ -62,7 +60,7 @@
 		width: 100%;
 		padding: 30px 50px;
 		border-radius: 50px;
-		background-color: var(--gray-950);
+		background-color: transparent;
 		border: 1px solid var(--gray-900);
 		box-shadow: none;
 		color: var(--gray-400);
@@ -88,28 +86,16 @@
 		color: var(--gray-300);
 	}
 
-	/* ── Right: image card ── */
 	.image-col {
 		flex: 1 0 0;
-		display: flex;
-		flex-direction: column;
-		align-self: stretch;
-	}
-
-	.image-card {
-		flex: 1 0 0;
 		position: relative;
-		background-color: var(--gray-950);
-		border: 1px solid var(--gray-800);
-		border-radius: var(--border-radius-2xl);
-		padding: 20px;
 		overflow: hidden;
-		min-height: 380px;
+		border-radius: calc(var(--border-radius-2xl) - 20px);
 	}
 
 	.image-wrapper {
 		position: absolute;
-		inset: 20px;
+		inset: 0;
 		opacity: 0;
 		transition: opacity 0.35s ease;
 		-webkit-mask: linear-gradient(rgb(0, 0, 0) 58%, rgba(0, 0, 0, 0) 100%);
@@ -128,19 +114,16 @@
 		border-radius: calc(var(--border-radius-2xl) - 20px);
 	}
 
-	/* ── Responsive ── */
 	@media (max-width: 768px) {
-		.productivity-tab {
+		.productivity-card {
 			flex-direction: column;
+			padding: 30px;
+			min-height: 300px;
 		}
 
 		.tab-btn {
 			padding: 20px 30px;
 			font-size: 17px;
-		}
-
-		.image-card {
-			min-height: 300px;
 		}
 	}
 </style>

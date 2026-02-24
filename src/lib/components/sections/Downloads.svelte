@@ -21,30 +21,39 @@
 	};
 </script>
 
-<section id="downloads" class="downloads">
+<section id="downloads" class="downloads-section">
 	<div class="container">
-		<div class="downloads-grid">
-			{#each downloads as dl}
+		<div class="downloads-row">
+			{#each downloads.slice(0, 3) as dl (dl.platform)}
 				<a href={dl.href} class="dl-card" target="_blank" rel="noopener noreferrer">
-					<img src={getIcon(dl.platform)} alt={dl.label} class="dl-icon" />
-					<div class="dl-content">
-						<h3 class="dl-title">{dl.label}</h3>
-						<p class="dl-count">{dl.count}</p>
+					<div class="dl-inner">
+						<div class="dl-icon-wrap">
+							<img src={getIcon(dl.platform)} alt={dl.label} class="dl-icon" />
+						</div>
+						<div class="dl-texts">
+							<h4 class="dl-title">{dl.label}</h4>
+							<p class="dl-count">{dl.count}</p>
+						</div>
 					</div>
 					<div class="dl-btn">
-						<svg
-							width="16"
-							height="16"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline
-								points="7 10 12 15 17 10"
-							></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg
-						>
+						{dl.action}
+					</div>
+				</a>
+			{/each}
+		</div>
+		<div class="downloads-row">
+			{#each downloads.slice(3) as dl (dl.platform)}
+				<a href={dl.href} class="dl-card" target="_blank" rel="noopener noreferrer">
+					<div class="dl-inner">
+						<div class="dl-icon-wrap">
+							<img src={getIcon(dl.platform)} alt={dl.label} class="dl-icon" />
+						</div>
+						<div class="dl-texts">
+							<h4 class="dl-title">{dl.label}</h4>
+							<p class="dl-count">{dl.count}</p>
+						</div>
+					</div>
+					<div class="dl-btn">
 						{dl.action}
 					</div>
 				</a>
@@ -54,88 +63,132 @@
 </section>
 
 <style>
-	.downloads {
-		padding: 64px 0 128px 0;
+	.downloads-section {
+		padding: 8px 8px 0;
 	}
 
-	.downloads-grid {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 16px;
+	.container {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.downloads-row {
+		display: flex;
+		flex-direction: row;
+		gap: 10px;
+		width: 100%;
 	}
 
 	.dl-card {
-		background: var(--bg-card);
-		border: 1px solid var(--border-color);
-		border-radius: var(--border-radius-lg);
-		padding: 32px;
+		flex: 1;
 		display: flex;
 		flex-direction: column;
-		align-items: flex-start;
-		gap: 16px;
-		transition: all 0.2s;
+		gap: 30px;
+		background: rgb(10, 10, 10);
+		border: 1px solid rgb(38, 38, 38);
+		border-radius: 48px;
+		padding: 30px 20px;
 		text-decoration: none;
-		color: var(--text-primary);
+		color: rgb(245, 245, 245);
+		overflow: hidden;
+		transition: border-color 0.2s ease;
 	}
 
 	.dl-card:hover {
-		background: rgba(255, 255, 255, 0.05);
-		border-color: var(--border-hover);
+		border-color: rgb(60, 60, 60);
+	}
+
+	.dl-inner {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+		padding: 20px;
+	}
+
+	.dl-icon-wrap {
+		flex-shrink: 0;
 	}
 
 	.dl-icon {
-		width: 48px;
-		height: 48px;
+		width: 80px;
+		height: 80px;
 		object-fit: contain;
-		margin-bottom: 8px;
+		display: block;
+		border-radius: 18px;
 	}
 
-	.dl-content {
+	.dl-texts {
 		display: flex;
 		flex-direction: column;
-		gap: 4px;
-		flex: 1;
+		gap: 5px;
 	}
 
 	.dl-title {
-		font-size: 1.125rem;
-		font-weight: 500;
+		font-family: 'Inter', sans-serif;
+		font-size: 34px;
+		font-weight: 400;
+		line-height: 1.4em;
+		color: rgb(245, 245, 245);
+		margin: 0;
 	}
 
 	.dl-count {
-		font-size: 0.875rem;
-		color: var(--text-secondary);
+		font-family: 'Inter', sans-serif;
+		font-size: 16px;
+		font-weight: 400;
+		color: rgb(163, 163, 163);
+		margin: 0;
 	}
 
 	.dl-btn {
 		display: flex;
 		align-items: center;
-		gap: 8px;
-		padding: 12px 24px;
-		background: rgba(255, 255, 255, 0.03);
-		border: 1px solid var(--border-color);
-		border-radius: 40px;
-		font-size: 0.875rem;
-		font-weight: 500;
-		width: 100%;
 		justify-content: center;
-		margin-top: 16px;
-		transition: background 0.2s;
+		width: 100%;
+		height: 57px;
+		padding: 14px 20px;
+		border-radius: 33px;
+		border: 1px solid rgba(230, 230, 230, 0.1);
+		background: rgba(250, 250, 250, 0.05);
+		backdrop-filter: blur(10px);
+		box-shadow:
+			rgba(0, 0, 0, 0.59) 0px -0.3px 1.14px -1.67px inset,
+			rgba(0, 0, 0, 0.49) 0px -1.14px 4.35px -3.33px inset,
+			rgba(0, 0, 0, 0.18) 0px 0.6px 0.6px -1.25px,
+			rgba(0, 0, 0, 0.16) 0px 2.29px 2.29px -2.5px,
+			rgba(0, 0, 0, 0.06) 0px 10px 10px -3.75px;
+		font-family: 'Inter', sans-serif;
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 1.6em;
+		color: rgb(229, 229, 229);
+		cursor: pointer;
+		transition: background 0.2s ease;
+		box-sizing: border-box;
 	}
 
 	.dl-card:hover .dl-btn {
-		background: rgba(255, 255, 255, 0.08);
+		background: rgba(250, 250, 250, 0.09);
 	}
 
-	@media (max-width: 900px) {
-		.downloads-grid {
-			grid-template-columns: repeat(2, 1fr);
+	@media (max-width: 1199px) {
+		.dl-title {
+			font-size: 25px;
 		}
 	}
 
-	@media (max-width: 600px) {
-		.downloads-grid {
-			grid-template-columns: 1fr;
+	@media (max-width: 809px) {
+		.downloads-row {
+			flex-direction: column;
+		}
+
+		.dl-title {
+			font-size: 22px;
+		}
+
+		.dl-card {
+			border-radius: 32px;
 		}
 	}
 </style>
