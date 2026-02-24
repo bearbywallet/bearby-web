@@ -40,8 +40,8 @@
 		flex-direction: row;
 		gap: 10px;
 		align-items: stretch;
-		background: var(--gray-950);
-		border: 1px solid var(--gray-800);
+		background: var(--bg-card);
+		border: 1px solid var(--border-card);
 		border-radius: var(--card-radius);
 		padding: 50px;
 		min-height: 380px;
@@ -61,9 +61,9 @@
 		padding: 30px 50px;
 		border-radius: 50px;
 		background-color: transparent;
-		border: 1px solid var(--gray-900);
+		border: 1px solid var(--border-card);
 		box-shadow: none;
-		color: var(--gray-400);
+		color: var(--text-secondary);
 		font-family: var(--font-secondary);
 		font-size: 20px;
 		font-weight: 400;
@@ -76,14 +76,14 @@
 	}
 
 	.tab-btn.active {
-		border-color: var(--gray-700);
-		box-shadow: rgba(255, 255, 255, 0.25) 0px 0px 30px 0px inset;
-		color: var(--gray-200);
+		border-color: var(--border-hover);
+		box-shadow: var(--shadow-glow) 0px 0px 30px 0px inset;
+		color: var(--text-primary);
 	}
 
 	.tab-btn:hover:not(.active) {
-		border-color: var(--gray-800);
-		color: var(--gray-300);
+		border-color: var(--border-card);
+		color: var(--text-primary);
 	}
 
 	.image-col {

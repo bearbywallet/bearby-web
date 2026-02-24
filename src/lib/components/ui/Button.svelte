@@ -37,14 +37,14 @@
 	}
 
 	.btn-outline {
-		background: rgba(255, 255, 255, 0.03);
+		background: var(--bg-subtle);
 		border: 1px solid var(--border-color);
 		backdrop-filter: blur(10px);
 		-webkit-backdrop-filter: blur(10px);
 	}
 
 	.btn-outline:hover {
-		background: rgba(255, 255, 255, 0.08);
+		background: var(--bg-card-hover);
 		border-color: var(--border-hover);
 	}
 

@@ -85,18 +85,18 @@
 		display: flex;
 		flex-direction: column;
 		gap: 30px;
-		background: rgb(10, 10, 10);
-		border: 1px solid rgb(38, 38, 38);
+		background: var(--bg-card);
+		border: 1px solid var(--border-card);
 		border-radius: var(--card-radius);
 		padding: 30px 20px;
 		text-decoration: none;
-		color: rgb(245, 245, 245);
+		color: var(--text-primary);
 		overflow: hidden;
 		transition: border-color 0.2s ease;
 	}
 
 	.dl-card:hover {
-		border-color: rgb(60, 60, 60);
+		border-color: var(--border-hover);
 	}
 
 	.dl-inner {
@@ -129,7 +129,7 @@
 		font-size: 34px;
 		font-weight: 400;
 		line-height: 1.4em;
-		color: rgb(245, 245, 245);
+		color: var(--text-primary);
 		margin: 0;
 	}
 
@@ -137,7 +137,7 @@
 		font-family: 'Inter', sans-serif;
 		font-size: 16px;
 		font-weight: 400;
-		color: rgb(163, 163, 163);
+		color: var(--text-secondary);
 		margin: 0;
 	}
 
@@ -149,8 +149,8 @@
 		height: 57px;
 		padding: 14px 20px;
 		border-radius: 33px;
-		border: 1px solid rgba(230, 230, 230, 0.1);
-		background: rgba(250, 250, 250, 0.05);
+		border: 1px solid var(--border-hover);
+		background: var(--bg-subtle);
 		backdrop-filter: blur(10px);
 		box-shadow:
 			rgba(0, 0, 0, 0.59) 0px -0.3px 1.14px -1.67px inset,
@@ -162,14 +162,14 @@
 		font-size: 16px;
 		font-weight: 400;
 		line-height: 1.6em;
-		color: rgb(229, 229, 229);
+		color: var(--text-primary);
 		cursor: pointer;
 		transition: background 0.2s ease;
 		box-sizing: border-box;
 	}
 
 	.dl-card:hover .dl-btn {
-		background: rgba(250, 250, 250, 0.09);
+		background: var(--bg-card-hover);
 	}
 
 	@media (max-width: 1199px) {

@@ -24,7 +24,7 @@
 	}
 
 	.card:hover {
-		background: rgba(250, 250, 250, 0.04);
+		background: var(--bg-card-hover);
 		border-color: var(--border-hover);
 	}
 </style>

@@ -1,25 +1,9 @@
 <!doctype html>
 
-<html lang="%paraglide.lang%" data-theme="dark">
+<html lang="%paraglide.lang%" data-theme="light">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-		<!-- Inline theme script: runs before body paint to prevent FOUC -->
-		<script>
-			(function () {
-				try {
-					var t = localStorage.getItem('theme');
-					// Default is dark — only set attribute if stored or system preference
-					if (t === 'light' || t === 'dark') {
-						document.documentElement.setAttribute('data-theme', t);
-					} else if (!window.matchMedia('(prefers-color-scheme: dark)').matches) {
-						document.documentElement.setAttribute('data-theme', 'light');
-					}
-					// else: stay dark (html already has data-theme="dark")
-				} catch (e) {}
-			})();
-		</script>
 
 		<!-- Google Fonts preconnect -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />

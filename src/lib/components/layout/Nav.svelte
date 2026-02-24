@@ -1,5 +1,6 @@
 <script lang="ts">
 	import logo from '$lib/assets/logo.svg';
+	import { getTheme, toggleTheme } from '$lib/stores/theme.svelte';
 </script>
 
 <nav class="nav" aria-label="Main navigation">
@@ -16,6 +17,25 @@
 		</div>
 
 		<div class="nav-actions">
+			<button class="theme-toggle" onclick={toggleTheme} aria-label="Toggle theme">
+				{#if getTheme() === 'dark'}
+					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<circle cx="12" cy="12" r="5"></circle>
+						<line x1="12" y1="1" x2="12" y2="3"></line>
+						<line x1="12" y1="21" x2="12" y2="23"></line>
+						<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+						<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+						<line x1="1" y1="12" x2="3" y2="12"></line>
+						<line x1="21" y1="12" x2="23" y2="12"></line>
+						<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+						<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+					</svg>
+				{:else}
+					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+					</svg>
+				{/if}
+			</button>
 			<a href="/#downloads" class="nav-download">
 				<svg
 					width="14"
@@ -55,7 +75,7 @@
 		justify-content: space-between;
 		gap: 30px;
 		padding: 12px 16px 12px 24px;
-		background: rgba(255, 255, 255, 0.03);
+		background: var(--bg-subtle);
 		backdrop-filter: blur(10px);
 		-webkit-backdrop-filter: blur(10px);
 		border-radius: 40px;
@@ -103,6 +123,25 @@
 		gap: 10px;
 	}
 
+	.theme-toggle {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		background: var(--bg-subtle);
+		border: 1px solid var(--border-color);
+		color: var(--text-primary);
+		cursor: pointer;
+		transition: all 0.2s;
+	}
+
+	.theme-toggle:hover {
+		background: var(--bg-card-hover);
+		border-color: var(--border-hover);
+	}
+
 	.nav-download {
 		display: flex;
 		align-items: center;
@@ -111,16 +150,16 @@
 		color: var(--text-primary);
 		padding: 10px 24px;
 		border-radius: 40px;
-		background: rgba(255, 255, 255, 0.05);
-		border: 1px solid rgba(255, 255, 255, 0.1);
+		background: var(--border-color);
+		border: 1px solid var(--border-hover);
 		text-decoration: none;
 		transition: all 0.2s;
 		white-space: nowrap;
 	}
 
 	.nav-download:hover {
-		background: rgba(255, 255, 255, 0.1);
-		border-color: rgba(255, 255, 255, 0.2);
+		background: var(--border-hover);
+		border-color: var(--border-hover);
 	}
 
 	@media (max-width: 900px) {

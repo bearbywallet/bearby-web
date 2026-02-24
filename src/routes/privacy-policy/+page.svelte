@@ -46,8 +46,8 @@
 
 <style>
 	.privacy {
-		padding: var(--space-2xl) var(--space-md);
-		min-height: calc(100vh - var(--nav-height) - 200px);
+		padding: 120px 24px 80px;
+		min-height: calc(100vh - 200px);
 	}
 
 	.privacy__inner {
@@ -58,34 +58,34 @@
 	.privacy__title {
 		font-size: clamp(2rem, 4vw, 3rem);
 		letter-spacing: -0.02em;
-		color: var(--color-text);
-		margin-bottom: var(--space-xs);
+		color: var(--text-primary);
+		margin-bottom: 8px;
 	}
 
 	.privacy__updated {
 		font-size: 0.875rem;
-		color: var(--color-text-muted);
-		margin-bottom: var(--space-xl);
+		color: var(--text-muted);
+		margin-bottom: 48px;
 	}
 
 	.privacy__section {
-		margin-bottom: var(--space-lg);
+		margin-bottom: 32px;
 	}
 
 	.privacy__section h2 {
 		font-size: 1.25rem;
-		color: var(--color-text);
-		margin-bottom: var(--space-xs);
+		color: var(--text-primary);
+		margin-bottom: 8px;
 	}
 
 	.privacy__section p {
 		font-size: 1rem;
-		color: var(--color-text-muted);
+		color: var(--text-secondary);
 		line-height: 1.7;
 	}
 
 	.privacy__section a {
-		color: var(--color-accent);
+		color: var(--brand-purple);
 		text-decoration: underline;
 		text-underline-offset: 3px;
 	}

@@ -86,8 +86,8 @@
 		grid-template-rows: repeat(2, minmax(0, 1fr));
 		gap: 50px;
 		padding: 100px;
-		background-color: var(--gray-950);
-		border: 1px solid var(--gray-800);
+		background-color: var(--bg-card);
+		border: 1px solid var(--border-card);
 		border-radius: var(--card-radius);
 		overflow: hidden;
 	}
@@ -106,7 +106,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background: rgba(255, 255, 255, 0.03);
+		background: var(--bg-subtle);
 		border-radius: 12px;
 	}
 
@@ -132,7 +132,7 @@
 		font-size: 14px;
 		font-weight: 400;
 		font-style: normal;
-		color: var(--gray-400);
+		color: var(--text-secondary);
 		line-height: 1.6em;
 		letter-spacing: 0em;
 	}

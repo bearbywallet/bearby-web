@@ -160,8 +160,8 @@
 		align-items: center;
 		gap: 14px;
 		padding: 18px 20px;
-		background: var(--gray-950);
-		border: 1px solid var(--gray-900);
+		background: var(--bg-card);
+		border: 1px solid var(--border-card);
 		border-radius: 19px;
 		height: 84px;
 		flex-shrink: 0;
@@ -180,7 +180,7 @@
 		font-family: var(--font-secondary);
 		font-size: 1rem;
 		font-weight: 500;
-		color: var(--gray-300);
+		color: var(--text-primary);
 		white-space: nowrap;
 	}
 

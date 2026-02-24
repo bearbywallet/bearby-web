@@ -43,8 +43,8 @@
 		justify-content: center;
 		gap: 30px;
 		padding: 50px 20px;
-		background: var(--gray-950);
-		border: 1px solid var(--gray-800);
+		background: var(--bg-card);
+		border: 1px solid var(--border-card);
 		border-radius: var(--card-radius);
 		overflow: hidden;
 	}
@@ -90,7 +90,7 @@
 		font-weight: 600;
 		line-height: 1.2em;
 		letter-spacing: 0em;
-		color: var(--gray-300);
+		color: var(--text-primary);
 	}
 
 	p {
@@ -98,7 +98,7 @@
 		font-size: 18px;
 		font-weight: 400;
 		line-height: 1.4em;
-		color: var(--gray-300);
+		color: var(--text-secondary);
 	}
 
 	@media (max-width: 809px) {

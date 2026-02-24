@@ -106,10 +106,10 @@
 	}
 
 	.cta-card {
-		background: rgba(10, 10, 10, 0.9);
+		background: var(--bg-card);
 		-webkit-backdrop-filter: blur(5px);
 		backdrop-filter: blur(5px);
-		border: 1px solid #262626;
+		border: 1px solid var(--border-card);
 		border-radius: var(--card-radius);
 		padding: 75px;
 		display: flex;
@@ -164,7 +164,7 @@
 	}
 
 	.title-gradient {
-		background-image: linear-gradient(270deg, #ac59ff 0%, #e80570 49%, #e8006f 84%, #000 112%);
+		background-image: linear-gradient(270deg, #ac59ff 0%, #e80570 49%, #e8006f 84%, var(--bg-color) 112%);
 		-webkit-background-clip: text;
 		background-clip: text;
 		-webkit-text-fill-color: transparent;
