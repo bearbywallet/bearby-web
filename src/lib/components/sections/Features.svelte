@@ -72,39 +72,12 @@
 			{/each}
 		</div>
 
-		<div class="showcase-grid">
-			<div class="showcase-card">
-				<div class="showcase-content">
-					<h2 class="showcase-title">In app dApps and browsers</h2>
-					<p class="showcase-desc">
-						Summarize long texts in seconds or generate professional content from scratch. Perfect
-						for professionals!
-					</p>
-				</div>
-				<div class="showcase-image-wrap">
-					<img src="/img/phone-dapps.png" alt="dApps Interface" class="showcase-image" />
-				</div>
-			</div>
-
-			<div class="showcase-card">
-				<div class="showcase-content">
-					<h2 class="showcase-title">Native Bitcoin Support</h2>
-					<p class="showcase-desc">
-						Native Bitcoin Support to store and trade your bitcoin securely. Designed to protect
-						assets from Quantum risks.
-					</p>
-				</div>
-				<div class="showcase-image-wrap">
-					<img src="/img/phone-bitcoin.png" alt="Hardware Wallet" class="showcase-image hw-image" />
-				</div>
-			</div>
-		</div>
 	</div>
 </section>
 
 <style>
 	.features-section {
-		padding: 0 0 100px;
+		padding: 0;
 	}
 
 	.features-grid {
@@ -164,111 +137,19 @@
 		letter-spacing: 0em;
 	}
 
-	.showcase-grid {
-		display: flex;
-		flex-direction: row;
-		gap: 10px;
-		margin-top: 10px;
-	}
-
-	.showcase-card {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: space-between;
-		gap: 10px;
-		padding: 100px 50px;
-		background: var(--bg-card);
-		border: 1px solid var(--border-color);
-		border-radius: 40px;
-		overflow: hidden;
-		backdrop-filter: blur(10px);
-		-webkit-backdrop-filter: blur(10px);
-	}
-
-	.showcase-content {
-		text-align: center;
-		max-width: 400px;
-	}
-
-	.showcase-title {
-		font-family: var(--font-primary);
-		font-size: 48px;
-		font-weight: 500;
-		font-style: normal;
-		color: var(--text-primary);
-		line-height: 1.1em;
-		letter-spacing: -0.02em;
-		margin-bottom: 20px;
-	}
-
-	.showcase-desc {
-		font-family: var(--font-secondary);
-		font-size: 14px;
-		font-weight: 400;
-		font-style: normal;
-		color: var(--gray-400);
-		line-height: 1.6em;
-		letter-spacing: 0em;
-	}
-
-	.showcase-image-wrap {
-		flex: 1;
-		display: flex;
-		justify-content: center;
-		align-items: flex-end;
-		width: 100%;
-	}
-
-	.showcase-image {
-		max-width: 280px;
-		max-height: 500px;
-		object-fit: contain;
-		object-position: bottom;
-	}
-
-	.hw-image {
-		max-height: 450px;
-	}
 
 	@media (min-width: 810px) and (max-width: 1199.98px) {
 		.features-grid {
 			padding: 50px;
 		}
-
-		.showcase-card {
-			padding: 50px;
-		}
 	}
 
 	@media (max-width: 809.98px) {
-		.features-section {
-			padding: 0 0 70px;
-		}
-
 		.features-grid {
 			grid-template-columns: repeat(1, minmax(0, 1fr));
 			gap: 29px;
 			padding: 50px;
 			border-radius: 24px;
-		}
-
-		.showcase-grid {
-			flex-direction: column;
-		}
-
-		.showcase-card {
-			padding: 50px 30px;
-		}
-
-		.showcase-title {
-			font-size: 32px;
-		}
-
-		.showcase-image {
-			max-width: 220px;
-			max-height: 400px;
 		}
 	}
 </style>

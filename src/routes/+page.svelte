@@ -2,6 +2,7 @@
 	import Hero from '$lib/components/sections/Hero.svelte';
 	import WalletSection from '$lib/components/sections/WalletSection.svelte';
 	import Features from '$lib/components/sections/Features.svelte';
+	import Showcases from '$lib/components/sections/Showcases.svelte';
 	import ExtraFeatures from '$lib/components/sections/About.svelte';
 	import Integrations from '$lib/components/sections/Integrations.svelte';
 	import Downloads from '$lib/components/sections/Downloads.svelte';
@@ -20,6 +21,7 @@
 	<Hero />
 	<WalletSection />
 	<Features />
+	<Showcases />
 	<ExtraFeatures />
 	<Integrations />
 	<Downloads />
