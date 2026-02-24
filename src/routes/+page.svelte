@@ -3,7 +3,7 @@
 	import WalletSection from '$lib/components/sections/WalletSection.svelte';
 	import Features from '$lib/components/sections/Features.svelte';
 	import Showcases from '$lib/components/sections/Showcases.svelte';
-	import BitcoinLandscape from '$lib/components/sections/BitcoinLandscape.svelte';
+	import Security from '$lib/components/sections/Security.svelte';
 	import ExtraFeatures from '$lib/components/sections/About.svelte';
 	import Integrations from '$lib/components/sections/Integrations.svelte';
 	import Downloads from '$lib/components/sections/Downloads.svelte';
@@ -24,7 +24,7 @@
 	<div use:reveal><WalletSection /></div>
 	<div use:reveal={{ delay: 50 }}><Features /></div>
 	<div use:reveal><Showcases /></div>
-	<div use:reveal><BitcoinLandscape /></div>
+	<div use:reveal><Security /></div>
 	<div use:reveal><ExtraFeatures /></div>
 	<div use:reveal><Integrations /></div>
 	<div use:reveal><Downloads /></div>

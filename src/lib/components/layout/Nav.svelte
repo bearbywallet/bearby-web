@@ -13,6 +13,7 @@
 		<div class="nav-links">
 			<a href="/#about" class="nav-link">About</a>
 			<a href="/#features" class="nav-link">Features</a>
+			<a href="/#secure" class="nav-link">Security</a>
 			<a href="/#integrations" class="nav-link">Integrations</a>
 		</div>
 
