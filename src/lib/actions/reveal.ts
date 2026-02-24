@@ -4,11 +4,37 @@ interface RevealOptions {
 	delay?: number;
 	y?: number;
 	duration?: number;
-	threshold?: number;
+}
+
+const THRESHOLD = 0.1;
+
+let sharedObserver: IntersectionObserver | null = null;
+const nodeCallbacks = new WeakMap<Element, () => void>();
+
+function getObserver(): IntersectionObserver {
+	if (sharedObserver) return sharedObserver;
+
+	sharedObserver = new IntersectionObserver(
+		(entries) => {
+			for (const entry of entries) {
+				if (entry.isIntersecting) {
+					const cb = nodeCallbacks.get(entry.target);
+					if (cb) {
+						cb();
+						nodeCallbacks.delete(entry.target);
+					}
+					sharedObserver!.unobserve(entry.target);
+				}
+			}
+		},
+		{ threshold: THRESHOLD }
+	);
+
+	return sharedObserver;
 }
 
 export const reveal: Action<HTMLElement, RevealOptions | undefined> = (node, options) => {
-	const { delay = 0, y = 48, duration = 900, threshold = 0.1 } = options ?? {};
+	const { delay = 0, y = 48, duration = 900 } = options ?? {};
 
 	node.style.opacity = '0';
 	node.style.transform = `translateY(${y}px)`;
@@ -17,22 +43,17 @@ export const reveal: Action<HTMLElement, RevealOptions | undefined> = (node, opt
 		`transform ${duration}ms cubic-bezier(0.16,1,0.3,1) ${delay}ms`
 	].join(', ');
 
-	const observer = new IntersectionObserver(
-		([entry]) => {
-			if (entry.isIntersecting) {
-				node.style.opacity = '1';
-				node.style.transform = 'translateY(0)';
-				observer.disconnect();
-			}
-		},
-		{ threshold }
-	);
+	nodeCallbacks.set(node, () => {
+		node.style.opacity = '1';
+		node.style.transform = 'translateY(0)';
+	});
 
-	observer.observe(node);
+	getObserver().observe(node);
 
 	return {
 		destroy() {
-			observer.disconnect();
+			nodeCallbacks.delete(node);
+			sharedObserver?.unobserve(node);
 		}
 	};
 };

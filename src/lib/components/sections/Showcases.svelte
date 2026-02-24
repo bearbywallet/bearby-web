@@ -7,7 +7,7 @@
 		<div class="cards">
 			<div class="card card--tall">
 				<div class="image-wrap">
-					<img src="/img/phone-dapps-vertical.png" alt="In app dApps browser" />
+					<img src="/img/phone-dapps-vertical.webp" alt="In app dApps browser" loading="lazy" width="1667" height="2268" />
 				</div>
 				<div class="text-wrap">
 					<h3>{m.showcase_dapps_title()}</h3>
@@ -16,7 +16,7 @@
 			</div>
 			<div class="card card--stretch">
 				<div class="image-wrap">
-					<img src="/img/phone-bitcoin.png" alt="Native Bitcoin Support" />
+					<img src="/img/phone-bitcoin.webp" alt="Native Bitcoin Support" loading="lazy" width="1652" height="2048" />
 				</div>
 				<div class="text-wrap">
 					<h3>{m.showcase_bitcoin_title()}</h3>

@@ -10,18 +10,18 @@
 	const secondaryDownloads = downloads.filter((d) => d.secondary);
 
 	const icons: Record<string, string> = {
-		android: '/img/dl-google-play.png',
-		ios: '/img/dl-app-store.png',
-		chrome: '/img/dl-chrome.png',
-		firefox: '/img/dl-firefox.png',
-		rustore: '/img/dl-rustore.png',
-		huawei: '/img/dl-app-gallery.png',
-		apk: '/img/android.png',
-		windows: '/img/win.png',
-		macos: '/img/macosx.png',
-		linux: '/img/linux.png',
-		'old-chrome': '/img/dl-chrome.png',
-		'old-firefox': '/img/dl-firefox.png'
+		android: '/img/dl-google-play.webp',
+		ios: '/img/dl-app-store.webp',
+		chrome: '/img/dl-chrome.webp',
+		firefox: '/img/dl-firefox.webp',
+		rustore: '/img/dl-rustore.webp',
+		huawei: '/img/dl-app-gallery.webp',
+		apk: '/img/android.webp',
+		windows: '/img/win.webp',
+		macos: '/img/macosx.webp',
+		linux: '/img/linux.webp',
+		'old-chrome': '/img/dl-chrome.webp',
+		'old-firefox': '/img/dl-firefox.webp'
 	};
 
 	const getIcon = (platform: string) => icons[platform] || '';
@@ -34,7 +34,7 @@
 				<a href={dl.href} class="dl-card" target="_blank" rel="noopener noreferrer">
 					<div class="dl-inner">
 						<div class="dl-icon-wrap">
-							<img src={getIcon(dl.platform)} alt={dl.label} class="dl-icon" />
+							<img src={getIcon(dl.platform)} alt={dl.label} class="dl-icon" loading="lazy" width="80" height="80" />
 						</div>
 						<div class="dl-texts">
 							<h4 class="dl-title">{dl.label}</h4>
@@ -52,7 +52,7 @@
 				<a href={dl.href} class="dl-card" target="_blank" rel="noopener noreferrer">
 					<div class="dl-inner">
 						<div class="dl-icon-wrap">
-							<img src={getIcon(dl.platform)} alt={dl.label} class="dl-icon" />
+							<img src={getIcon(dl.platform)} alt={dl.label} class="dl-icon" loading="lazy" width="80" height="80" />
 						</div>
 						<div class="dl-texts">
 							<h4 class="dl-title">{dl.label}</h4>
@@ -71,7 +71,7 @@
 					<a href={dl.href} class="dl-card" target="_blank" rel="noopener noreferrer">
 						<div class="dl-inner">
 							<div class="dl-icon-wrap">
-								<img src={getIcon(dl.platform)} alt={dl.label} class="dl-icon" />
+								<img src={getIcon(dl.platform)} alt={dl.label} class="dl-icon" loading="lazy" width="80" height="80" />
 							</div>
 							<div class="dl-texts">
 								<h4 class="dl-title">{dl.label}</h4>

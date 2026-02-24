@@ -21,7 +21,7 @@
 	<div class="container">
 		<div class="wallet-card">
 			<div class="visual-col">
-				<img src="/img/network-sphere.png" alt="Network nodes" class="network-img" />
+				<img src="/img/network-sphere.webp" alt="Network nodes" class="network-img" loading="lazy" width="1024" height="1024" />
 			</div>
 
 			<div class="content-col">

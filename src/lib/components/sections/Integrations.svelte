@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { Action } from 'svelte/action';
 	import { getChains } from '$lib/data/integrations';
 	import * as m from '$lib/paraglide/messages';
 	import Card from '$lib/components/ui/Card.svelte';
@@ -17,6 +18,17 @@
 		avalanche: '/img/chain-avalanche.svg',
 		linea: '/img/chain-linea.svg'
 	};
+
+	const pauseWhenHidden: Action<HTMLElement> = (node) => {
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				node.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
+			},
+			{ threshold: 0 }
+		);
+		observer.observe(node);
+		return { destroy: () => observer.disconnect() };
+	};
 </script>
 
 <section class="integrations" id="integrations">
@@ -32,10 +44,10 @@
 
 				<div class="integrations-columns">
 					<div class="ticker-col">
-						<ul class="ticker-list ticker-up">
+						<ul class="ticker-list ticker-up" use:pauseWhenHidden>
 							{#each [...col1, ...col1] as chain, i (i)}
 								<li class="chain-card">
-									<img src={icons[chain.key]} alt={chain.name} class="chain-icon" />
+									<img src={icons[chain.key]} alt={chain.name} class="chain-icon" loading="lazy" width="44" height="44" />
 									<span class="chain-name">{chain.name}</span>
 								</li>
 							{/each}
@@ -43,10 +55,10 @@
 					</div>
 
 					<div class="ticker-col">
-						<ul class="ticker-list ticker-down">
+						<ul class="ticker-list ticker-down" use:pauseWhenHidden>
 							{#each [...col2, ...col2] as chain, i (i)}
 								<li class="chain-card">
-									<img src={icons[chain.key]} alt={chain.name} class="chain-icon" />
+									<img src={icons[chain.key]} alt={chain.name} class="chain-icon" loading="lazy" width="44" height="44" />
 									<span class="chain-name">{chain.name}</span>
 								</li>
 							{/each}
@@ -95,7 +107,6 @@
 		line-height: 1.6;
 	}
 
-	/* Right side: two scrolling columns */
 	.integrations-columns {
 		display: flex;
 		gap: 10px;
@@ -105,18 +116,8 @@
 	.ticker-col {
 		flex: 1;
 		overflow: hidden;
-		mask-image: linear-gradient(
-			rgba(0, 0, 0, 0) 0%,
-			rgb(0, 0, 0) 15%,
-			rgb(0, 0, 0) 85%,
-			rgba(0, 0, 0, 0) 100%
-		);
-		-webkit-mask-image: linear-gradient(
-			rgba(0, 0, 0, 0) 0%,
-			rgb(0, 0, 0) 15%,
-			rgb(0, 0, 0) 85%,
-			rgba(0, 0, 0, 0) 100%
-		);
+		-webkit-mask-image: linear-gradient(transparent 0%, #000 15%, #000 85%, transparent 100%);
+		mask-image: linear-gradient(transparent 0%, #000 15%, #000 85%, transparent 100%);
 	}
 
 	.ticker-list {
@@ -155,7 +156,6 @@
 		}
 	}
 
-	/* Individual chain card */
 	.chain-card {
 		display: flex;
 		align-items: center;

@@ -6,15 +6,15 @@
 <div class="hero">
 	<header id="hero-header" class="hero-header">
 		<div class="hero-wrap">
-			<img src="/img/hero-bg.png" alt="Bearby Wallet" class="hero-phone" />
+			<img src="/img/hero-bg.webp" alt="Bearby Wallet" class="hero-phone" width="2048" height="1536" />
 		</div>
 	</header>
 
 	<section id="about" class="hero-cta">
 		<div class="cta-card">
 			<div class="icon-wrap">
-				<img src="/img/app-icon.png" alt="Bearby" class="icon" />
-				<img src="/img/app-icon.png" alt="" class="icon-glow" aria-hidden="true" />
+				<img src="/img/app-icon.webp" alt="Bearby" class="icon" />
+				<img src="/img/app-icon.webp" alt="" class="icon-glow" aria-hidden="true" />
 			</div>
 
 			<div class="cta-text">
