@@ -52,6 +52,28 @@
 		width: 100%;
 	}
 
+	@keyframes heroPhoneIn {
+		from {
+			opacity: 0;
+			transform: scale(0.96) translateY(24px);
+		}
+		to {
+			opacity: 1;
+			transform: scale(1) translateY(0);
+		}
+	}
+
+	@keyframes heroCTAIn {
+		from {
+			opacity: 0;
+			transform: translateY(48px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
 	.hero-wrap {
 		width: 100%;
 		min-height: 100vh;
@@ -62,6 +84,7 @@
 		overflow: visible;
 		-webkit-mask: linear-gradient(#000 50%, #0000 100%);
 		mask: linear-gradient(#000 50%, #0000 100%);
+		animation: heroPhoneIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 	}
 
 	.hero-phone {
@@ -94,6 +117,7 @@
 		align-items: center;
 		gap: 30px;
 		overflow: hidden;
+		animation: heroCTAIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
 	}
 
 	.icon-wrap {

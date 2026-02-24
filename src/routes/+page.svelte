@@ -8,6 +8,7 @@
 	import Integrations from '$lib/components/sections/Integrations.svelte';
 	import Downloads from '$lib/components/sections/Downloads.svelte';
 	import Footer from '$lib/components/layout/Footer.svelte';
+	import { reveal } from '$lib/actions/reveal';
 </script>
 
 <svelte:head>
@@ -20,14 +21,14 @@
 
 <main class="page-wrapper">
 	<Hero />
-	<WalletSection />
-	<Features />
-	<Showcases />
-	<BitcoinLandscape />
-	<ExtraFeatures />
-	<Integrations />
-	<Downloads />
-	<Footer />
+	<div use:reveal><WalletSection /></div>
+	<div use:reveal={{ delay: 50 }}><Features /></div>
+	<div use:reveal><Showcases /></div>
+	<div use:reveal><BitcoinLandscape /></div>
+	<div use:reveal><ExtraFeatures /></div>
+	<div use:reveal><Integrations /></div>
+	<div use:reveal><Downloads /></div>
+	<div use:reveal={{ y: 24 }}><Footer /></div>
 </main>
 
 <style>

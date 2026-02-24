@@ -12,15 +12,7 @@
 		<div class="nav-links">
 			<a href="/#about" class="nav-link">About</a>
 			<a href="/#features" class="nav-link">Features</a>
-			<a
-				href="https://github.com/zilpay"
-				class="nav-link"
-				target="_blank"
-				rel="noopener noreferrer"
-			>
-				Github(Web)
-			</a>
-			<a href="/privacy-policy" class="nav-link">Privacy Policy</a>
+			<a href="/#integrations" class="nav-link">Integrations</a>
 		</div>
 
 		<div class="nav-actions">
@@ -39,7 +31,7 @@
 						points="7,10 12,15 17,10"
 					></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg
 				>
-				Download (.apk)
+				Download
 			</a>
 		</div>
 	</div>

@@ -13,7 +13,6 @@
 			</div>
 
 			<div class="footer-links-right">
-				<span class="footer-credit">Developed and Maintained by Rinat Khasanshin</span>
 				<a
 					href="https://github.com/zilpay"
 					target="_blank"
