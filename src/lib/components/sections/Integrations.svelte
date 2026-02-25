@@ -5,10 +5,12 @@
 	import Card from '$lib/components/ui/Card.svelte';
 
 	const chains = getChains();
-	const col1 = chains.slice(0, 4);
-	const col2 = chains.slice(4);
+	const mid = Math.ceil(chains.length / 2);
+	const col1 = chains.slice(0, mid);
+	const col2 = chains.slice(mid);
 
 	const icons: Record<string, string> = {
+		bitcoin: '/img/bitcoin.webp',
 		ethereum: '/img/chain-ethereum.svg',
 		bnb: '/img/chain-bnb.svg',
 		polygon: '/img/chain-polygon.svg',

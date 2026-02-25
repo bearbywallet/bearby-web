@@ -7,6 +7,7 @@ export type Download = {
 	count: string;
 	action: string;
 	secondary?: boolean;
+	disabled?: boolean;
 };
 
 export function getDownloads(): Download[] {
@@ -55,7 +56,7 @@ export function getDownloads(): Download[] {
 		},
 		{
 			label: m.dl_android_apk(),
-			href: '#',
+			href: 'https://github.com/zilpay/zilpay-mobile/releases/latest/download/app-release.apk',
 			platform: 'apk',
 			count: m.dl_count_direct(),
 			action: m.dl_action_apk(),
@@ -67,7 +68,8 @@ export function getDownloads(): Download[] {
 			platform: 'windows',
 			count: m.dl_count_desktop(),
 			action: m.dl_action_download(),
-			secondary: true
+			secondary: true,
+			disabled: true
 		},
 		{
 			label: m.dl_macos(),
@@ -75,7 +77,8 @@ export function getDownloads(): Download[] {
 			platform: 'macos',
 			count: m.dl_count_desktop(),
 			action: m.dl_action_download(),
-			secondary: true
+			secondary: true,
+			disabled: true
 		},
 		{
 			label: m.dl_linux(),
@@ -83,11 +86,12 @@ export function getDownloads(): Download[] {
 			platform: 'linux',
 			count: m.dl_count_desktop(),
 			action: m.dl_action_download(),
-			secondary: true
+			secondary: true,
+			disabled: true
 		},
 		{
 			label: m.dl_old_chrome(),
-			href: '#',
+			href: 'https://chromewebstore.google.com/detail/bearby/papngmkmknnmfhabbckobgfpihpdgplk',
 			platform: 'old-chrome',
 			count: m.dl_count_legacy_ext(),
 			action: m.dl_action_install(),
@@ -95,7 +99,7 @@ export function getDownloads(): Download[] {
 		},
 		{
 			label: m.dl_old_firefox(),
-			href: '#',
+			href: 'https://addons.mozilla.org/en-GB/firefox/addon/bearby/',
 			platform: 'old-firefox',
 			count: m.dl_count_legacy_addon(),
 			action: m.dl_action_install(),

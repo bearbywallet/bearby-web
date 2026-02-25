@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { getDownloads } from '$lib/data/downloads';
 	import * as m from '$lib/paraglide/messages';
+	import { slide, fly } from 'svelte/transition';
 
 	const downloads = getDownloads();
 
@@ -66,22 +67,48 @@
 			{/each}
 		</div>
 		{#if expanded}
-			<div class="downloads-row secondary">
-				{#each secondaryDownloads as dl (dl.platform)}
-					<a href={dl.href} class="dl-card" target="_blank" rel="noopener noreferrer">
-						<div class="dl-inner">
-							<div class="dl-icon-wrap">
-								<img src={getIcon(dl.platform)} alt={dl.label} class="dl-icon" loading="lazy" width="80" height="80" />
+			<div class="downloads-row secondary" transition:slide={{ duration: 400 }}>
+				{#each secondaryDownloads as dl, i (dl.platform)}
+					{#if dl.disabled}
+						<div
+							class="dl-card disabled"
+							in:fly={{ y: 30, duration: 300, delay: i * 80 }}
+						>
+							<div class="dl-inner">
+								<div class="dl-icon-wrap">
+									<img src={getIcon(dl.platform)} alt={dl.label} class="dl-icon" loading="lazy" width="80" height="80" />
+								</div>
+								<div class="dl-texts">
+									<h4 class="dl-title">{dl.label}</h4>
+									<p class="dl-count">{dl.count}</p>
+								</div>
 							</div>
-							<div class="dl-texts">
-								<h4 class="dl-title">{dl.label}</h4>
-								<p class="dl-count">{dl.count}</p>
+							<div class="dl-btn">
+								{m.dl_coming_soon()}
 							</div>
 						</div>
-						<div class="dl-btn">
-							{dl.action}
-						</div>
-					</a>
+					{:else}
+						<a
+							href={dl.href}
+							class="dl-card"
+							target="_blank"
+							rel="noopener noreferrer"
+							in:fly={{ y: 30, duration: 300, delay: i * 80 }}
+						>
+							<div class="dl-inner">
+								<div class="dl-icon-wrap">
+									<img src={getIcon(dl.platform)} alt={dl.label} class="dl-icon" loading="lazy" width="80" height="80" />
+								</div>
+								<div class="dl-texts">
+									<h4 class="dl-title">{dl.label}</h4>
+									<p class="dl-count">{dl.count}</p>
+								</div>
+							</div>
+							<div class="dl-btn">
+								{dl.action}
+							</div>
+						</a>
+					{/if}
 				{/each}
 			</div>
 		{/if}
@@ -154,6 +181,12 @@
 
 	.dl-card:hover {
 		border-color: var(--border-hover);
+	}
+
+	.dl-card.disabled {
+		opacity: 0.4;
+		pointer-events: none;
+		cursor: default;
 	}
 
 	.dl-inner {

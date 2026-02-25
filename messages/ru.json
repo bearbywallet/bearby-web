@@ -34,6 +34,7 @@
 
 	"integrations_title": "Бесшовные интеграции для умного рабочего процесса",
 	"integrations_desc": "Bearby легко работает с вашими любимыми инструментами, делая рабочий процесс более плавным и эффективным. Подключайтесь, автоматизируйте и работайте быстрее!",
+	"chain_bitcoin": "Bitcoin",
 	"chain_ethereum": "Ethereum",
 	"chain_binance": "Binance Chain",
 	"chain_polygon": "Polygon",
@@ -100,6 +101,7 @@
 	"dl_action_install": "Установить",
 	"dl_show_more": "Показать ещё",
 	"dl_show_less": "Свернуть",
+	"dl_coming_soon": "Скоро",
 
 	"footer_privacy": "Политика конфиденциальности",
 	"footer_old_bearby": "Старый Bearby",

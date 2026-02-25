@@ -8,6 +8,7 @@ export type Chain = {
 
 export function getChains(): Chain[] {
 	return [
+		{ key: 'bitcoin', name: m.chain_bitcoin(), color: '#f7931a' },
 		{ key: 'ethereum', name: m.chain_ethereum(), color: '#627eea' },
 		{ key: 'bnb', name: m.chain_binance(), color: '#f3ba2f' },
 		{ key: 'polygon', name: m.chain_polygon(), color: '#8247e5' },

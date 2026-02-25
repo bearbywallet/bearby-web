@@ -34,6 +34,7 @@
 
 	"integrations_title": "Seamless Integrations for a Smarter Workflow",
 	"integrations_desc": "Bearby works effortlessly with your favorite tools, making your workflow smoother and more efficient. Connect, automate, and get things done faster!",
+	"chain_bitcoin": "Bitcoin",
 	"chain_ethereum": "Ethereum",
 	"chain_binance": "Binance Chain",
 	"chain_polygon": "Polygon",
@@ -100,6 +101,7 @@
 	"dl_action_install": "Install",
 	"dl_show_more": "Show More",
 	"dl_show_less": "Show Less",
+	"dl_coming_soon": "Coming Soon",
 
 	"footer_privacy": "Privacy Policy",
 	"footer_old_bearby": "Old Bearby",
