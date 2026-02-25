@@ -57,7 +57,7 @@
 	"security_tag_memory": "Memory Safe",
 	"security_tag_abstractions": "Zero-Cost Abstractions",
 	"security_tag_gc": "No GC Pauses",
-	"security_storage_title": "Quantum-Proof Storage",
+	"security_storage_title": "Quantum-Resistant Storage",
 	"security_storage_desc": "Private keys are encrypted with layered post-quantum algorithms, ensuring your assets remain secure even against future quantum computers.",
 	"security_primitives_title": "Cryptographic Primitives",
 	"crypto_ntru_label": "Post-Quantum",
@@ -120,5 +120,11 @@
 	"privacy_contact_title": "Contact",
 	"privacy_contact_desc": "Questions? Open an issue or discussion on our {link}.",
 	"privacy_github": "GitHub",
-	"privacy_github_repo": "GitHub repository"
+	"privacy_github_repo": "GitHub repository",
+
+	"seo_title": "Bearby — Quantum-Resistant Crypto Wallet | Browser Extension & Mobile App",
+	"seo_description": "Bearby is the best quantum-resistant crypto wallet. Non-custodial browser extension and mobile app with on-device key storage, zero data collection, and support for Bitcoin, Ethereum, and EVM chains.",
+	"seo_keywords": "Bearby, crypto wallet, quantum-resistant wallet, quantum-resistant, browser extension wallet, non-custodial wallet, Bitcoin wallet, Ethereum wallet, EVM wallet, decentralized wallet, secure crypto wallet, post-quantum cryptography, mobile crypto wallet",
+	"seo_og_title": "Bearby — The Quantum-Resistant Crypto Wallet",
+	"seo_og_description": "Non-custodial, quantum-resistant wallet for Bitcoin, Ethereum & EVM chains. On-device key storage, zero data collection, military-grade encryption."
 }

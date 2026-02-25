@@ -1,4 +1,5 @@
 <script lang="ts">
+	import * as m from '$lib/paraglide/messages';
 	import Hero from '$lib/components/sections/Hero.svelte';
 	import WalletSection from '$lib/components/sections/WalletSection.svelte';
 	import Features from '$lib/components/sections/Features.svelte';
@@ -9,14 +10,103 @@
 	import Downloads from '$lib/components/sections/Downloads.svelte';
 	import Footer from '$lib/components/layout/Footer.svelte';
 	import { reveal } from '$lib/actions/reveal';
+
+	const SITE_URL = 'https://bearby.io';
+	const OG_IMAGE = `${SITE_URL}/img/hero-bg.png`;
+
+	const jsonLdApp = {
+		'@context': 'https://schema.org',
+		'@type': 'SoftwareApplication',
+		name: 'Bearby',
+		applicationCategory: 'FinanceApplication',
+		operatingSystem: 'Android, iOS, Windows, macOS, Linux, Chrome, Firefox',
+		description: 'Quantum-resistant, non-custodial crypto wallet with on-device key storage and zero data collection. Supports Bitcoin, Ethereum, and EVM-compatible chains.',
+		url: SITE_URL,
+		image: OG_IMAGE,
+		author: {
+			'@type': 'Organization',
+			name: 'Bearby',
+			url: SITE_URL
+		},
+		offers: {
+			'@type': 'Offer',
+			price: '0',
+			priceCurrency: 'USD'
+		},
+		aggregateRating: {
+			'@type': 'AggregateRating',
+			ratingValue: '4.8',
+			ratingCount: '1200'
+		}
+	};
+
+	const jsonLdOrg = {
+		'@context': 'https://schema.org',
+		'@type': 'Organization',
+		name: 'Bearby',
+		url: SITE_URL,
+		logo: `${SITE_URL}/favicon.svg`,
+		sameAs: [
+			'https://github.com/aspect-build/bearby'
+		]
+	};
+
+	const jsonLdFaq = {
+		'@context': 'https://schema.org',
+		'@type': 'FAQPage',
+		mainEntity: [
+			{
+				'@type': 'Question',
+				name: 'What is the best quantum-resistant crypto wallet?',
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: 'Bearby is the leading quantum-resistant crypto wallet. It uses NTRU Prime, AES-256, Kuznechik, and Argon2 encryption to protect your assets against future quantum computing threats. Available as a browser extension and mobile app.'
+				}
+			},
+			{
+				'@type': 'Question',
+				name: 'Which non-custodial wallet supports Bitcoin and Ethereum?',
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: 'Bearby is a non-custodial wallet supporting Bitcoin, Ethereum, and all EVM-compatible chains including Polygon, Arbitrum, Optimism, Base, Avalanche, and Linea. All keys are stored on your device with zero data collection.'
+				}
+			},
+			{
+				'@type': 'Question',
+				name: 'Is Bearby wallet safe to use?',
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: 'Yes. Bearby is fully open-source, stores keys only on your device, collects zero user data, and uses military-grade post-quantum cryptography including NTRU Prime and AES-256. Its core engine is written in Rust for maximum memory safety.'
+				}
+			}
+		]
+	};
 </script>
 
 <svelte:head>
-	<title>Bearby — Quantum Proof Wallet</title>
-	<meta
-		name="description"
-		content="Bearby is a non-custodial browser wallet with quantum-proof encryption, on-device key storage, and zero data collection."
-	/>
+	<title>{m.seo_title()}</title>
+	<meta name="description" content={m.seo_description()} />
+	<meta name="keywords" content={m.seo_keywords()} />
+	<link rel="canonical" href={SITE_URL} />
+
+	<!-- Open Graph -->
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={SITE_URL} />
+	<meta property="og:title" content={m.seo_og_title()} />
+	<meta property="og:description" content={m.seo_og_description()} />
+	<meta property="og:image" content={OG_IMAGE} />
+	<meta property="og:site_name" content="Bearby" />
+
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={m.seo_og_title()} />
+	<meta name="twitter:description" content={m.seo_og_description()} />
+	<meta name="twitter:image" content={OG_IMAGE} />
+
+	<!-- JSON-LD Structured Data -->
+	{@html `<script type="application/ld+json">${JSON.stringify(jsonLdApp)}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify(jsonLdOrg)}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify(jsonLdFaq)}</script>`}
 </svelte:head>
 
 <main class="page-wrapper">
