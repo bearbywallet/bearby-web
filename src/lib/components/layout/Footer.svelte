@@ -19,7 +19,7 @@
 					href="https://github.com/zilpay"
 					target="_blank"
 					rel="noopener noreferrer"
-					class="footer-link">{m.footer_old_bearby()}</a
+					class="footer-link">{m.footer_github()}</a
 				>
 			</div>
 		</div>
