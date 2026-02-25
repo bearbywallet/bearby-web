@@ -11,7 +11,7 @@
 	import Footer from '$lib/components/layout/Footer.svelte';
 	import { reveal } from '$lib/actions/reveal';
 
-	const SITE_URL = 'https://bearby.io';
+	import { SITE_URL } from '$lib/constants';
 	const OG_IMAGE = `${SITE_URL}/img/hero-bg.png`;
 
 	const jsonLdApp = {
@@ -20,7 +20,8 @@
 		name: 'Bearby',
 		applicationCategory: 'FinanceApplication',
 		operatingSystem: 'Android, iOS, Windows, macOS, Linux, Chrome, Firefox',
-		description: 'Quantum-resistant, non-custodial crypto wallet with on-device key storage and zero data collection. Supports Bitcoin, Ethereum, and EVM-compatible chains.',
+		description:
+			'Quantum-resistant, non-custodial crypto wallet with on-device key storage and zero data collection. Supports Bitcoin, Ethereum, and EVM-compatible chains.',
 		url: SITE_URL,
 		image: OG_IMAGE,
 		author: {
@@ -46,9 +47,7 @@
 		name: 'Bearby',
 		url: SITE_URL,
 		logo: `${SITE_URL}/favicon.svg`,
-		sameAs: [
-			'https://github.com/aspect-build/bearby'
-		]
+		sameAs: ['https://github.com/aspect-build/bearby', 'https://x.com/pay_zil']
 	};
 
 	const jsonLdFaq = {
@@ -89,21 +88,27 @@
 	<meta name="keywords" content={m.seo_keywords()} />
 	<link rel="canonical" href={SITE_URL} />
 
-	<!-- Open Graph -->
+	
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content={SITE_URL} />
 	<meta property="og:title" content={m.seo_og_title()} />
 	<meta property="og:description" content={m.seo_og_description()} />
 	<meta property="og:image" content={OG_IMAGE} />
+	<meta property="og:image:alt" content="Bearby Wallet Interface and Branding" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
 	<meta property="og:site_name" content="Bearby" />
 
-	<!-- Twitter Card -->
+	
 	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@pay_zil" />
+	<meta name="twitter:creator" content="@pay_zil" />
 	<meta name="twitter:title" content={m.seo_og_title()} />
 	<meta name="twitter:description" content={m.seo_og_description()} />
 	<meta name="twitter:image" content={OG_IMAGE} />
+	<meta name="twitter:image:alt" content="Bearby Wallet Interface and Branding" />
 
-	<!-- JSON-LD Structured Data -->
+	
 	{@html `<script type="application/ld+json">${JSON.stringify(jsonLdApp)}</script>`}
 	{@html `<script type="application/ld+json">${JSON.stringify(jsonLdOrg)}</script>`}
 	{@html `<script type="application/ld+json">${JSON.stringify(jsonLdFaq)}</script>`}

@@ -2,7 +2,13 @@ import adapter from '@sveltejs/adapter-auto';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	kit: { adapter: adapter() }
+	kit: {
+		adapter: adapter(),
+		prerender: {
+			entries: ['*', '/sitemap.xml', '/robots.txt'],
+			handleUnseenRoutes: 'ignore'
+		}
+	}
 };
 
 export default config;
