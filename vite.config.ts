@@ -6,5 +6,8 @@ export default defineConfig({
 	plugins: [
 		sveltekit(),
 		paraglideVitePlugin({ project: './project.inlang', outdir: './src/lib/paraglide' })
-	]
+	],
+	preview: {
+		allowedHosts: ['dev.bearby.io', 'bearby.io', 'bearby.ru']
+	}
 });
