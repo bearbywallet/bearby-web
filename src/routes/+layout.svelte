@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import Nav from '$lib/components/layout/Nav.svelte';
+	import LocaleSwitcher from '$lib/components/layout/LocaleSwitcher.svelte';
 	import { initTheme, type Theme } from '$lib/stores/theme.svelte';
 	import '../app.css';
 
@@ -31,6 +32,7 @@
 </svelte:head>
 
 <Nav />
+<LocaleSwitcher />
 
 <main>
 	{@render children()}

@@ -2,7 +2,7 @@
 	import logo from '$lib/assets/logo.svg';
 	import { getTheme, toggleTheme } from '$lib/stores/theme.svelte';
 	import * as m from '$lib/paraglide/messages';
-	import LocaleSwitcher from './LocaleSwitcher.svelte';
+
 </script>
 
 <nav class="nav" aria-label="Main navigation">
@@ -20,7 +20,6 @@
 		</div>
 
 		<div class="nav-actions">
-			<LocaleSwitcher />
 			<button class="theme-toggle" onclick={toggleTheme} aria-label="Toggle theme">
 				{#if getTheme() === 'dark'}
 					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -79,11 +78,18 @@
 		justify-content: space-between;
 		gap: 30px;
 		padding: 12px 16px 12px 24px;
-		background: var(--bg-nav);
-		backdrop-filter: blur(10px);
-		-webkit-backdrop-filter: blur(10px);
+		background: rgba(255, 255, 255, 0.08);
+		backdrop-filter: blur(20px) saturate(180%);
+		-webkit-backdrop-filter: blur(20px) saturate(180%);
 		border-radius: 40px;
-		border: 1px solid var(--border-color);
+		border: 1px solid rgba(255, 255, 255, 0.15);
+		box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+	}
+
+	:global([data-theme='light']) .nav-container {
+		background: rgba(255, 255, 255, 0.45);
+		border: 1px solid rgba(255, 255, 255, 0.6);
+		box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.5);
 	}
 
 	.nav-logo {
@@ -134,16 +140,26 @@
 		width: 40px;
 		height: 40px;
 		border-radius: 50%;
-		background: var(--bg-subtle);
-		border: 1px solid var(--border-color);
+		background: rgba(255, 255, 255, 0.08);
+		border: 1px solid rgba(255, 255, 255, 0.12);
 		color: var(--text-primary);
 		cursor: pointer;
 		transition: all 0.2s;
 	}
 
+	:global([data-theme='light']) .theme-toggle {
+		background: rgba(255, 255, 255, 0.35);
+		border: 1px solid rgba(255, 255, 255, 0.5);
+	}
+
 	.theme-toggle:hover {
-		background: var(--bg-card-hover);
-		border-color: var(--border-hover);
+		background: rgba(255, 255, 255, 0.15);
+		border-color: rgba(255, 255, 255, 0.25);
+	}
+
+	:global([data-theme='light']) .theme-toggle:hover {
+		background: rgba(255, 255, 255, 0.55);
+		border-color: rgba(255, 255, 255, 0.7);
 	}
 
 	.nav-download {
@@ -154,16 +170,26 @@
 		color: var(--text-primary);
 		padding: 10px 24px;
 		border-radius: 40px;
-		background: var(--border-color);
-		border: 1px solid var(--border-hover);
+		background: rgba(255, 255, 255, 0.1);
+		border: 1px solid rgba(255, 255, 255, 0.15);
 		text-decoration: none;
 		transition: all 0.2s;
 		white-space: nowrap;
 	}
 
+	:global([data-theme='light']) .nav-download {
+		background: rgba(255, 255, 255, 0.4);
+		border: 1px solid rgba(255, 255, 255, 0.55);
+	}
+
 	.nav-download:hover {
-		background: var(--border-hover);
-		border-color: var(--border-hover);
+		background: rgba(255, 255, 255, 0.18);
+		border-color: rgba(255, 255, 255, 0.25);
+	}
+
+	:global([data-theme='light']) .nav-download:hover {
+		background: rgba(255, 255, 255, 0.6);
+		border-color: rgba(255, 255, 255, 0.75);
 	}
 
 	@media (max-width: 900px) {
