@@ -56,15 +56,36 @@
 		justify-content: center;
 		gap: 10px;
 		overflow: hidden;
+		padding: 16px;
+		border-radius: calc(var(--card-radius) - 20px);
+		background: rgba(255, 255, 255, 0.04);
+		backdrop-filter: blur(24px) saturate(180%);
+		-webkit-backdrop-filter: blur(24px) saturate(180%);
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		box-shadow:
+			inset 0 1px 0 rgba(255, 255, 255, 0.06),
+			inset 0 -1px 0 rgba(255, 255, 255, 0.02),
+			0 2px 12px rgba(0, 0, 0, 0.08);
+	}
+
+	:global([data-theme='light']) .tabs-col {
+		background: rgba(255, 255, 255, 0.25);
+		border: 1px solid rgba(255, 255, 255, 0.45);
+		box-shadow:
+			inset 0 1px 0 rgba(255, 255, 255, 0.4),
+			inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+			0 2px 12px rgba(0, 0, 0, 0.04);
 	}
 
 	.tab-btn {
 		width: 100%;
 		padding: 30px 50px;
 		border-radius: 50px;
-		background-color: transparent;
-		border: 1px solid var(--border-card);
-		box-shadow: none;
+		background: rgba(255, 255, 255, 0.06);
+		backdrop-filter: blur(16px) saturate(180%);
+		-webkit-backdrop-filter: blur(16px) saturate(180%);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 		color: var(--text-secondary);
 		font-family: var(--font-secondary);
 		font-size: 20px;
@@ -74,18 +95,38 @@
 		transition:
 			color 0.2s,
 			border-color 0.2s,
-			box-shadow 0.2s;
+			box-shadow 0.2s,
+			background 0.2s;
+	}
+
+	:global([data-theme='light']) .tab-btn {
+		background: rgba(255, 255, 255, 0.35);
+		border: 1px solid rgba(255, 255, 255, 0.5);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
 	}
 
 	.tab-btn.active {
-		border-color: var(--border-hover);
-		box-shadow: var(--shadow-glow) 0px 0px 30px 0px inset;
+		border-color: rgba(255, 255, 255, 0.25);
+		box-shadow: var(--shadow-glow) 0px 0px 30px 0px inset, inset 0 1px 0 rgba(255, 255, 255, 0.15);
+		background: rgba(255, 255, 255, 0.1);
 		color: var(--text-primary);
 	}
 
+	:global([data-theme='light']) .tab-btn.active {
+		background: rgba(255, 255, 255, 0.55);
+		border-color: rgba(255, 255, 255, 0.7);
+		box-shadow: var(--shadow-glow) 0px 0px 30px 0px inset, inset 0 1px 0 rgba(255, 255, 255, 0.5);
+	}
+
 	.tab-btn:hover:not(.active) {
-		border-color: var(--border-card);
+		border-color: rgba(255, 255, 255, 0.18);
+		background: rgba(255, 255, 255, 0.08);
 		color: var(--text-primary);
+	}
+
+	:global([data-theme='light']) .tab-btn:hover:not(.active) {
+		background: rgba(255, 255, 255, 0.45);
+		border-color: rgba(255, 255, 255, 0.6);
 	}
 
 	.image-col {
@@ -119,13 +160,33 @@
 	@media (max-width: 768px) {
 		.productivity-card {
 			flex-direction: column;
-			padding: 30px;
-			min-height: 300px;
+			padding: 12px;
+			min-height: auto;
+			border-radius: 24px;
+			gap: 8px;
+		}
+
+		.tabs-col {
+			flex: 0 0 auto;
+			gap: 6px;
+			overflow: visible;
+		}
+
+		.image-col {
+			flex: 0 0 auto;
+			height: 300px;
+			border-radius: 16px;
+		}
+
+		.image-wrapper img {
+			border-radius: 16px;
 		}
 
 		.tab-btn {
-			padding: 20px 30px;
-			font-size: 17px;
+			padding: 12px 18px;
+			font-size: 14px;
+			border-radius: 28px;
+			text-align: center;
 		}
 	}
 </style>

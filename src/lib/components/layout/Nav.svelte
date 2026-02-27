@@ -3,6 +3,15 @@
 	import { getTheme, toggleTheme } from '$lib/stores/theme.svelte';
 	import * as m from '$lib/paraglide/messages';
 
+	let menuOpen = $state(false);
+
+	function closeMenu() {
+		menuOpen = false;
+	}
+
+	function handleOverlayClick() {
+		closeMenu();
+	}
 </script>
 
 <nav class="nav" aria-label="Main navigation">
@@ -56,9 +65,31 @@
 				>
 				{m.nav_download()}
 			</a>
+			<button
+				class="hamburger"
+				onclick={() => (menuOpen = !menuOpen)}
+				aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+				aria-expanded={menuOpen}
+			>
+				<span class="hamburger-line" class:open={menuOpen}></span>
+				<span class="hamburger-line" class:open={menuOpen}></span>
+				<span class="hamburger-line" class:open={menuOpen}></span>
+			</button>
 		</div>
 	</div>
 </nav>
+
+{#if menuOpen}
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
+	<div class="mobile-overlay" onclick={handleOverlayClick} onkeydown={() => {}}></div>
+	<div class="mobile-menu">
+		<a href="/#about" class="mobile-link" onclick={closeMenu}>{m.nav_about()}</a>
+		<a href="/#features" class="mobile-link" onclick={closeMenu}>{m.nav_features()}</a>
+		<a href="/#secure" class="mobile-link" onclick={closeMenu}>{m.nav_security()}</a>
+		<a href="/#integrations" class="mobile-link" onclick={closeMenu}>{m.nav_integrations()}</a>
+		<a href="/#downloads" class="mobile-link" onclick={closeMenu}>{m.nav_download()}</a>
+	</div>
+{/if}
 
 <style>
 	.nav {
@@ -192,6 +223,97 @@
 		border-color: rgba(255, 255, 255, 0.75);
 	}
 
+	/* Hamburger button */
+	.hamburger {
+		display: none;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 5px;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		background: rgba(255, 255, 255, 0.08);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		cursor: pointer;
+		padding: 0;
+		transition: all 0.2s;
+	}
+
+	:global([data-theme='light']) .hamburger {
+		background: rgba(255, 255, 255, 0.35);
+		border: 1px solid rgba(255, 255, 255, 0.5);
+	}
+
+	.hamburger-line {
+		display: block;
+		width: 18px;
+		height: 2px;
+		background: var(--text-primary);
+		border-radius: 2px;
+		transition: all 0.3s ease;
+		transform-origin: center;
+	}
+
+	.hamburger-line.open:nth-child(1) {
+		transform: translateY(7px) rotate(45deg);
+	}
+
+	.hamburger-line.open:nth-child(2) {
+		opacity: 0;
+	}
+
+	.hamburger-line.open:nth-child(3) {
+		transform: translateY(-7px) rotate(-45deg);
+	}
+
+	/* Mobile overlay & menu */
+	.mobile-overlay {
+		position: fixed;
+		inset: 0;
+		z-index: 99;
+		background: rgba(0, 0, 0, 0.5);
+	}
+
+	.mobile-menu {
+		position: fixed;
+		top: 70px;
+		left: 0;
+		right: 0;
+		z-index: 101;
+		display: none;
+		flex-direction: column;
+		gap: 4px;
+		padding: 8px;
+		background: rgba(255, 255, 255, 0.08);
+		backdrop-filter: blur(20px) saturate(180%);
+		-webkit-backdrop-filter: blur(20px) saturate(180%);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+	}
+
+	:global([data-theme='light']) .mobile-menu {
+		background: rgba(255, 255, 255, 0.45);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+	}
+
+	.mobile-link {
+		display: block;
+		padding: 14px 20px;
+		font-size: 1rem;
+		color: var(--text-primary);
+		text-decoration: none;
+		border-radius: 16px;
+		transition: background 0.2s;
+	}
+
+	.mobile-link:hover {
+		background: rgba(255, 255, 255, 0.1);
+	}
+
+	:global([data-theme='light']) .mobile-link:hover {
+		background: rgba(255, 255, 255, 0.4);
+	}
+
 	@media (max-width: 900px) {
 		.nav {
 			top: 0;
@@ -199,11 +321,15 @@
 		}
 		.nav-container {
 			border-radius: 0;
-			flex-wrap: wrap;
-			justify-content: center;
 		}
 		.nav-links {
 			display: none;
+		}
+		.hamburger {
+			display: flex;
+		}
+		.mobile-menu {
+			display: flex;
 		}
 	}
 </style>

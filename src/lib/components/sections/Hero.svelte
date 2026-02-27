@@ -246,6 +246,7 @@
 
 		.cta-card {
 			padding: 50px 25px;
+			border-radius: 24px;
 		}
 
 		h1 {

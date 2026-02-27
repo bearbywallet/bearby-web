@@ -195,6 +195,7 @@
 
 		:global(.integrations-card) {
 			padding: 32px !important;
+			border-radius: 24px !important;
 		}
 
 		.integrations-columns {

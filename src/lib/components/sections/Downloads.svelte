@@ -309,7 +309,11 @@
 		}
 
 		.dl-card {
-			border-radius: 32px;
+			border-radius: 24px;
+		}
+
+		.expand-btn {
+			border-radius: 24px;
 		}
 
 		.downloads-row.secondary .dl-card {
