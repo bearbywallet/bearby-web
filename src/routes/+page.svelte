@@ -12,18 +12,30 @@
 	import { reveal } from '$lib/actions/reveal';
 
 	import { SITE_URL } from '$lib/constants';
-	const OG_IMAGE = `${SITE_URL}/img/hero-bg.png`;
+	const OG_IMAGE = `${SITE_URL}/img/og-bearby.png`;
 
 	const jsonLdApp = {
 		'@context': 'https://schema.org',
 		'@type': 'SoftwareApplication',
 		name: 'Bearby',
-		applicationCategory: 'FinanceApplication',
+		applicationCategory: 'WalletApplication',
 		operatingSystem: 'Android, iOS, Windows, macOS, Linux, Chrome, Firefox',
 		description:
 			'Quantum-resistant, non-custodial crypto wallet with on-device key storage and zero data collection. Supports Bitcoin, Ethereum, and EVM-compatible chains.',
 		url: SITE_URL,
 		image: OG_IMAGE,
+		featureList: [
+			'post-quantum encryption',
+			'max decentralization',
+			'zero data collection',
+			'on-device storage'
+		],
+		downloadUrl: [
+			'https://chromewebstore.google.com/detail/bearby/klnepcnofpcagllmbcplocjpkmnpjhhb',
+			'https://play.google.com/store/apps/details?id=com.zilpay.bearby',
+			'https://apps.apple.com/us/app/bearby-wallet/id1612716382'
+		],
+		softwareHelp: 'https://github.com/zilpay',
 		author: {
 			'@type': 'Organization',
 			name: 'Bearby',
@@ -38,6 +50,21 @@
 			'@type': 'AggregateRating',
 			ratingValue: '4.8',
 			ratingCount: '1200'
+		}
+	};
+
+	const jsonLdWebSite = {
+		'@context': 'https://schema.org',
+		'@type': 'WebSite',
+		name: 'Bearby',
+		url: SITE_URL,
+		potentialAction: {
+			'@type': 'SearchAction',
+			target: {
+				'@type': 'EntryPoint',
+				urlTemplate: `${SITE_URL}/?q={search_term_string}`
+			},
+			'query-input': 'required name=search_term_string'
 		}
 	};
 
@@ -88,7 +115,6 @@
 	<meta name="keywords" content={m.seo_keywords()} />
 	<link rel="canonical" href={SITE_URL} />
 
-	
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content={SITE_URL} />
 	<meta property="og:title" content={m.seo_og_title()} />
@@ -99,7 +125,6 @@
 	<meta property="og:image:height" content="630" />
 	<meta property="og:site_name" content="Bearby" />
 
-	
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@pay_zil" />
 	<meta name="twitter:creator" content="@pay_zil" />
@@ -108,8 +133,8 @@
 	<meta name="twitter:image" content={OG_IMAGE} />
 	<meta name="twitter:image:alt" content="Bearby Wallet Interface and Branding" />
 
-	
 	{@html `<script type="application/ld+json">${JSON.stringify(jsonLdApp)}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify(jsonLdWebSite)}</script>`}
 	{@html `<script type="application/ld+json">${JSON.stringify(jsonLdOrg)}</script>`}
 	{@html `<script type="application/ld+json">${JSON.stringify(jsonLdFaq)}</script>`}
 </svelte:head>

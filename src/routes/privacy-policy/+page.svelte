@@ -1,10 +1,26 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages';
+	import { SITE_URL } from '$lib/constants';
+
+	const OG_IMAGE = `${SITE_URL}/img/og-bearby.png`;
+	const url = `${SITE_URL}/privacy-policy`;
 </script>
 
 <svelte:head>
 	<title>{m.privacy_page_title()}</title>
 	<meta name="description" content={m.privacy_meta_desc()} />
+
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={url} />
+	<meta property="og:title" content={m.privacy_page_title()} />
+	<meta property="og:description" content={m.privacy_meta_desc()} />
+	<meta property="og:image" content={OG_IMAGE} />
+	<meta property="og:image:alt" content="Bearby Wallet Privacy Policy" />
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={m.privacy_page_title()} />
+	<meta name="twitter:description" content={m.privacy_meta_desc()} />
+	<meta name="twitter:image" content={OG_IMAGE} />
 </svelte:head>
 
 <article class="privacy">
@@ -29,14 +45,24 @@
 		<section class="privacy__section">
 			<h2>{m.privacy_opensource_title()}</h2>
 			<p>
-				{@html m.privacy_opensource_desc({ link: '<a href="https://github.com/zilpay" target="_blank" rel="noopener noreferrer">' + m.privacy_github() + '</a>' })}
+				{@html m.privacy_opensource_desc({
+					link:
+						'<a href="https://github.com/zilpay" target="_blank" rel="noopener noreferrer">' +
+						m.privacy_github() +
+						'</a>'
+				})}
 			</p>
 		</section>
 
 		<section class="privacy__section">
 			<h2>{m.privacy_contact_title()}</h2>
 			<p>
-				{@html m.privacy_contact_desc({ link: '<a href="https://github.com/zilpay" target="_blank" rel="noopener noreferrer">' + m.privacy_github_repo() + '</a>' })}
+				{@html m.privacy_contact_desc({
+					link:
+						'<a href="https://github.com/zilpay" target="_blank" rel="noopener noreferrer">' +
+						m.privacy_github_repo() +
+						'</a>'
+				})}
 			</p>
 		</section>
 	</div>

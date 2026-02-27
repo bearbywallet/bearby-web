@@ -3,7 +3,14 @@ export const prerender = true;
 import { SITE_URL } from '$lib/constants';
 
 export async function GET() {
-	const pages = ['', '/privacy-policy'];
+	const pages = [
+		{ path: '', priority: '1.0', changefreq: 'daily' },
+		{ path: '/privacy-policy', priority: '0.8', changefreq: 'weekly' },
+		{ path: '/ru/', priority: '1.0', changefreq: 'daily' },
+		{ path: '/ru/privacy-policy', priority: '0.8', changefreq: 'weekly' }
+	];
+
+	const today = new Date().toISOString().split('T')[0];
 
 	const sitemap = `<?xml version="1.0" encoding="UTF-8" ?>
 <urlset
@@ -15,13 +22,21 @@ export async function GET() {
 	xmlns:video="https://www.google.com/schemas/sitemap-video/1.1"
 >
 ${pages
-	.map(
-		(page) => `	<url>
-		<loc>${SITE_URL}${page}</loc>
-		<changefreq>${page === '' ? 'daily' : 'weekly'}</changefreq>
-		<priority>${page === '' ? '1.0' : '0.8'}</priority>
-	</url>`
-	)
+	.map((page) => {
+		const enUrl = page.path.startsWith('/ru')
+			? SITE_URL + page.path.replace(/^\/ru/, '')
+			: SITE_URL + page.path;
+		const ruUrl = page.path.startsWith('/ru') ? SITE_URL + page.path : SITE_URL + '/ru' + page.path;
+
+		return `	<url>
+		<loc>${SITE_URL}${page.path}</loc>
+		<lastmod>${today}</lastmod>
+		<changefreq>${page.changefreq}</changefreq>
+		<priority>${page.priority}</priority>
+		<xhtml:link rel="alternate" hreflang="en" href="${enUrl}" />
+		<xhtml:link rel="alternate" hreflang="ru" href="${ruUrl}" />
+	</url>`;
+	})
 	.join('\n')}
 </urlset>`.trim();
 
