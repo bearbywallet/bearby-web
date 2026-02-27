@@ -134,7 +134,7 @@
 
 <style>
 	.downloads-section {
-		padding: 8px 8px 0;
+		padding: 120px 8px 0;
 	}
 
 	.container {
@@ -296,6 +296,12 @@
 
 		.downloads-row.secondary .dl-card {
 			flex: 1 1 calc(50% - 10px);
+		}
+	}
+
+	@media (max-width: 900px) {
+		.downloads-section {
+			padding-top: 80px;
 		}
 	}
 

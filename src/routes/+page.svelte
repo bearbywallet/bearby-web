@@ -115,6 +115,7 @@
 </svelte:head>
 
 <main class="page-wrapper">
+	<Downloads />
 	<Hero />
 	<div use:reveal><WalletSection /></div>
 	<div use:reveal={{ delay: 50 }}><Features /></div>
@@ -122,7 +123,6 @@
 	<div use:reveal><Security /></div>
 	<div use:reveal><ExtraFeatures /></div>
 	<div use:reveal><Integrations /></div>
-	<div use:reveal><Downloads /></div>
 	<div use:reveal={{ y: 24 }}><Footer /></div>
 </main>
 

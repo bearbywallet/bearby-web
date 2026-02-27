@@ -4,12 +4,6 @@
 </script>
 
 <div class="hero">
-	<header id="hero-header" class="hero-header">
-		<div class="hero-wrap">
-			<img src="/img/hero-bg.webp" alt="Bearby Wallet" class="hero-phone" width="2048" height="1536" />
-		</div>
-	</header>
-
 	<section id="about" class="hero-cta">
 		<div class="cta-card">
 			<div class="icon-wrap">
@@ -48,22 +42,6 @@
 		flex-direction: column;
 	}
 
-	.hero-header {
-		width: 100%;
-		background: var(--bg-color);
-	}
-
-	@keyframes heroPhoneIn {
-		from {
-			opacity: 0;
-			transform: scale(0.96) translateY(24px);
-		}
-		to {
-			opacity: 1;
-			transform: scale(1) translateY(0);
-		}
-	}
-
 	@keyframes heroCTAIn {
 		from {
 			opacity: 0;
@@ -73,35 +51,6 @@
 			opacity: 1;
 			transform: translateY(0);
 		}
-	}
-
-	.hero-wrap {
-		width: 100%;
-		min-height: 100vh;
-		position: relative;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		overflow: visible;
-		animation: heroPhoneIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
-	}
-
-	.hero-wrap::after {
-		content: '';
-		position: absolute;
-		inset: 0;
-		pointer-events: none;
-		background: linear-gradient(to bottom, transparent 30%, var(--bg-color) 75%);
-		z-index: 1;
-	}
-
-	.hero-phone {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		object-fit: contain;
 	}
 
 	.hero-cta {
@@ -192,14 +141,6 @@
 	}
 
 	@media (max-width: 1199px) {
-		.hero-wrap {
-			min-height: 80vh;
-		}
-
-		.hero-wrap::after {
-			background: linear-gradient(to bottom, transparent 50%, var(--bg-color) 94%);
-		}
-
 		.hero-cta {
 			max-width: 95%;
 		}
@@ -214,21 +155,6 @@
 	}
 
 	@media (max-width: 809px) {
-		.hero-wrap {
-			min-height: 720px;
-			padding: 80px 0 100px;
-		}
-
-		.hero-wrap::after {
-			background: linear-gradient(to bottom, transparent 50%, var(--bg-color) 94%);
-		}
-
-		.hero-phone {
-			max-height: 370px;
-			height: 370px;
-			object-fit: contain;
-		}
-
 		.hero-cta {
 			max-width: 95%;
 		}
