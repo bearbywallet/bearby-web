@@ -1,25 +1,13 @@
 <script lang="ts">
 	import type { Action } from 'svelte/action';
 	import { getChains } from '$lib/data/integrations';
+	import { chainIconSrcs } from '$lib/assets/icons';
 	import * as m from '$lib/paraglide/messages';
 	import Card from '$lib/components/ui/Card.svelte';
 
 	const chains = getChains();
 	const mid = Math.ceil(chains.length / 2);
-	const col1 = chains.slice(0, mid);
-	const col2 = chains.slice(mid);
-
-	const icons: Record<string, string> = {
-		bitcoin: '/img/bitcoin.webp',
-		ethereum: '/img/chain-ethereum.svg',
-		bnb: '/img/chain-bnb.svg',
-		polygon: '/img/chain-polygon.svg',
-		arbitrum: '/img/chain-arbitrum.svg',
-		optimism: '/img/chain-optimism.svg',
-		base: '/img/chain-base.svg',
-		avalanche: '/img/chain-avalanche.svg',
-		linea: '/img/chain-linea.svg'
-	};
+	const columns = [chains.slice(0, mid), chains.slice(mid)];
 
 	const pauseWhenHidden: Action<HTMLElement> = (node) => {
 		const observer = new IntersectionObserver(
@@ -45,27 +33,18 @@
 				</div>
 
 				<div class="integrations-columns">
-					<div class="ticker-col">
-						<ul class="ticker-list ticker-up" use:pauseWhenHidden>
-							{#each [...col1, ...col1] as chain, i (i)}
-								<li class="chain-card">
-									<img src={icons[chain.key]} alt={chain.name} class="chain-icon" loading="lazy" width="44" height="44" />
-									<span class="chain-name">{chain.name}</span>
-								</li>
-							{/each}
-						</ul>
-					</div>
-
-					<div class="ticker-col">
-						<ul class="ticker-list ticker-down" use:pauseWhenHidden>
-							{#each [...col2, ...col2] as chain, i (i)}
-								<li class="chain-card">
-									<img src={icons[chain.key]} alt={chain.name} class="chain-icon" loading="lazy" width="44" height="44" />
-									<span class="chain-name">{chain.name}</span>
-								</li>
-							{/each}
-						</ul>
-					</div>
+					{#each columns as col, idx (idx)}
+						<div class="ticker-col">
+							<ul class="ticker-list" class:ticker-up={idx === 0} class:ticker-down={idx === 1} use:pauseWhenHidden>
+								{#each [...col, ...col] as chain, i (i)}
+									<li class="chain-card">
+										<img src={chainIconSrcs[chain.key]} alt={chain.name} class="chain-icon" width="44" height="44" />
+										<span class="chain-name">{chain.name}</span>
+									</li>
+								{/each}
+							</ul>
+						</div>
+					{/each}
 				</div>
 			</div>
 		</Card>

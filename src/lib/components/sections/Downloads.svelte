@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { getDownloads } from '$lib/data/downloads';
+	import { getDownloads, type Download } from '$lib/data/downloads';
+	import { dlIcons } from '$lib/assets/icons';
 	import * as m from '$lib/paraglide/messages';
 	import { slide, fly } from 'svelte/transition';
 
@@ -10,62 +11,43 @@
 	const primaryDownloads = downloads.filter((d) => !d.secondary);
 	const secondaryDownloads = downloads.filter((d) => d.secondary);
 
-	const icons: Record<string, string> = {
-		android: '/img/dl-google-play.webp',
-		ios: '/img/dl-app-store.webp',
-		chrome: '/img/dl-chrome.webp',
-		firefox: '/img/dl-firefox.webp',
-		rustore: '/img/dl-rustore.webp',
-		huawei: '/img/dl-app-gallery.webp',
-		apk: '/img/android.webp',
-		windows: '/img/win.webp',
-		macos: '/img/macosx.webp',
-		linux: '/img/linux.webp',
-		'old-chrome': '/img/dl-chrome.webp',
-		'old-firefox': '/img/dl-firefox.webp'
-	};
-
-	const getIcon = (platform: string) => icons[platform] || '';
+	const getIcon = (platform: string) => dlIcons[platform] ?? { src: '', lazy: true };
 </script>
+
+{#snippet dlCardContent(dl: Download)}
+	{@const icon = getIcon(dl.platform)}
+	<div class="dl-inner">
+		<div class="dl-icon-wrap">
+			<img
+				src={icon.src}
+				alt={dl.label}
+				class="dl-icon"
+				loading={icon.lazy ? 'lazy' : 'eager'}
+				width="80"
+				height="80"
+			/>
+		</div>
+		<div class="dl-texts">
+			<h4 class="dl-title">{dl.label}</h4>
+			<p class="dl-count">{dl.count}</p>
+		</div>
+	</div>
+	<div class="dl-btn">
+		{dl.disabled ? m.dl_coming_soon() : dl.action}
+	</div>
+{/snippet}
 
 <section id="downloads" class="downloads-section">
 	<div class="container">
-		<div class="downloads-row">
-			{#each primaryDownloads.slice(0, 3) as dl (dl.platform)}
-				<a href={dl.href} class="dl-card" target="_blank" rel="noopener noreferrer">
-					<div class="dl-inner">
-						<div class="dl-icon-wrap">
-							<img src={getIcon(dl.platform)} alt={dl.label} class="dl-icon" loading="lazy" width="80" height="80" />
-						</div>
-						<div class="dl-texts">
-							<h4 class="dl-title">{dl.label}</h4>
-							<p class="dl-count">{dl.count}</p>
-						</div>
-					</div>
-					<div class="dl-btn">
-						{dl.action}
-					</div>
-				</a>
-			{/each}
-		</div>
-		<div class="downloads-row">
-			{#each primaryDownloads.slice(3) as dl (dl.platform)}
-				<a href={dl.href} class="dl-card" target="_blank" rel="noopener noreferrer">
-					<div class="dl-inner">
-						<div class="dl-icon-wrap">
-							<img src={getIcon(dl.platform)} alt={dl.label} class="dl-icon" loading="lazy" width="80" height="80" />
-						</div>
-						<div class="dl-texts">
-							<h4 class="dl-title">{dl.label}</h4>
-							<p class="dl-count">{dl.count}</p>
-						</div>
-					</div>
-					<div class="dl-btn">
-						{dl.action}
-					</div>
-				</a>
-			{/each}
-		</div>
+		{#each [primaryDownloads.slice(0, 3), primaryDownloads.slice(3)] as row, idx (idx)}
+			<div class="downloads-row">
+				{#each row as dl (dl.platform)}
+					<a href={dl.href} class="dl-card" target="_blank" rel="noopener noreferrer">
+						{@render dlCardContent(dl)}
+					</a>
+				{/each}
+			</div>
+		{/each}
 		{#if expanded}
 			<div class="downloads-row secondary" transition:slide={{ duration: 400 }}>
 				{#each secondaryDownloads as dl, i (dl.platform)}
@@ -74,18 +56,7 @@
 							class="dl-card disabled"
 							in:fly={{ y: 30, duration: 300, delay: i * 80 }}
 						>
-							<div class="dl-inner">
-								<div class="dl-icon-wrap">
-									<img src={getIcon(dl.platform)} alt={dl.label} class="dl-icon" loading="lazy" width="80" height="80" />
-								</div>
-								<div class="dl-texts">
-									<h4 class="dl-title">{dl.label}</h4>
-									<p class="dl-count">{dl.count}</p>
-								</div>
-							</div>
-							<div class="dl-btn">
-								{m.dl_coming_soon()}
-							</div>
+							{@render dlCardContent(dl)}
 						</div>
 					{:else}
 						<a
@@ -95,18 +66,7 @@
 							rel="noopener noreferrer"
 							in:fly={{ y: 30, duration: 300, delay: i * 80 }}
 						>
-							<div class="dl-inner">
-								<div class="dl-icon-wrap">
-									<img src={getIcon(dl.platform)} alt={dl.label} class="dl-icon" loading="lazy" width="80" height="80" />
-								</div>
-								<div class="dl-texts">
-									<h4 class="dl-title">{dl.label}</h4>
-									<p class="dl-count">{dl.count}</p>
-								</div>
-							</div>
-							<div class="dl-btn">
-								{dl.action}
-							</div>
+							{@render dlCardContent(dl)}
 						</a>
 					{/if}
 				{/each}
@@ -152,15 +112,12 @@
 
 	.downloads-row.secondary {
 		flex-wrap: wrap;
+		align-items: stretch;
 	}
 
 	.downloads-row.secondary .dl-card {
 		flex: 1 1 calc(33.333% - 10px);
 		min-width: 200px;
-	}
-
-	.downloads-row.secondary {
-		align-items: stretch;
 	}
 
 	.dl-card {
