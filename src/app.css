@@ -42,6 +42,8 @@
 
 	--card-radius: 48px;
 	--section-max-width: 1140px;
+
+	--focus-ring: var(--brand-purple);
 }
 
 [data-theme="light"] {
@@ -96,6 +98,29 @@ a {
 	text-decoration: none;
 }
 
+:focus-visible {
+	outline: 2px solid var(--focus-ring);
+	outline-offset: 2px;
+}
+
+.skip-link {
+	position: fixed;
+	top: -100%;
+	left: 16px;
+	z-index: 9999;
+	padding: 12px 24px;
+	background: var(--brand-purple);
+	color: #fff;
+	border-radius: var(--border-radius-sm);
+	font-weight: 600;
+	font-size: 0.875rem;
+	transition: top 0.2s;
+}
+
+.skip-link:focus {
+	top: 16px;
+}
+
 button {
 	font-family: inherit;
 	cursor: pointer;
@@ -121,6 +146,31 @@ img {
 	-webkit-text-fill-color: transparent;
 	background-clip: text;
 	color: transparent;
+}
+
+@media print {
+	body {
+		background: #fff;
+		color: #000;
+	}
+
+	nav,
+	.skip-link,
+	.mobile-overlay,
+	.mobile-menu {
+		display: none !important;
+	}
+
+	img {
+		max-width: 100%;
+		page-break-inside: avoid;
+	}
+
+	a[href^="http"]::after {
+		content: " (" attr(href) ")";
+		font-size: 0.8em;
+		color: #555;
+	}
 }
 
 @media (prefers-reduced-motion: reduce) {

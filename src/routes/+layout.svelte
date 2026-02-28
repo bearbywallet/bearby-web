@@ -34,6 +34,6 @@
 <Nav />
 <LocaleSwitcher />
 
-<main>
+<main id="main-content">
 	{@render children()}
 </main>

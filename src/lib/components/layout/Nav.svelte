@@ -17,7 +17,7 @@
 <nav class="nav" aria-label="Main navigation">
 	<div class="nav-container">
 		<a href="/#hero-header" class="nav-logo" aria-label="Bearby — home">
-			<img src={logo} alt="Bearby" class="nav-icon" />
+			<img src={logo} alt="Bearby" class="nav-icon" width="24" height="24" />
 			<span class="nav-logo-text">Bearby</span>
 		</a>
 

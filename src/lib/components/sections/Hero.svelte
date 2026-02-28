@@ -7,8 +7,8 @@
 	<section id="about" class="hero-cta">
 		<div class="cta-card">
 			<div class="icon-wrap">
-				<img src="/img/app-icon.webp" alt="Bearby" class="icon" />
-				<img src="/img/app-icon.webp" alt="" class="icon-glow" aria-hidden="true" />
+				<img src="/img/app-icon.webp" alt="Bearby" class="icon" width="320" height="318" />
+				<img src="/img/app-icon.webp" alt="" class="icon-glow" aria-hidden="true" width="320" height="318" />
 			</div>
 
 			<div class="cta-text">

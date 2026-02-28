@@ -6,8 +6,10 @@ export async function GET() {
 	const pages = [
 		{ path: '', priority: '1.0', changefreq: 'daily' },
 		{ path: '/privacy-policy', priority: '0.8', changefreq: 'weekly' },
+		{ path: '/sitemap', priority: '0.3', changefreq: 'monthly' },
 		{ path: '/ru/', priority: '1.0', changefreq: 'daily' },
-		{ path: '/ru/privacy-policy', priority: '0.8', changefreq: 'weekly' }
+		{ path: '/ru/privacy-policy', priority: '0.8', changefreq: 'weekly' },
+		{ path: '/ru/sitemap', priority: '0.3', changefreq: 'monthly' }
 	];
 
 	const today = new Date().toISOString().split('T')[0];

@@ -4,9 +4,9 @@
 	let activeTab = $state(0);
 
 	const tabs = [
-		{ label: m.about_tab_language(), image: '/img/phone-dapps.webp' },
-		{ label: m.about_tab_bitcoin(), image: '/img/bitoin-support.webp' },
-		{ label: m.about_tab_dapps(), image: '/img/browser.webp' }
+		{ label: m.about_tab_language(), image: '/img/phone-dapps.webp', w: 1024, h: 557 },
+		{ label: m.about_tab_bitcoin(), image: '/img/bitoin-support.webp', w: 2048, h: 1113 },
+		{ label: m.about_tab_dapps(), image: '/img/browser.webp', w: 2095, h: 1139 }
 	];
 </script>
 
@@ -24,7 +24,7 @@
 			<div class="image-col">
 				{#each tabs as tab, i (tab.label)}
 					<div class="image-wrapper" class:visible={activeTab === i}>
-						<img src={tab.image} alt={tab.label} loading="lazy" />
+						<img src={tab.image} alt={tab.label} loading="lazy" width={tab.w} height={tab.h} />
 					</div>
 				{/each}
 			</div>
