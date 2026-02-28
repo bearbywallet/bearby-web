@@ -1,5 +1,6 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages';
+	import { socialLinks } from '$lib/assets/icons';
 
 	const year = new Date().getFullYear();
 </script>
@@ -15,12 +16,13 @@
 			</div>
 
 			<div class="footer-links-right">
-				<a
-					href="https://github.com/zilpay"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="footer-link">{m.footer_github()}</a
-				>
+				{#each socialLinks as { name, href, path, viewBox }}
+					<a {href} target="_blank" rel="noopener noreferrer" class="social-link" aria-label={name}>
+						<svg {viewBox} fill="currentColor" aria-hidden="true" class="social-icon">
+							<path d={path} />
+						</svg>
+					</a>
+				{/each}
 			</div>
 		</div>
 	</div>
@@ -56,7 +58,42 @@
 	.footer-links-left,
 	.footer-links-right {
 		display: flex;
-		gap: 32px;
+		align-items: center;
+		gap: 16px;
+	}
+
+	.social-link {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		background: rgba(255, 255, 255, 0.08);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		color: var(--text-primary);
+		transition: all 0.2s;
+	}
+
+	:global([data-theme='light']) .social-link {
+		background: rgba(0, 0, 0, 0.05);
+		border: 1px solid rgba(0, 0, 0, 0.1);
+	}
+
+	.social-link:hover {
+		background: rgba(255, 255, 255, 0.15);
+		border-color: rgba(255, 255, 255, 0.25);
+	}
+
+	:global([data-theme='light']) .social-link:hover {
+		background: rgba(0, 0, 0, 0.08);
+		border-color: rgba(0, 0, 0, 0.15);
+	}
+
+	.social-icon {
+		width: 20px;
+		height: 20px;
+		object-fit: contain;
 	}
 
 	.footer-link {
@@ -74,8 +111,7 @@
 			gap: 16px;
 			text-align: center;
 		}
-		.footer-links-left,
-		.footer-links-right {
+		.footer-links-left {
 			flex-direction: column;
 			gap: 8px;
 		}
