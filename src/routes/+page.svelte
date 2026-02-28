@@ -12,7 +12,7 @@
 	import { reveal } from '$lib/actions/reveal';
 
 	import { SITE_URL } from '$lib/constants';
-	const OG_IMAGE = `${SITE_URL}/img/og-bearby.png`;
+	const OG_IMAGE = `${SITE_URL}/img/hero-bg.webp`;
 
 	const jsonLdApp = {
 		'@context': 'https://schema.org',

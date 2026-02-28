@@ -2,7 +2,7 @@
 	import * as m from '$lib/paraglide/messages';
 	import { SITE_URL } from '$lib/constants';
 
-	const OG_IMAGE = `${SITE_URL}/img/og-bearby.png`;
+	const OG_IMAGE = `${SITE_URL}/img/hero-bg.webp`;
 	const url = `${SITE_URL}/privacy-policy`;
 </script>
 
