@@ -158,13 +158,6 @@
 	"error_generic_title": "Something Went Wrong",
 	"error_generic_description": "An unexpected error occurred. Please try again later.",
 
-	"sitemap_title": "Sitemap — Bearby",
-	"sitemap_heading": "Sitemap",
-	"sitemap_home": "Home",
-	"sitemap_privacy": "Privacy Policy",
-
-	"footer_sitemap": "Sitemap",
-
 	"seo_title": "Bearby — Quantum-Resistant Crypto Wallet | Browser Extension & Mobile App",
 	"seo_description": "Bearby is the best quantum-resistant crypto wallet. Non-custodial browser extension and mobile app with on-device key storage, zero data collection, and support for Bitcoin, Ethereum, and EVM chains.",
 	"seo_keywords": "Bearby, crypto wallet, quantum-resistant wallet, quantum-resistant, browser extension wallet, non-custodial wallet, Bitcoin wallet, Ethereum wallet, EVM wallet, decentralized wallet, secure crypto wallet, post-quantum cryptography, mobile crypto wallet",

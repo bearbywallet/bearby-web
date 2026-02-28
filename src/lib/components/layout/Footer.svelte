@@ -11,7 +11,6 @@
 		<div class="footer-bottom">
 			<div class="footer-links-left">
 				<a href="/privacy-policy" class="footer-link">{m.footer_privacy()}</a>
-				<a href="/sitemap" class="footer-link">{m.footer_sitemap()}</a>
 				<span class="footer-copy">{m.footer_copyright({ year: String(year) })}</span>
 			</div>
 

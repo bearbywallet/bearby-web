@@ -6,7 +6,6 @@ export async function GET() {
 	const robots = `
 User-agent: *
 Allow: /
-Sitemap: ${SITE_URL}/sitemap.xml
 `.trim();
 
 	return new Response(robots, {
