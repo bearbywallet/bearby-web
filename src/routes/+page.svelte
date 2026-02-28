@@ -156,5 +156,20 @@
 		display: flex;
 		flex-direction: column;
 		gap: 32px;
+		position: relative;
+	}
+
+	.page-wrapper::before {
+		content: '';
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background:
+			radial-gradient(ellipse 80% 50% at 50% -20%, rgba(172, 89, 255, 0.15), transparent),
+			radial-gradient(ellipse 60% 40% at 80% 100%, rgba(232, 0, 111, 0.1), transparent);
+		pointer-events: none;
+		z-index: -1;
 	}
 </style>
