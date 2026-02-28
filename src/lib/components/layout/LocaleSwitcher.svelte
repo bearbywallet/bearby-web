@@ -48,10 +48,22 @@
 		aria-label="Switch language"
 		aria-expanded={open}
 	>
-		<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+		<svg
+			width="20"
+			height="20"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			aria-hidden="true"
+		>
 			<circle cx="12" cy="12" r="10"></circle>
 			<line x1="2" y1="12" x2="22" y2="12"></line>
-			<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+			<path
+				d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+			></path>
 		</svg>
 		<span class="locale-label">{getLocale().toUpperCase()}</span>
 	</button>
@@ -85,13 +97,17 @@
 		font-size: 0.8rem;
 		font-weight: 600;
 		font-family: var(--font-primary);
-		box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+		box-shadow:
+			0 4px 24px rgba(0, 0, 0, 0.15),
+			inset 0 1px 0 rgba(255, 255, 255, 0.2);
 	}
 
 	:global([data-theme='light']) .locale-toggle {
 		background: rgba(255, 255, 255, 0.45);
 		border: 1px solid rgba(255, 255, 255, 0.6);
-		box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+		box-shadow:
+			0 4px 24px rgba(0, 0, 0, 0.08),
+			inset 0 1px 0 rgba(255, 255, 255, 0.5);
 	}
 
 	.locale-toggle:hover {
@@ -117,14 +133,18 @@
 		-webkit-backdrop-filter: blur(20px) saturate(180%);
 		border: 1px solid rgba(255, 255, 255, 0.2);
 		border-radius: 16px;
-		box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+		box-shadow:
+			0 4px 24px rgba(0, 0, 0, 0.15),
+			inset 0 1px 0 rgba(255, 255, 255, 0.2);
 		animation: fade-in 0.15s ease-out;
 	}
 
 	:global([data-theme='light']) .locale-list {
 		background: rgba(255, 255, 255, 0.45);
 		border: 1px solid rgba(255, 255, 255, 0.6);
-		box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+		box-shadow:
+			0 4px 24px rgba(0, 0, 0, 0.08),
+			inset 0 1px 0 rgba(255, 255, 255, 0.5);
 	}
 
 	.locale-option {

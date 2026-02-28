@@ -31,7 +31,17 @@
 		<div class="nav-actions">
 			<button class="theme-toggle" onclick={toggleTheme} aria-label="Toggle theme">
 				{#if getTheme() === 'dark'}
-					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<svg
+						width="18"
+						height="18"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						aria-hidden="true"
+					>
 						<circle cx="12" cy="12" r="5"></circle>
 						<line x1="12" y1="1" x2="12" y2="3"></line>
 						<line x1="12" y1="21" x2="12" y2="23"></line>
@@ -43,7 +53,17 @@
 						<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
 					</svg>
 				{:else}
-					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<svg
+						width="18"
+						height="18"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						aria-hidden="true"
+					>
 						<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
 					</svg>
 				{/if}
@@ -114,13 +134,17 @@
 		-webkit-backdrop-filter: blur(20px) saturate(180%);
 		border-radius: 40px;
 		border: 1px solid rgba(255, 255, 255, 0.15);
-		box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+		box-shadow:
+			0 4px 24px rgba(0, 0, 0, 0.12),
+			inset 0 1px 0 rgba(255, 255, 255, 0.15);
 	}
 
 	:global([data-theme='light']) .nav-container {
 		background: rgba(255, 255, 255, 0.45);
 		border: 1px solid rgba(255, 255, 255, 0.6);
-		box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+		box-shadow:
+			0 4px 24px rgba(0, 0, 0, 0.06),
+			inset 0 1px 0 rgba(255, 255, 255, 0.5);
 	}
 
 	.nav-logo {

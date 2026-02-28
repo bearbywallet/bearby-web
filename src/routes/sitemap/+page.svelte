@@ -12,7 +12,7 @@
 <svelte:head>
 	<title>{m.sitemap_title()}</title>
 	<meta name="description" content="Bearby website sitemap" />
-	<link rel="canonical" href="{SITE_URL + '/sitemap'}" />
+	<link rel="canonical" href={SITE_URL + '/sitemap'} />
 </svelte:head>
 
 <div class="sitemap-page container">

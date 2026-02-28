@@ -73,7 +73,6 @@
 				</div>
 			{/each}
 		</div>
-
 	</div>
 </section>
 
@@ -138,7 +137,6 @@
 		line-height: 1.6em;
 		letter-spacing: 0em;
 	}
-
 
 	@media (min-width: 810px) and (max-width: 1199.98px) {
 		.features-grid {

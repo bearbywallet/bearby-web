@@ -11,7 +11,13 @@
 					<p>{m.showcase_dapps_desc()}</p>
 				</div>
 				<div class="image-wrap">
-					<img src="/img/phone-dapps-vertical.webp" alt="In app dApps browser" loading="lazy" width="1667" height="2268" />
+					<img
+						src="/img/phone-dapps-vertical.webp"
+						alt="In app dApps browser"
+						loading="lazy"
+						width="1667"
+						height="2268"
+					/>
 				</div>
 			</div>
 			<div class="card card--stretch">
@@ -20,7 +26,13 @@
 					<p>{m.showcase_bitcoin_desc()}</p>
 				</div>
 				<div class="image-wrap">
-					<img src="/img/phone-bitcoin.webp" alt="Native Bitcoin Support" loading="lazy" width="1652" height="2048" />
+					<img
+						src="/img/phone-bitcoin.webp"
+						alt="Native Bitcoin Support"
+						loading="lazy"
+						width="1652"
+						height="2048"
+					/>
 				</div>
 			</div>
 		</div>

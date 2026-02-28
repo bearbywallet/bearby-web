@@ -107,7 +107,9 @@
 
 	.tab-btn.active {
 		border-color: rgba(255, 255, 255, 0.25);
-		box-shadow: var(--shadow-glow) 0px 0px 30px 0px inset, inset 0 1px 0 rgba(255, 255, 255, 0.15);
+		box-shadow:
+			var(--shadow-glow) 0px 0px 30px 0px inset,
+			inset 0 1px 0 rgba(255, 255, 255, 0.15);
 		background: rgba(255, 255, 255, 0.1);
 		color: var(--text-primary);
 	}
@@ -115,7 +117,9 @@
 	:global([data-theme='light']) .tab-btn.active {
 		background: rgba(255, 255, 255, 0.55);
 		border-color: rgba(255, 255, 255, 0.7);
-		box-shadow: var(--shadow-glow) 0px 0px 30px 0px inset, inset 0 1px 0 rgba(255, 255, 255, 0.5);
+		box-shadow:
+			var(--shadow-glow) 0px 0px 30px 0px inset,
+			inset 0 1px 0 rgba(255, 255, 255, 0.5);
 	}
 
 	.tab-btn:hover:not(.active) {

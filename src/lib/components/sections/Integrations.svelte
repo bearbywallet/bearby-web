@@ -35,10 +35,21 @@
 				<div class="integrations-columns">
 					{#each columns as col, idx (idx)}
 						<div class="ticker-col">
-							<ul class="ticker-list" class:ticker-up={idx === 0} class:ticker-down={idx === 1} use:pauseWhenHidden>
+							<ul
+								class="ticker-list"
+								class:ticker-up={idx === 0}
+								class:ticker-down={idx === 1}
+								use:pauseWhenHidden
+							>
 								{#each [...col, ...col] as chain, i (i)}
 									<li class="chain-card">
-										<img src={chainIconSrcs[chain.key]} alt={chain.name} class="chain-icon" width="44" height="44" />
+										<img
+											src={chainIconSrcs[chain.key]}
+											alt={chain.name}
+											class="chain-icon"
+											width="44"
+											height="44"
+										/>
 										<span class="chain-name">{chain.name}</span>
 									</li>
 								{/each}

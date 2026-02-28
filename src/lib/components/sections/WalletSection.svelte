@@ -21,7 +21,14 @@
 	<div class="container">
 		<div class="wallet-card">
 			<div class="visual-col">
-				<img src="/img/network-sphere.webp" alt="Network nodes" class="network-img" loading="lazy" width="1024" height="1024" />
+				<img
+					src="/img/network-sphere.webp"
+					alt="Network nodes"
+					class="network-img"
+					loading="lazy"
+					width="1024"
+					height="1024"
+				/>
 			</div>
 
 			<div class="content-col">
@@ -35,14 +42,37 @@
 						<div class="feature-item">
 							<span class="feature-icon">
 								{#if feature.iconType === 'circle'}
-									<svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<svg
+										width="37"
+										height="37"
+										viewBox="0 0 37 37"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
 										<circle cx="18.5" cy="18.5" r="17.5" stroke="currentColor" stroke-width="1.5" />
 										<circle cx="18.5" cy="18.5" r="6" fill="currentColor" />
 									</svg>
 								{:else}
-									<svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<path d="M18.5 3.5L6 8.5V18c0 7.732 5.373 14.963 12.5 17 7.127-2.037 12.5-9.268 12.5-17V8.5L18.5 3.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
-										<path d="m13 18.5 3.5 3.5 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+									<svg
+										width="37"
+										height="37"
+										viewBox="0 0 37 37"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											d="M18.5 3.5L6 8.5V18c0 7.732 5.373 14.963 12.5 17 7.127-2.037 12.5-9.268 12.5-17V8.5L18.5 3.5Z"
+											stroke="currentColor"
+											stroke-width="1.5"
+											stroke-linejoin="round"
+										/>
+										<path
+											d="m13 18.5 3.5 3.5 7-7"
+											stroke="currentColor"
+											stroke-width="1.5"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										/>
 									</svg>
 								{/if}
 							</span>

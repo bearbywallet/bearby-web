@@ -52,10 +52,7 @@
 			<div class="downloads-row secondary" transition:slide={{ duration: 400 }}>
 				{#each secondaryDownloads as dl, i (dl.platform)}
 					{#if dl.disabled}
-						<div
-							class="dl-card disabled"
-							in:fly={{ y: 30, duration: 300, delay: i * 80 }}
-						>
+						<div class="dl-card disabled" in:fly={{ y: 30, duration: 300, delay: i * 80 }}>
 							{@render dlCardContent(dl)}
 						</div>
 					{:else}
