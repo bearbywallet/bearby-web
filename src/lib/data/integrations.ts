@@ -16,6 +16,7 @@ export function getChains(): Chain[] {
 		{ key: 'optimism', name: m.chain_optimism(), color: '#ff0420' },
 		{ key: 'base', name: m.chain_base(), color: '#0052ff' },
 		{ key: 'avalanche', name: m.chain_avalanche(), color: '#e84142' },
-		{ key: 'linea', name: m.chain_linea(), color: '#61dfff' }
+		{ key: 'linea', name: m.chain_linea(), color: '#61dfff' },
+		{ key: 'tron', name: m.chain_tron(), color: '#ef0027' }
 	];
 }

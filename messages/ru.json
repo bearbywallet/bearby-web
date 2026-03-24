@@ -43,6 +43,7 @@
 	"chain_base": "Base",
 	"chain_avalanche": "Avalanche",
 	"chain_linea": "Linea",
+	"chain_tron": "TRON",
 
 	"showcase_dapps_title": "Встроенные dApps и браузер",
 	"showcase_dapps_desc": "Суммируйте длинные тексты за секунды или создавайте профессиональный контент с нуля. Идеально для профессионалов!",

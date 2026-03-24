@@ -43,6 +43,7 @@
 	"chain_base": "Base",
 	"chain_avalanche": "Avalanche",
 	"chain_linea": "Linea",
+	"chain_tron": "TRON",
 
 	"showcase_dapps_title": "In app dApps and browsers",
 	"showcase_dapps_desc": "Summarize long texts in seconds or generate professional content from scratch. Perfect for professionals!",
