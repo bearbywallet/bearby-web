@@ -74,7 +74,7 @@
 		name: 'Bearby',
 		url: SITE_URL,
 		logo: `${SITE_URL}/favicon.svg`,
-		sameAs: ['https://github.com/aspect-build/bearby', 'https://x.com/pay_zil']
+		sameAs: ['https://github.com/aspect-build/bearby', 'https://x.com/BearbyPro']
 	};
 
 	const jsonLdFaq = {
