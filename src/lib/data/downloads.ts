@@ -35,7 +35,7 @@ export function getDownloads(): Download[] {
 		},
 		{
 			label: m.dl_firefox(),
-			href: 'https://addons.mozilla.org/en-GB/firefox/addon/zilpay/',
+			href: 'https://addons.mozilla.org/en-GB/firefox/addon/bearby/',
 			platform: 'firefox',
 			count: m.dl_count_500(),
 			action: m.dl_action_addon()
