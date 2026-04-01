@@ -17,6 +17,7 @@ export function getChains(): Chain[] {
 		{ key: 'base', name: m.chain_base(), color: '#0052ff' },
 		{ key: 'avalanche', name: m.chain_avalanche(), color: '#e84142' },
 		{ key: 'linea', name: m.chain_linea(), color: '#61dfff' },
-		{ key: 'tron', name: m.chain_tron(), color: '#ef0027' }
+		{ key: 'tron', name: m.chain_tron(), color: '#ef0027' },
+		{ key: 'zilliqa', name: m.chain_zilliqa(), color: '#42b4a8' }
 	];
 }
