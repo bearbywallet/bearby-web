@@ -35,7 +35,7 @@
 			'https://play.google.com/store/apps/details?id=com.zilpay.bearby',
 			'https://apps.apple.com/us/app/bearby-wallet/id1612716382'
 		],
-		softwareHelp: 'https://github.com/zilpay',
+		softwareHelp: 'https://github.com/bearbywallet',
 		author: {
 			'@type': 'Organization',
 			name: 'Bearby',

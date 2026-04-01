@@ -56,7 +56,7 @@ export function getDownloads(): Download[] {
 		},
 		{
 			label: m.dl_android_apk(),
-			href: 'https://github.com/zilpay/zilpay-mobile/releases/latest/download/app-release.apk',
+			href: 'https://github.com/bearbywallet/zilpay-mobile/releases/latest/download/app-release.apk',
 			platform: 'apk',
 			count: m.dl_count_direct(),
 			action: m.dl_action_apk(),

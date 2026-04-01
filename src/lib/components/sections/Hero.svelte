@@ -29,7 +29,7 @@
 
 			<Button
 				variant="outline"
-				href="https://github.com/zilpay"
+				href="https://github.com/bearbywallet"
 				target="_blank"
 				rel="noopener noreferrer"
 			>
