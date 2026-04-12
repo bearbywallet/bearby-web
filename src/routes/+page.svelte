@@ -18,38 +18,43 @@
 		'@context': 'https://schema.org',
 		'@type': 'SoftwareApplication',
 		name: 'Bearby',
-		applicationCategory: 'WalletApplication',
+		applicationCategory: 'FinanceApplication',
+		applicationSubCategory: 'Cryptocurrency Wallet',
 		operatingSystem: 'Android, iOS, Windows, macOS, Linux, Chrome, Firefox',
 		description:
-			'Quantum-resistant, non-custodial crypto wallet with on-device key storage and zero data collection. Supports Bitcoin, Ethereum, and EVM-compatible chains.',
+			'Quantum-resistant, non-custodial crypto wallet with on-device key storage and zero data collection. Uses NTRU Prime, AES-256, Kuznechik, and Argon2. Supports Bitcoin, Ethereum, and EVM-compatible chains.',
 		url: SITE_URL,
 		image: OG_IMAGE,
-		featureList: [
-			'post-quantum encryption',
-			'max decentralization',
-			'zero data collection',
-			'on-device storage'
-		],
+		featureList:
+			'Post-quantum encryption (NTRU Prime, AES-256, Kuznechik), on-device key storage, zero data collection, local transaction signing, native Bitcoin support, Rust core engine',
 		downloadUrl: [
 			'https://chromewebstore.google.com/detail/bearby/klnepcnofpcagllmbcplocjpkmnpjhhb',
 			'https://play.google.com/store/apps/details?id=com.zilpay.bearby',
 			'https://apps.apple.com/us/app/bearby-wallet/id1612716382'
 		],
-		softwareHelp: 'https://github.com/bearbywallet',
+		softwareHelp: {
+			'@type': 'CreativeWork',
+			url: 'https://github.com/bearbywallet'
+		},
 		author: {
 			'@type': 'Organization',
 			name: 'Bearby',
 			url: SITE_URL
 		},
+		datePublished: '2023-01-01',
+		dateModified: new Date().toISOString().split('T')[0],
 		offers: {
 			'@type': 'Offer',
 			price: '0',
-			priceCurrency: 'USD'
+			priceCurrency: 'AED',
+			availability: 'https://schema.org/OnlineOnly'
 		},
 		aggregateRating: {
 			'@type': 'AggregateRating',
 			ratingValue: '4.8',
-			ratingCount: '1200'
+			ratingCount: '1200',
+			bestRating: '5',
+			worstRating: '1'
 		}
 	};
 
@@ -58,12 +63,10 @@
 		'@type': 'WebSite',
 		name: 'Bearby',
 		url: SITE_URL,
+		description: 'Official website of Bearby, the quantum-resistant non-custodial cryptocurrency wallet.',
 		potentialAction: {
 			'@type': 'SearchAction',
-			target: {
-				'@type': 'EntryPoint',
-				urlTemplate: `${SITE_URL}/?q={search_term_string}`
-			},
+			target: `${SITE_URL}/?q={search_term_string}`,
 			'query-input': 'required name=search_term_string'
 		}
 	};
@@ -73,8 +76,21 @@
 		'@type': 'Organization',
 		name: 'Bearby',
 		url: SITE_URL,
-		logo: `${SITE_URL}/favicon.svg`,
-		sameAs: ['https://github.com/aspect-build/bearby', 'https://x.com/BearbyPro']
+		logo: {
+			'@type': 'ImageObject',
+			url: `${SITE_URL}/favicon.svg`,
+			width: 512,
+			height: 512
+		},
+		description:
+			'Bearby is a quantum-resistant, non-custodial cryptocurrency wallet using post-quantum cryptography (NTRU Prime, AES-256, Kuznechik, Argon2) to protect digital assets against future quantum computing threats. Available as a browser extension and mobile app for Bitcoin, Ethereum, and EVM-compatible chains.',
+		sameAs: [
+			'https://github.com/bearbywallet',
+			'https://x.com/BearbyPro',
+			'https://chromewebstore.google.com/detail/bearby/klnepcnofpcagllmbcplocjpkmnpjhhb',
+			'https://play.google.com/store/apps/details?id=com.zilpay.bearby',
+			'https://apps.apple.com/us/app/bearby-wallet/id1612716382'
+		]
 	};
 
 	const jsonLdFaq = {
@@ -83,26 +99,42 @@
 		mainEntity: [
 			{
 				'@type': 'Question',
-				name: 'What is the best quantum-resistant crypto wallet?',
+				name: 'What is post-quantum cryptography and why does it matter for crypto wallets?',
 				acceptedAnswer: {
 					'@type': 'Answer',
-					text: 'Bearby is the leading quantum-resistant crypto wallet. It uses NTRU Prime, AES-256, Kuznechik, and Argon2 encryption to protect your assets against future quantum computing threats. Available as a browser extension and mobile app.'
+					text: 'Post-quantum cryptography refers to cryptographic algorithms designed to resist attacks from quantum computers. Current wallets rely on elliptic-curve cryptography (ECC), which a sufficiently powerful quantum computer could break using Shor\'s algorithm. Bearby uses NTRU Prime — a lattice-based algorithm selected for its resistance to quantum attacks — along with AES-256 and Kuznechik to protect private keys against both classical and quantum threats.'
 				}
 			},
 			{
 				'@type': 'Question',
-				name: 'Which non-custodial wallet supports Bitcoin and Ethereum?',
+				name: 'What does non-custodial mean for a cryptocurrency wallet?',
 				acceptedAnswer: {
 					'@type': 'Answer',
-					text: 'Bearby is a non-custodial wallet supporting Bitcoin, Ethereum, and all EVM-compatible chains including Polygon, Arbitrum, Optimism, Base, Avalanche, and Linea. All keys are stored on your device with zero data collection.'
+					text: 'A non-custodial wallet means you — and only you — control your private keys. No company, server, or third party ever has access to your keys or funds. Bearby generates and stores all keys locally on your device using on-device encryption. There is no account registration and zero data collection.'
 				}
 			},
 			{
 				'@type': 'Question',
-				name: 'Is Bearby wallet safe to use?',
+				name: 'Which blockchain networks does Bearby support?',
 				acceptedAnswer: {
 					'@type': 'Answer',
-					text: 'Yes. Bearby is fully open-source, stores keys only on your device, collects zero user data, and uses military-grade post-quantum cryptography including NTRU Prime and AES-256. Its core engine is written in Rust for maximum memory safety.'
+					text: 'Bearby supports Bitcoin, Ethereum, and all EVM-compatible chains including Polygon, Arbitrum, Optimism, Base, Avalanche, Linea, and Zilliqa. Additional EVM chains can be added manually via custom RPC configuration.'
+				}
+			},
+			{
+				'@type': 'Question',
+				name: 'How does Bearby protect user privacy?',
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: 'Bearby collects zero user data. There are no analytics, no telemetry, no account system, and no server-side storage of any kind. All transaction signing happens locally on your device. The open-source codebase can be independently verified at github.com/bearbywallet.'
+				}
+			},
+			{
+				'@type': 'Question',
+				name: 'Is Bearby open source?',
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: 'Yes. Bearby\'s core engine is written in Rust and published as open-source software on GitHub at github.com/bearbywallet. The open-source model allows independent security researchers to audit the cryptographic implementation and key management logic.'
 				}
 			}
 		]
@@ -126,8 +158,8 @@
 	<meta property="og:site_name" content="Bearby" />
 
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:site" content="@pay_zil" />
-	<meta name="twitter:creator" content="@pay_zil" />
+	<meta name="twitter:site" content="@BearbyPro" />
+	<meta name="twitter:creator" content="@BearbyPro" />
 	<meta name="twitter:title" content={m.seo_og_title()} />
 	<meta name="twitter:description" content={m.seo_og_description()} />
 	<meta name="twitter:image" content={OG_IMAGE} />

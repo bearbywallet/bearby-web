@@ -3,10 +3,10 @@ export const prerender = true;
 import { SITE_URL } from '$lib/constants';
 
 export async function GET() {
-	const robots = `
-User-agent: *
+	const robots = `User-agent: *
 Allow: /
-`.trim();
+
+Sitemap: ${SITE_URL}/sitemap.xml`;
 
 	return new Response(robots, {
 		headers: {
