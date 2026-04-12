@@ -63,7 +63,8 @@
 		'@type': 'WebSite',
 		name: 'Bearby',
 		url: SITE_URL,
-		description: 'Official website of Bearby, the quantum-resistant non-custodial cryptocurrency wallet.',
+		description:
+			'Official website of Bearby, the quantum-resistant non-custodial cryptocurrency wallet.',
 		potentialAction: {
 			'@type': 'SearchAction',
 			target: `${SITE_URL}/?q={search_term_string}`,
@@ -102,7 +103,7 @@
 				name: 'What is post-quantum cryptography and why does it matter for crypto wallets?',
 				acceptedAnswer: {
 					'@type': 'Answer',
-					text: 'Post-quantum cryptography refers to cryptographic algorithms designed to resist attacks from quantum computers. Current wallets rely on elliptic-curve cryptography (ECC), which a sufficiently powerful quantum computer could break using Shor\'s algorithm. Bearby uses NTRU Prime — a lattice-based algorithm selected for its resistance to quantum attacks — along with AES-256 and Kuznechik to protect private keys against both classical and quantum threats.'
+					text: "Post-quantum cryptography refers to cryptographic algorithms designed to resist attacks from quantum computers. Current wallets rely on elliptic-curve cryptography (ECC), which a sufficiently powerful quantum computer could break using Shor's algorithm. Bearby uses NTRU Prime — a lattice-based algorithm selected for its resistance to quantum attacks — along with AES-256 and Kuznechik to protect private keys against both classical and quantum threats."
 				}
 			},
 			{
@@ -134,7 +135,7 @@
 				name: 'Is Bearby open source?',
 				acceptedAnswer: {
 					'@type': 'Answer',
-					text: 'Yes. Bearby\'s core engine is written in Rust and published as open-source software on GitHub at github.com/bearbywallet. The open-source model allows independent security researchers to audit the cryptographic implementation and key management logic.'
+					text: "Yes. Bearby's core engine is written in Rust and published as open-source software on GitHub at github.com/bearbywallet. The open-source model allows independent security researchers to audit the cryptographic implementation and key management logic."
 				}
 			}
 		]

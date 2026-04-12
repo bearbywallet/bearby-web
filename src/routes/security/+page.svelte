@@ -44,6 +44,8 @@
 	<meta property="og:image:alt" content="Bearby Security Architecture" />
 
 	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@BearbyPro" />
+	<meta name="twitter:creator" content="@BearbyPro" />
 	<meta name="twitter:title" content="Security Architecture — Bearby Wallet" />
 	<meta
 		name="twitter:description"
@@ -77,8 +79,8 @@
 					All major cryptocurrency wallets today — MetaMask, Trust Wallet, Phantom, Coinbase Wallet
 					— rely on Elliptic Curve Digital Signature Algorithm (ECDSA) with the secp256k1 curve.
 					This cryptography is secure against classical computers. However, a sufficiently powerful
-					quantum computer running <strong>Shor's algorithm</strong> could derive a private key from
-					a public key in polynomial time, breaking ECDSA entirely.
+					quantum computer running <strong>Shor's algorithm</strong> could derive a private key from a
+					public key in polynomial time, breaking ECDSA entirely.
 				</p>
 				<p>
 					NIST estimates that cryptographically relevant quantum computers (CRQCs) capable of
@@ -91,16 +93,15 @@
 			<section class="security-page__section">
 				<h2>NTRU Prime — Post-Quantum Key Encapsulation</h2>
 				<p>
-					Bearby uses <strong>NTRU Prime</strong> (specifically the Streamlined NTRU Prime variant,
-					sntrup761) as its primary post-quantum key encapsulation mechanism. NTRU Prime was
-					developed by Daniel J. Bernstein, Chitchanok Chuengsatiansup, Tanja Lange, and Christine
-					van Vredendaal.
+					Bearby uses <strong>NTRU Prime</strong> (specifically the Streamlined NTRU Prime variant, sntrup761)
+					as its primary post-quantum key encapsulation mechanism. NTRU Prime was developed by Daniel
+					J. Bernstein, Chitchanok Chuengsatiansup, Tanja Lange, and Christine van Vredendaal.
 				</p>
 				<p>
 					NTRU Prime is based on the hardness of lattice problems (NTRU lattice problem), which are
-					believed to be resistant to both classical and quantum attacks. Unlike CRYSTALS-Kyber (NIST
-					FIPS 203), NTRU Prime avoids the algebraic structure of module lattices, offering a more
-					conservative security foundation against potential future cryptanalytic advances.
+					believed to be resistant to both classical and quantum attacks. Unlike CRYSTALS-Kyber
+					(NIST FIPS 203), NTRU Prime avoids the algebraic structure of module lattices, offering a
+					more conservative security foundation against potential future cryptanalytic advances.
 				</p>
 				<div class="comparison-table">
 					<table>
@@ -144,17 +145,17 @@
 				</p>
 				<ul>
 					<li>
-						<strong>AES-256</strong> (NIST FIPS 197) — 256-bit Advanced Encryption Standard, the
-						global standard for symmetric encryption used by governments and financial institutions
-						worldwide. AES-256 provides 128 bits of post-quantum security (Grover's algorithm halves
-						the effective key length, but 128-bit security remains computationally infeasible).
+						<strong>AES-256</strong> (NIST FIPS 197) — 256-bit Advanced Encryption Standard, the global
+						standard for symmetric encryption used by governments and financial institutions worldwide.
+						AES-256 provides 128 bits of post-quantum security (Grover's algorithm halves the effective
+						key length, but 128-bit security remains computationally infeasible).
 					</li>
 					<li>
-						<strong>Kuznechik</strong> (GOST R 34.12-2015) — the Russian Federal Standard 128-bit
-						block cipher standardized by the Federal Agency on Technical Regulating and Metrology. As
-						a second independent cipher from a different design lineage, Kuznechik provides defense-in-depth:
-						a cryptanalytic breakthrough against AES would not automatically compromise Kuznechik,
-						and vice versa.
+						<strong>Kuznechik</strong> (GOST R 34.12-2015) — the Russian Federal Standard 128-bit block
+						cipher standardized by the Federal Agency on Technical Regulating and Metrology. As a second
+						independent cipher from a different design lineage, Kuznechik provides defense-in-depth: a
+						cryptanalytic breakthrough against AES would not automatically compromise Kuznechik, and vice
+						versa.
 					</li>
 				</ul>
 			</section>
@@ -162,10 +163,10 @@
 			<section class="security-page__section">
 				<h2>Key Derivation — Argon2</h2>
 				<p>
-					User passwords and seed phrases are processed through <strong>Argon2</strong> — the winner
-					of the Password Hashing Competition (PHC, 2015) and the recommended password hashing function
-					per OWASP guidelines. Argon2 is memory-hard: deriving a key requires a configurable amount
-					of RAM, making brute-force attacks on GPUs and ASICs prohibitively expensive.
+					User passwords and seed phrases are processed through <strong>Argon2</strong> — the winner of
+					the Password Hashing Competition (PHC, 2015) and the recommended password hashing function per
+					OWASP guidelines. Argon2 is memory-hard: deriving a key requires a configurable amount of RAM,
+					making brute-force attacks on GPUs and ASICs prohibitively expensive.
 				</p>
 				<p>Bearby uses Argon2id, the hybrid variant that combines:</p>
 				<ul>
@@ -194,8 +195,9 @@
 				<h2>Open Source</h2>
 				<p>
 					Bearby's cryptographic core is written in <strong>Rust</strong> — a memory-safe systems
-					language that eliminates entire classes of vulnerabilities (buffer overflows, use-after-free,
-					data races) at compile time. The full source code is available for inspection at
+					language that eliminates entire classes of vulnerabilities (buffer overflows,
+					use-after-free, data races) at compile time. The full source code is available for
+					inspection at
 					<a href="https://github.com/bearbywallet" target="_blank" rel="noopener noreferrer"
 						>github.com/bearbywallet</a
 					>.
@@ -217,8 +219,8 @@
 						>
 					</li>
 					<li>
-						NIST FIPS 203 — Module-Lattice-Based Key-Encapsulation Mechanism Standard (CRYSTALS-Kyber),
-						2024. <a
+						NIST FIPS 203 — Module-Lattice-Based Key-Encapsulation Mechanism Standard
+						(CRYSTALS-Kyber), 2024. <a
 							href="https://csrc.nist.gov/publications/detail/fips/203/final"
 							target="_blank"
 							rel="noopener noreferrer">csrc.nist.gov</a
@@ -231,7 +233,9 @@
 							rel="noopener noreferrer">ntruprime.cr.yp.to</a
 						>
 					</li>
-					<li>GOST R 34.12-2015 — Kuznyechik block cipher, Federal standard of the Russian Federation.</li>
+					<li>
+						GOST R 34.12-2015 — Kuznyechik block cipher, Federal standard of the Russian Federation.
+					</li>
 					<li>
 						Password Hashing Competition — Argon2 specification, 2015. <a
 							href="https://github.com/P-H-C/phc-winner-argon2"

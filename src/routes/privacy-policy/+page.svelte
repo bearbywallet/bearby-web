@@ -52,6 +52,7 @@
 <svelte:head>
 	<title>{m.privacy_page_title()}</title>
 	<meta name="description" content={m.privacy_title()} />
+	<link rel="canonical" href={url} />
 
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content={url} />
@@ -61,6 +62,8 @@
 	<meta property="og:image:alt" content="Bearby Wallet Privacy Policy" />
 
 	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@BearbyPro" />
+	<meta name="twitter:creator" content="@BearbyPro" />
 	<meta name="twitter:title" content={m.privacy_page_title()} />
 	<meta name="twitter:description" content={m.privacy_title()} />
 	<meta name="twitter:image" content={OG_IMAGE} />

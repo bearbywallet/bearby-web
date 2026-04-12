@@ -25,6 +25,8 @@
 	<meta property="og:image:alt" content="Bearby Wallet Terms of Service" />
 
 	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@BearbyPro" />
+	<meta name="twitter:creator" content="@BearbyPro" />
 	<meta name="twitter:title" content="Terms of Service — Bearby Wallet" />
 	<meta
 		name="twitter:description"
@@ -79,9 +81,9 @@
 			<section class="legal__section">
 				<h2>3. Limitation of Liability</h2>
 				<p>
-					To the maximum extent permitted by applicable law, Bearby and its contributors shall not be
-					liable for any indirect, incidental, special, consequential, or punitive damages, including
-					loss of digital assets, arising out of or related to your use of the Software.
+					To the maximum extent permitted by applicable law, Bearby and its contributors shall not
+					be liable for any indirect, incidental, special, consequential, or punitive damages,
+					including loss of digital assets, arising out of or related to your use of the Software.
 				</p>
 			</section>
 
@@ -92,7 +94,8 @@
 					the applicable open-source license available at
 					<a href="https://github.com/bearbywallet" target="_blank" rel="noopener noreferrer"
 						>github.com/bearbywallet</a
-					>. These Terms of Service govern your use of the compiled software and associated services.
+					>. These Terms of Service govern your use of the compiled software and associated
+					services.
 				</p>
 			</section>
 
@@ -122,7 +125,8 @@
 					We may update these Terms from time to time. Continued use of the Software after changes
 					constitutes acceptance of the updated Terms. Material changes will be announced via our
 					official channels at
-					<a href="https://x.com/BearbyPro" target="_blank" rel="noopener noreferrer">@BearbyPro</a>.
+					<a href="https://x.com/BearbyPro" target="_blank" rel="noopener noreferrer">@BearbyPro</a
+					>.
 				</p>
 			</section>
 
