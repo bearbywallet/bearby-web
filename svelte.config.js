@@ -5,7 +5,7 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		prerender: {
-			entries: ['*', '/robots.txt', '/llms.txt', '/sitemap.xml'],
+			entries: ['*', '/robots.txt', '/llms.txt', '/llms-full.txt', '/sitemap.xml'],
 			handleUnseenRoutes: 'ignore'
 		}
 	}

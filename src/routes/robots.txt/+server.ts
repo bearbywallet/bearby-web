@@ -6,6 +6,21 @@ export async function GET() {
 	const robots = `User-agent: *
 Allow: /
 
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Googlebot-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
 Sitemap: ${SITE_URL}/sitemap.xml`;
 
 	return new Response(robots, {

@@ -12,8 +12,8 @@
 	"hero_subtitle": "Quantum-resistant, multi-currency decentralized wallet, functioning as a browser extension compatible with the EVM-compatible networks.",
 	"hero_github_btn": "Open-Source Github",
 
-	"wallet_title": "Wallet that can never be stopped",
-	"wallet_desc": "The wallet that connects to dozens of independent nodes simultaneously — unlike traditional wallets relying on a single point of failure.",
+	"wallet_title": "Why Can't Bearby Be Seized, Frozen, or Shut Down?",
+	"wallet_desc": "Bearby is non-custodial: your private keys are generated and stored exclusively on your device. No company, server, or authority can freeze your funds. The wallet connects to dozens of independent blockchain nodes simultaneously — eliminating the single points of failure that centralized wallets rely on.",
 	"wallet_failproof_title": "Failproof System",
 	"wallet_failproof_desc": "Stay 100% operational regardless of how many nodes are offline.",
 	"wallet_secure_title": "100% Secure",
@@ -32,8 +32,8 @@
 	"feature_signing_title": "Local Transaction Signing",
 	"feature_signing_desc": "All transactions are signed directly on your hardware, eliminating risks from remote processing.",
 
-	"integrations_title": "Seamless Integrations for a Smarter Workflow",
-	"integrations_desc": "Bearby works effortlessly with your favorite tools, making your workflow smoother and more efficient. Connect, automate, and get things done faster!",
+	"integrations_title": "Which Blockchains and Networks Does Bearby Support?",
+	"integrations_desc": "Bearby supports Bitcoin, Ethereum, and all EVM-compatible chains — including Polygon, Arbitrum, Optimism, Base, Avalanche, Linea, BNB Chain, and Zilliqa. Additional networks can be added via custom RPC. The in-app dApp browser enables Web3 interaction across all supported chains.",
 	"chain_bitcoin": "Bitcoin",
 	"chain_ethereum": "Ethereum",
 	"chain_binance": "Binance Chain",
@@ -52,8 +52,8 @@
 	"showcase_bitcoin_desc": "Native Bitcoin Support to store and trade your bitcoin securely. Designed to protect assets from Quantum risks.",
 
 	"security_badge": "Quantum Resistant",
-	"security_title": "Built for the post-quantum era",
-	"security_desc": "Every layer of Bearby's architecture is hardened with military-grade cryptography — designed to withstand threats that don't even exist yet.",
+	"security_title": "How Does Bearby Protect Against Quantum Attacks?",
+	"security_desc": "Bearby uses NTRU Prime (post-quantum key encapsulation), AES-256, and Kuznechik in a dual-layer symmetric encryption scheme, with Argon2id key derivation. Unlike wallets relying on ECDSA — which a quantum computer running Shor's algorithm could break — Bearby's architecture is designed to protect assets against threats that don't yet exist.",
 	"security_rust_title": "Written in Rust",
 	"security_rust_desc": "Core cryptographic engine built with Rust — a memory-safe language that eliminates buffer overflows, use-after-free, and data races at compile time.",
 	"security_tag_memory": "Memory Safe",
@@ -112,7 +112,7 @@
 
 	"privacy_page_title": "Privacy Policy - Bearby",
 	"privacy_title": "Privacy Policy",
-	"privacy_updated": "LAST UPDATED – 21ST OF APRIL, 2020",
+	"privacy_updated": "LAST UPDATED – 13TH OF APRIL, 2026",
 	"privacy_p0": "This Privacy Policy (“Policy”) describes how Khasanshin Rinat Ildarovich, IP, registered under no. 01.02.2021, 661220158399, Duns: 506873901, (“Bearby” or the “controller”) collects, uses, shares, and retain the personal data/information (“data”) of users of our website https://bearby.io/ (the “WebSite”) and our mobile application (“App”). This Policy applies to the WebSite, App, and other products/ services offered to you (the „User”/ “You”) by Bearby (the “Services”)..",
 	"privacy_p1": "This Policy supplements out Terms of Services with regard to any details/aspects regarding the processing of personal data in connection with Bearby.",
 	"privacy_p2": "Please note that by downloading our mobile App or running the WebSite you agree to the terms outlined in this Policy.",

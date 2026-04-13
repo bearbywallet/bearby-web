@@ -1,5 +1,6 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages';
+	import { page } from '$app/state';
 	import Hero from '$lib/components/sections/Hero.svelte';
 	import WalletSection from '$lib/components/sections/WalletSection.svelte';
 	import Features from '$lib/components/sections/Features.svelte';
@@ -12,6 +13,10 @@
 	import { reveal } from '$lib/actions/reveal';
 
 	import { SITE_URL } from '$lib/constants';
+
+	const canonicalUrl = $derived(
+		page.url.pathname.startsWith('/ru') ? `${SITE_URL}/ru` : SITE_URL
+	);
 	const OG_IMAGE = `${SITE_URL}/img/hero-bg.webp`;
 
 	const jsonLdApp = {
@@ -43,11 +48,17 @@
 		},
 		datePublished: '2023-01-01',
 		dateModified: new Date().toISOString().split('T')[0],
+		softwareVersion: '3.8.29',
+		screenshot: {
+			'@type': 'ImageObject',
+			url: `${SITE_URL}/img/hero-bg.webp`,
+			caption: 'Bearby quantum-resistant wallet interface'
+		},
 		offers: {
 			'@type': 'Offer',
 			price: '0',
-			priceCurrency: 'AED',
-			availability: 'https://schema.org/OnlineOnly'
+			priceCurrency: 'USD',
+			availability: 'https://schema.org/InStock'
 		},
 		aggregateRating: {
 			'@type': 'AggregateRating',
@@ -85,12 +96,22 @@
 		},
 		description:
 			'Bearby is a quantum-resistant, non-custodial cryptocurrency wallet using post-quantum cryptography (NTRU Prime, AES-256, Kuznechik, Argon2) to protect digital assets against future quantum computing threats. Available as a browser extension and mobile app for Bitcoin, Ethereum, and EVM-compatible chains.',
+		foundingDate: '2022',
+		contactPoint: {
+			'@type': 'ContactPoint',
+			contactType: 'customer support',
+			email: 'support@bearby.io'
+		},
+		email: 'support@bearby.io',
 		sameAs: [
 			'https://github.com/bearbywallet',
 			'https://x.com/BearbyPro',
 			'https://chromewebstore.google.com/detail/bearby/klnepcnofpcagllmbcplocjpkmnpjhhb',
 			'https://play.google.com/store/apps/details?id=com.zilpay.bearby',
 			'https://apps.apple.com/us/app/bearby-wallet/id1612716382'
+			// Add LinkedIn and Wikipedia URLs once those pages are created:
+			// 'https://www.linkedin.com/company/bearby',
+			// 'https://en.wikipedia.org/wiki/Bearby'
 		]
 	};
 
@@ -146,7 +167,7 @@
 	<title>{m.seo_title()}</title>
 	<meta name="description" content={m.seo_description()} />
 	<meta name="keywords" content={m.seo_keywords()} />
-	<link rel="canonical" href={SITE_URL} />
+	<link rel="canonical" href={canonicalUrl} />
 
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content={SITE_URL} />

@@ -4,6 +4,27 @@
 	const OG_IMAGE = `${SITE_URL}/img/hero-bg.webp`;
 	const url = `${SITE_URL}/terms`;
 	const lastUpdated = '2026-04-13';
+
+	const jsonLdWebPage = {
+		'@context': 'https://schema.org',
+		'@type': 'WebPage',
+		name: 'Terms of Service — Bearby Wallet',
+		url,
+		description:
+			'Terms governing use of the Bearby non-custodial cryptocurrency wallet and related services.',
+		dateModified: lastUpdated,
+		lastReviewed: lastUpdated,
+		inLanguage: 'en'
+	};
+
+	const jsonLdBreadcrumb = {
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+			{ '@type': 'ListItem', position: 2, name: 'Terms of Service', item: url }
+		]
+	};
 </script>
 
 <svelte:head>
@@ -33,6 +54,9 @@
 		content="Bearby Wallet Terms of Service. Read our terms governing the use of the Bearby non-custodial cryptocurrency wallet."
 	/>
 	<meta name="twitter:image" content={OG_IMAGE} />
+
+	{@html `<script type="application/ld+json">${JSON.stringify(jsonLdWebPage)}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify(jsonLdBreadcrumb)}</script>`}
 </svelte:head>
 
 <article class="legal">

@@ -5,6 +5,27 @@
 	const OG_IMAGE = `${SITE_URL}/img/hero-bg.webp`;
 	const url = `${SITE_URL}/privacy-policy`;
 
+	const jsonLdWebPage = {
+		'@context': 'https://schema.org',
+		'@type': 'WebPage',
+		name: 'Privacy Policy — Bearby Wallet',
+		url,
+		description:
+			'Bearby collects zero user data. No accounts, no analytics, no server-side key storage. Last updated April 2026.',
+		dateModified: '2026-04-13',
+		lastReviewed: '2026-04-13',
+		inLanguage: 'en'
+	};
+
+	const jsonLdBreadcrumb = {
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+			{ '@type': 'ListItem', position: 2, name: 'Privacy Policy', item: url }
+		]
+	};
+
 	interface Section {
 		id: string;
 		title?: string;
@@ -51,13 +72,13 @@
 
 <svelte:head>
 	<title>{m.privacy_page_title()}</title>
-	<meta name="description" content={m.privacy_title()} />
+	<meta name="description" content="Bearby collects zero user data. Learn how Bearby's non-custodial wallet protects your privacy: no accounts, no analytics, no server-side storage. Effective April 2026." />
 	<link rel="canonical" href={url} />
 
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content={url} />
 	<meta property="og:title" content={m.privacy_page_title()} />
-	<meta property="og:description" content={m.privacy_title()} />
+	<meta property="og:description" content="Bearby collects zero user data. Learn how Bearby's non-custodial wallet protects your privacy: no accounts, no analytics, no server-side storage." />
 	<meta property="og:image" content={OG_IMAGE} />
 	<meta property="og:image:alt" content="Bearby Wallet Privacy Policy" />
 
@@ -67,6 +88,9 @@
 	<meta name="twitter:title" content={m.privacy_page_title()} />
 	<meta name="twitter:description" content={m.privacy_title()} />
 	<meta name="twitter:image" content={OG_IMAGE} />
+
+	{@html `<script type="application/ld+json">${JSON.stringify(jsonLdWebPage)}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify(jsonLdBreadcrumb)}</script>`}
 </svelte:head>
 
 <article class="privacy">

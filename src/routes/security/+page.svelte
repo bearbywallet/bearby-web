@@ -12,16 +12,84 @@
 		description:
 			"Technical deep-dive into Bearby's post-quantum cryptographic architecture: NTRU Prime, AES-256, Kuznechik (GOST R 34.12-2015), and Argon2 key derivation. Includes comparison with NIST-standardized CRYSTALS-Kyber and threat timeline for quantum computing.",
 		url,
+		mainEntityOfPage: url,
+		articleSection: 'Cryptography',
+		wordCount: 950,
 		datePublished: '2023-01-01',
 		dateModified: lastUpdated,
-		author: { '@type': 'Organization', name: 'Bearby', url: SITE_URL },
+		author: {
+			'@type': 'Person',
+			name: 'Bearby Security Team',
+			worksFor: { '@type': 'Organization', name: 'Bearby', url: SITE_URL },
+			sameAs: 'https://github.com/bearbywallet'
+		},
 		publisher: {
 			'@type': 'Organization',
 			name: 'Bearby',
 			url: SITE_URL,
 			logo: { '@type': 'ImageObject', url: `${SITE_URL}/favicon.svg` }
 		},
-		image: OG_IMAGE
+		image: OG_IMAGE,
+		speakable: {
+			'@type': 'SpeakableSpecification',
+			cssSelector: ['h1', '.security-page__subtitle']
+		}
+	};
+
+	const jsonLdFaq = {
+		'@context': 'https://schema.org',
+		'@type': 'FAQPage',
+		mainEntity: [
+			{
+				'@type': 'Question',
+				name: 'What is NTRU Prime and why does Bearby use it instead of CRYSTALS-Kyber?',
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: "NTRU Prime is a post-quantum key encapsulation mechanism based on the NTRU lattice problem, developed by Daniel J. Bernstein and colleagues. Unlike CRYSTALS-Kyber (NIST FIPS 203), which uses module lattices with more algebraic structure, NTRU Prime uses a simpler lattice structure that has been studied since 1996. Bearby chose NTRU Prime for its more conservative security assumption: a cryptanalytic breakthrough against module lattices would not automatically apply to NTRU Prime's simpler structure. Both provide quantum resistance, but NTRU Prime offers an additional margin of safety."
+				}
+			},
+			{
+				'@type': 'Question',
+				name: 'When will quantum computers threaten existing cryptocurrency wallets?',
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: "NIST estimates that cryptographically relevant quantum computers (CRQCs) capable of breaking 256-bit elliptic-curve cryptography (ECDSA) may emerge within the next 10–15 years. All major wallets — MetaMask, Trust Wallet, Phantom — currently rely on ECDSA with secp256k1, which Shor's algorithm on a CRQC would break. Additionally, 'harvest now, decrypt later' attacks are already theoretically possible: adversaries can record blockchain transactions today and decrypt them once quantum hardware is available. Migration to post-quantum cryptography should begin before quantum computers arrive."
+				}
+			},
+			{
+				'@type': 'Question',
+				name: 'How does Argon2id protect against brute-force attacks on wallet passwords?',
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: 'Argon2id is a memory-hard key derivation function — winner of the Password Hashing Competition (PHC, 2015) and recommended by OWASP. Deriving a key requires a configurable, large amount of RAM, making large-scale GPU and ASIC brute-force attacks prohibitively expensive. A typical GPU can run SHA-256 billions of times per second, but Argon2id (configured with sufficient memory) may only allow thousands of attempts per second, dramatically slowing any brute-force attack. Argon2id combines Argon2i resistance to side-channel attacks with Argon2d resistance to GPU brute-force.'
+				}
+			},
+			{
+				'@type': 'Question',
+				name: 'What is defense-in-depth encryption and how does Bearby implement it?',
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: 'Defense-in-depth encryption means applying multiple independent cryptographic layers, so that a breakthrough against one layer does not automatically compromise the whole system. Bearby encrypts private keys using both AES-256 (NIST FIPS 197) and Kuznechik (GOST R 34.12-2015) — two symmetric ciphers from entirely different design teams and mathematical lineages. An attacker would need to break both ciphers simultaneously to access key material. This is the most conservative symmetric encryption configuration available in any consumer-grade cryptocurrency wallet.'
+				}
+			},
+			{
+				'@type': 'Question',
+				name: "Is Bearby's cryptographic code open source and independently auditable?",
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: "Yes. Bearby's cryptographic core is written in Rust — a memory-safe systems language — and published as open-source software at github.com/bearbywallet. Any security researcher, cryptographer, or developer can review the key generation, encryption, signing, and key derivation logic without relying on Bearby's self-reported claims. Rust's compile-time guarantees eliminate entire classes of vulnerabilities (buffer overflows, use-after-free, data races) that have historically affected cryptographic implementations in C and C++."
+				}
+			}
+		]
+	};
+
+	const jsonLdBreadcrumb = {
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+			{ '@type': 'ListItem', position: 2, name: 'Security Architecture', item: url }
+		]
 	};
 </script>
 
@@ -54,6 +122,8 @@
 	<meta name="twitter:image" content={OG_IMAGE} />
 
 	{@html `<script type="application/ld+json">${JSON.stringify(jsonLdArticle)}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify(jsonLdFaq)}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify(jsonLdBreadcrumb)}</script>`}
 </svelte:head>
 
 <article class="security-page">
