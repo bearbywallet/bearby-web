@@ -47,7 +47,8 @@ Yes. Bearby's cryptographic core is written in Rust and published as open-source
 
 - Official website: https://bearby.io
 - Twitter/X: https://x.com/BearbyPro
-- GitHub: https://github.com/bearbywallet`;
+- GitHub: https://github.com/bearbywallet
+- LinkedIn: https://www.linkedin.com/company/76457138`;
 
 	return new Response(content, {
 		headers: {

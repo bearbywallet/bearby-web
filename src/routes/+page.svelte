@@ -106,12 +106,10 @@
 		sameAs: [
 			'https://github.com/bearbywallet',
 			'https://x.com/BearbyPro',
+			'https://www.linkedin.com/company/76457138',
 			'https://chromewebstore.google.com/detail/bearby/klnepcnofpcagllmbcplocjpkmnpjhhb',
 			'https://play.google.com/store/apps/details?id=com.zilpay.bearby',
 			'https://apps.apple.com/us/app/bearby-wallet/id1612716382'
-			// Add LinkedIn and Wikipedia URLs once those pages are created:
-			// 'https://www.linkedin.com/company/bearby',
-			// 'https://en.wikipedia.org/wiki/Bearby'
 		]
 	};
 

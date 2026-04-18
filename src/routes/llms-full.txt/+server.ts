@@ -147,7 +147,8 @@ A: Exclusively on your device, encrypted with AES-256 and Kuznechik in a dual-la
 - Privacy policy: https://bearby.io/privacy-policy
 - Terms of service: https://bearby.io/terms
 - GitHub: https://github.com/bearbywallet
-- Twitter/X: https://x.com/BearbyPro
+	- LinkedIn: https://www.linkedin.com/company/76457138
+	- Twitter/X: https://x.com/BearbyPro
 - Chrome Web Store: https://chromewebstore.google.com/detail/bearby/klnepcnofpcagllmbcplocjpkmnpjhhb
 - Google Play: https://play.google.com/store/apps/details?id=com.zilpay.bearby
 - App Store: https://apps.apple.com/us/app/bearby-wallet/id1612716382`;
