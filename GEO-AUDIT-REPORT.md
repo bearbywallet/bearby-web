@@ -1,391 +1,510 @@
 # GEO Audit Report: Bearby Wallet
 
-**Audit Date:** 2026-04-13
+**Audit Date:** 2026-04-14
 **URL:** https://bearby.io
-**Business Type:** SaaS / Crypto Wallet (YMYL — Financial Software)
-**Pages Analyzed:** 5 (/, /ru, /security, /privacy-policy, /terms)
+**Business Type:** Crypto Wallet SaaS (quantum-resistant, non-custodial)
+**Pages Analyzed:** 5 (/, /security, /privacy-policy, /terms, /ru/)
 
 ---
 
 ## Executive Summary
 
-**Overall GEO Score: 52/100 — Poor**
+**Overall GEO Score: 50/100 (Poor)**
 
-Bearby has a genuinely strong technical differentiator (post-quantum cryptography) and solid foundational infrastructure — SSR rendering, all AI crawlers permitted, llms.txt present, FAQPage schema, and a well-cited security page. However, the site is critically thin: only 5 pages, no blog, no team attribution, no third-party validation, and no entity recognition in AI knowledge graphs (no Wikipedia, no Wikidata, no LinkedIn). The 2020 privacy policy is an active YMYL liability. Without content depth and external authority signals, AI systems have no basis to cite or recommend Bearby — even when it is the correct answer to a user's query.
+Bearby has a technically sophisticated product and an exemplary AI crawler access configuration — every major AI bot is explicitly permitted in robots.txt. However, the site is a nearly empty house with an open door: only 5 pages exist, the primary content is rendered by client-side JavaScript (invisible to AI crawlers), there is no external brand authority (no Wikipedia, no press coverage, no LinkedIn), and the content volume is insufficient for AI systems to develop citation patterns. The technical foundation is solid but unused; closing the content and authority gaps is the critical path to GEO improvement.
 
 ### Score Breakdown
 
 | Category | Score | Weight | Weighted Score |
 |---|---|---|---|
-| AI Citability | 68/100 | 25% | 17.0 |
-| Brand Authority | 22/100 | 20% | 4.4 |
-| Content E-E-A-T | 44/100 | 20% | 8.8 |
-| Technical GEO | 74/100 | 15% | 11.1 |
-| Schema & Structured Data | 62/100 | 10% | 6.2 |
-| Platform Optimization | 49/100 | 10% | 4.9 |
-| **Overall GEO Score** | | | **52/100** |
+| AI Citability | 54/100 | 25% | 13.5 |
+| Brand Authority | 29/100 | 20% | 5.8 |
+| Content E-E-A-T | 48/100 | 20% | 9.6 |
+| Technical GEO | 61/100 | 15% | 9.15 |
+| Schema & Structured Data | 63/100 | 10% | 6.3 |
+| Platform Optimization | 52/100 | 10% | 5.2 |
+| **Overall GEO Score** | | | **50/100** |
 
 ---
 
 ## Critical Issues (Fix Immediately)
 
-### C1 — Privacy Policy Dated 2020 (YMYL Failure)
-**Pages affected:** /privacy-policy
-**Impact:** AI systems score financial/security products against YMYL standards. A 6-year-old privacy policy signals either abandoned maintenance or compliance negligence. Google's quality raters and AI content evaluators both penalize stale legal documentation on YMYL sites. This is the single most damaging trust signal on the site.
-**Fix:** Update the privacy policy to reflect current data practices, include a 2026 effective date, update DPA contacts, and add a cookie/tracking policy section. Minimum: add `dateModified` to the page and update the last-updated date to today.
+### C1 — Client-Side-Only Vue.js Rendering
 
-### C2 — No Wikipedia Article / No Wikidata Entity
-**Impact:** AI models (ChatGPT, Gemini, Perplexity, Bing Copilot) use Wikipedia and Wikidata as the primary signal for entity recognition. Without a Wikipedia article or Wikidata Q-item, Bearby is not a recognized entity in any major AI knowledge graph. It will not appear in comparative AI responses ("best quantum-resistant wallets"), will not be cited by name, and brand mentions elsewhere will not be connected into a coherent entity profile. The only "Bearby" Wikidata entry is a Japanese manga series.
-**Fix:** Draft a Wikipedia article establishing notability through: 100,000+ downloads, pioneering NTRU Prime implementation in a consumer wallet, post-quantum cryptography positioning. Simultaneously create a Wikidata Q-item with `instance of: software` and add both URLs to the Organization schema `sameAs` array.
+The site uses a Vue.js SPA with no server-side rendering. A confirmed `<noscript>` tag reads: *"Please enable JavaScript to use Bearby Wallet website."* This means all prose content — feature descriptions, product copy, security explanations — is invisible to AI crawlers (GPTBot, ClaudeBot, PerplexityBot). Only the JSON-LD schema blocks appear to be server-rendered. AI crawlers can read schema metadata but cannot access the body content they would cite in answers.
 
----
+**Fix:** Migrate to Nuxt.js (Vue's SSR/SSG framework) or implement static site generation. This is the single highest-ROI technical change for GEO. Until this is resolved, no amount of content improvement will be fully effective.
 
-## High Priority Issues (Fix Within 1 Week)
-
-### H1 — No Content Layer (5 Pages Total)
-The entire site has 5 pages. There is no blog, no changelog, no how-to guides, no comparison content, no use-case pages, and no documentation hub. The /security page carries all the technical authority alone. AI systems have almost nothing to cite from Bearby in response to the hundreds of relevant queries ("best quantum-resistant wallet", "how to protect crypto from quantum computers", "NTRU Prime wallet", "non-custodial wallet comparison"). The topical authority required for AI citation does not exist.
-**Fix:** Add a minimum of 1 authoritative article in the next 7 days. Recommended: "How NTRU Prime Protects Against Quantum Attacks" (1,000+ words, building on /security content).
-
-### H2 — No LinkedIn Company Page
-LinkedIn is absent from `sameAs` and does not exist at `/company/bearby`. This is the highest-weight Microsoft ecosystem signal for Bing Copilot, and a key entity verification source for ChatGPT and Gemini.
-**Fix:** Create a LinkedIn company page for Bearby and add the URL to the Organization schema `sameAs` array. 30-minute task.
-
-### H3 — /ru Canonical Points to English Root
-`/ru` has `<link rel="canonical" href="https://bearby.io">` — pointing to the English homepage. This tells all search engines and AI crawlers that the Russian page is a duplicate of the English page and should not be indexed independently.
-**Fix:** Change the `/ru` canonical to `https://bearby.io/ru` (or `https://bearby.io/ru/` to match the hreflang declaration). One-line fix in the SvelteKit route.
-
-### H4 — No llms-full.txt
-The `llms.txt` file exists but is minimal. The `llms-full.txt` companion (complete prose content for AI ingestion without page crawls) is absent. This is the highest-value llms.txt addition missing — it allows AI models like Perplexity and Claude to ingest the full site content in a single request.
-**Fix:** Create `/llms-full.txt` with 1,500–3,000 words covering: product description, full feature explanations, cryptographic architecture details, supported chains with rationale, FAQ content in prose, and contact information.
-
-### H5 — No Named Author on Security Page
-The `/security` TechArticle schema attributes authorship to `"@type": "Organization"`. Google's E-E-A-T guidelines and AI content evaluators both prefer a named `Person` with credentials for YMYL content. Anonymous organizational authorship significantly discounts expertise signals for a financial security product.
-**Fix:** Add a named engineer or cryptographer with a bio to the /security page. Update the TechArticle schema `author` from Organization to Person with `sameAs` pointing to a GitHub or LinkedIn profile.
-
-### H6 — No Third-Party Security Audit
-No published security audit, penetration test, or independent cryptographic review exists anywhere on the site. For a wallet product marketing post-quantum cryptography, this absence is the single biggest authoritativeness gap. Users and AI systems evaluating "is Bearby trustworthy?" have only self-reported claims to evaluate.
-**Fix:** Commission an independent cryptographic audit (or publish a GitHub security advisory). Even a summary with redacted findings is a high-impact trust signal. Publish it at `/security-audit`.
-
-### H7 — SoftwareApplication Schema Validation Errors
-Two errors in the homepage SoftwareApplication schema:
-- `offers.priceCurrency`: Set to `"AED"` (UAE dirham) — should be `"USD"` for a globally distributed free product
-- `offers.availability`: `"OnlineOnly"` is not a valid schema.org value — should be `"https://schema.org/InStock"`
-**Fix:** Correct both values in the JSON-LD block. 5-minute fix.
-
-### H8 — Missing msvalidate.01 Meta Tag
-Bing Webmaster Tools is verified via `BingSiteAuth.xml` (user ID: `6CAD5331F323DF4BBA962F2CB902687F`) but the in-page `<meta name="msvalidate.01">` tag is absent. This is Bing Copilot's primary crawl-priority signal.
-**Fix:** Add `<meta name="msvalidate.01" content="6CAD5331F323DF4BBA962F2CB902687F">` to `<svelte:head>` in `src/routes/+layout.svelte`.
+**Affected pages:** All 5 pages
+**Effort:** High — 1-2 weeks
+**Impact:** Very high
 
 ---
 
-## Medium Priority Issues (Fix Within 1 Month)
+### C2 — No llms.txt File
 
-### M1 — llms.txt Links Have No Descriptions
-All links in `llms.txt` are bare — no `: Description` text after any URL. AI crawlers use these descriptions to prioritize which pages to fetch.
-**Fix:** Add descriptions to each link. Example: `- [Security Architecture](https://bearby.io/security): Technical documentation covering NTRU Prime (sntrup761), AES-256, Kuznechik dual-layer encryption, and Argon2id key derivation.`
+`https://bearby.io/llms.txt` returns 404. With only 5 pages, a well-crafted llms.txt would meaningfully accelerate AI discoverability by explicitly directing crawlers to the security page's technical claims. This is especially valuable while the site remains thin.
 
-### M2 — llms.txt Missing Key Pages and Content
-`/security`, `/terms`, `/ru`, and the Firefox extension are not listed in `llms.txt`. The FAQ content (5 high-citability Q&As) is not surfaced.
-**Fix:** Add all pages with descriptions. Add a `## FAQ` section with full Q&A text from the FAQPage schema items.
+**Fix:** Create `/llms.txt` at the domain root:
 
-### M3 — No FAQPage Schema on /security Despite Q&A Content
-The security page answers questions like "Is NTRU Prime better than CRYSTALS-Kyber?" and "What is Argon2id?" in body content but these are not schema-exposed.
-**Fix:** Add a `FAQPage` JSON-LD block to `/security` covering the top 4–5 technical questions answered on the page.
+```
+# Bearby
 
-### M4 — TechArticle Schema Incomplete on /security
-Missing: `mainEntityOfPage`, `articleSection`, `wordCount`, `speakable` property. Author should be a named `Person` not an `Organization`.
-**Fix:** See schema fix templates in the Schema section below.
+> Bearby is a quantum-resistant, non-custodial crypto wallet using NTRU Prime,
+> AES-256, Kuznechik, and Argon2id encryption. Available for iOS, Android, Chrome,
+> and Firefox. Founded 2022. Open-source Rust core.
 
-### M5 — CSP Uses `unsafe-inline` on Scripts
-The Content Security Policy includes `script-src 'self' 'unsafe-inline'`. This is a credibility inconsistency for a product marketing itself on security. It does not affect SEO directly but is a trust signal weakness.
-**Fix:** Implement nonce-based CSP (SvelteKit supports this natively). Remove `unsafe-inline` from `script-src`.
+## Product
 
-### M6 — No IndexNow Implementation
-No IndexNow key file detected at standard paths. IndexNow allows immediate Bing (and Yandex) index updates on each deployment — directly improving Bing Copilot recency signals.
-**Fix:** Generate an IndexNow key, place the key file at `https://bearby.io/[key].txt`, and ping `https://api.indexnow.org` on each SvelteKit deployment.
+- [Home](https://bearby.io/): Product overview, features, and download statistics
+- [Security Architecture](https://bearby.io/security): Technical documentation of
+  post-quantum cryptography — NTRU Prime, dual symmetric cipher layering, Argon2id
+  key derivation
 
-### M7 — No robots.txt Sitemap Directive / No Explicit AI Crawler Rules
-The `Sitemap:` directive is missing from `robots.txt` despite the sitemap existing (it is declared in the sitemap itself but not in robots.txt). No explicit named allow rules for AI crawlers.
-**Fix:** Add `Sitemap: https://bearby.io/sitemap.xml` to robots.txt. Optionally add explicit allow rules: `User-agent: GPTBot`, `User-agent: ClaudeBot`, `User-agent: PerplexityBot`, each with `Allow: /`.
+## Legal
 
-### M8 — No Changelog / Release Notes Page
-No evidence of active maintenance is visible on the site. A changelog demonstrates ongoing development — a critical freshness and trust signal for security software.
-**Fix:** Add a `/changelog` page with release history. Even 3-4 entries covering the last 12 months provides meaningful signals.
+- [Privacy Policy](https://bearby.io/privacy-policy): Zero data collection policy
+- [Terms of Service](https://bearby.io/terms): Terms governing wallet use
 
-### M9 — Missing Organization Schema Fields
-`foundingDate`, `contactPoint`, and `email` are absent from the Organization schema. `sameAs` is missing LinkedIn, YouTube, Wikipedia, and Wikidata.
-**Fix:** Add missing fields. See schema recommendations below.
+## Optional
 
-### M10 — Homepage H2s Are Navigation Labels, Not Query-Format Headings
-Section headings are "About", "Features", "Security", "Integrations", "Downloads" — navigation labels, not question-answering headings. Google AI Overviews extracts content under headings that match user query patterns.
-**Fix:** Convert key section headings to question format followed by a 40–60 word direct-answer paragraph. Example: "How Does Bearby Protect Against Quantum Attacks?" with an answer paragraph before expanding into feature details.
+- [GitHub](https://github.com/bearbywallet): Open-source Rust core engine
+```
 
-### M11 — No Product Hunt / CoinGecko Listing
-Both are sources AI models frequently cite in comparative responses about crypto tools. Neither listing was found.
-**Fix:** Submit to Product Hunt (free, moderate effort). Submit to CoinGecko wallet directory (free, low effort).
+**Effort:** 30 minutes
+**Impact:** Medium (immediate; amplified as content grows)
 
 ---
 
-## Low Priority Issues (Optimize When Possible)
+## High Priority Issues
 
-### L1 — No BreadcrumbList on Inner Pages
-`/security`, `/privacy-policy`, and `/terms` have no BreadcrumbList schema.
+### H1 — No External Brand Authority
 
-### L2 — Missing `screenshot` and `softwareVersion` in SoftwareApplication Schema
-Both unlock richer Google display eligibility.
+Bearby has zero verifiable third-party presence: no Wikipedia article, no LinkedIn company page, no crypto press coverage (CoinDesk, Decrypt, Cointelegraph, The Block), no named review platform links. The 1,200 reviews cited on the homepage are not linked to any source, making them unverifiable by AI systems. AI models form brand entity judgments from third-party corroboration — Bearby has almost none.
 
-### L3 — Hero Image Missing Preload Hint
-`/img/hero-bg.webp` has no `<link rel="preload" as="image">` in the HTML head. Affects LCP.
+**Most critical gap:** No Wikipedia article. Wikipedia is the primary source AI language models use for entity disambiguation. Every competing wallet with a Wikipedia page (MetaMask, Exodus, Trust Wallet, Ledger) receives preferential citation.
 
-### L4 — WebSite SearchAction Endpoint May Not Be Functional
-A `potentialAction` with `?q={search_term_string}` is declared. If bearby.io has no working site search at that URL, this should be removed to avoid serving a broken action.
+**Fix path:**
+1. Secure 2–3 independent press mentions in recognized crypto publications (prerequisite for Wikipedia notability)
+2. Create LinkedIn company page (30-minute fix with outsized impact)
+3. Submit Wikipedia article once citations exist
+4. Add a Trustpilot or G2 profile with linked reviews
 
-### L5 — Trailing Slash Inconsistency
-Sitemap uses `/ru` while hreflang declares `https://bearby.io/ru/`. Standardize and enforce via Vercel redirect.
+**Effort:** High (requires external press outreach)
+**Impact:** Very high — affects ChatGPT, Perplexity, Gemini, Bing Copilot entity recognition
 
-### L6 — Privacy Policy Has No Meta Description or Schema
-The privacy policy page has no meta description and no WebPage schema with `dateModified`.
+---
+
+### H2 — Content Volume Is Critically Thin
+
+Five pages totaling approximately 3,500 words gives Bearby roughly the content footprint of a single blog post. AI models require breadth — multiple angles, multiple queries answered — to build a citation pattern. With no blog, no documentation, no changelog, no comparison content, and no team page, there is almost no surface area for AI systems to discover and cite.
+
+**Top missing content types (in priority order):**
+1. Post-quantum cryptography explainer (non-technical audience entry point)
+2. "Bearby vs traditional wallets" comparison page
+3. Monthly changelog / release notes (currently at v3.8.29 — each release is a content opportunity)
+4. Threat model page (what Bearby protects against and what it does not)
+5. Developer documentation / integration guide
+6. Author/team bio pages
+
+**Effort:** High (ongoing)
+**Impact:** Very high — affects all 6 GEO categories
+
+---
+
+### H3 — Invalid Author Attribution on TechArticle
+
+The `/security` page TechArticle schema uses `@type: "Person"` with `name: "Bearby Security Team"`. Teams are not persons — this is semantically invalid and confuses AI entity resolution. It also means no individual's credentials are attached to technical claims, suppressing E-E-A-T signals.
+
+**Fix:** Replace with either:
+- `@type: "Organization"` (immediate fix, minimal code change), or
+- A real named individual with `name`, `url` (to an author bio page), and `sameAs` links to their LinkedIn/GitHub
+
+```json
+"author": {
+  "@type": "Organization",
+  "name": "Bearby",
+  "url": "https://bearby.io",
+  "sameAs": "https://github.com/bearbywallet"
+}
+```
+
+Preferred long-term solution: create a named author (e.g., the CTO or lead engineer) with a bio page and Person schema.
+
+**Effort:** Low (15 minutes for Organization fix; 2 hours for named Person with bio page)
+**Impact:** High — affects E-E-A-T scoring on the most citable page on the site
+
+---
+
+### H4 — Missing hreflang Tags for Russian Page
+
+`/ru/` is included in the sitemap but has no `<link rel="alternate" hreflang>` declarations on any page. Search engines must guess the language relationship, risking wrong-language indexing.
+
+**Fix:** Add to both the English homepage and the `/ru/` page:
+
+```html
+<link rel="alternate" hreflang="en" href="https://bearby.io/" />
+<link rel="alternate" hreflang="ru" href="https://bearby.io/ru/" />
+<link rel="alternate" hreflang="x-default" href="https://bearby.io/" />
+```
+
+Note: If these tags are currently injected by Vue at runtime rather than present in server-rendered HTML, this is a rendering issue (see C1). Verify via `view-source:https://bearby.io`.
+
+**Effort:** Low
+**Impact:** High — prevents wrong-language indexing for Russian users
+
+---
+
+### H5 — Organization sameAs Populated With Wrong Links
+
+The Organization schema `sameAs` array contains 5 entries: GitHub ✓, Twitter/X ✓, and 3 app store URLs (Chrome Web Store, Google Play, App Store). App store listings describe where to download the product — they are not alternate representations of the Bearby organization entity. These three entries should be moved to `downloadUrl` on the SoftwareApplication schema (where they already exist) and replaced with actual authority platform links.
+
+**Fix — replace sameAs on Organization:**
+
+```json
+"sameAs": [
+  "https://github.com/bearbywallet",
+  "https://x.com/BearbyPro",
+  "[LinkedIn company page URL]",
+  "[Telegram channel URL]",
+  "[Reddit community URL — if created]",
+  "[YouTube channel URL — if created]",
+  "[Wikipedia article URL — when created]",
+  "[Wikidata entity URL — when created]"
+]
+```
+
+**Effort:** Low
+**Impact:** High — sameAs is the primary mechanism AI entity graphs use to resolve brand identity
+
+---
+
+## Medium Priority Issues
+
+### M1 — Meta Tags May Be JavaScript-Rendered
+
+The noscript signal and Vue SPA architecture suggest that canonical tags, Open Graph tags, and Twitter Card meta tags may be injected by Vue at runtime rather than present in the server-rendered HTML. If so, AI crawlers and social media scrapers will not see them. Verify via `view-source:https://bearby.io`.
+
+**Fix:** Ensure all of the following are in the static server-rendered `<head>`:
+- `<link rel="canonical">`
+- `og:title`, `og:description`, `og:image`, `og:url`, `og:type`
+- `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`
+- `<html lang="en">` (and `lang="ru"` on the Russian page)
+
+**Effort:** Medium (depends on build tooling — Nuxt or Vite SSR can handle this automatically)
+**Impact:** Medium-High
+
+---
+
+### M2 — datePublished Appears To Be a Placeholder
+
+Both the SoftwareApplication and TechArticle schemas show `datePublished: "2023-01-01"`. This appears to be a round-number placeholder rather than the true first publication date. Fabricated or approximate dates are an E-E-A-T risk.
+
+**Fix:** Replace with the actual launch date of the app and the actual publication date of the security page. If the security page was published in November 2022, use `"2022-11-15"` (or the actual date).
+
+**Effort:** Low
+**Impact:** Medium
+
+---
+
+### M3 — aggregateRating ratingCount Is a Quoted String
+
+`"ratingCount": "1200"` — Schema.org requires Integer, not String. Also, the review sources (App Store, Google Play, Chrome Web Store) are not linked from the homepage, making the claimed 4.8/5 from 1,200 reviews unverifiable by AI systems.
+
+**Fix:**
+1. Change `"ratingCount": "1200"` → `"ratingCount": 1200` (remove quotes)
+2. Add `"reviewCount": 1200` alongside it
+3. Link the download count badges directly to the respective app store pages
+
+**Effort:** Low
+**Impact:** Medium
+
+---
+
+### M4 — Homepage H2 Headings Are Navigation Labels
+
+Current H2s on the homepage are navigation section labels ("About", "Features", "Security", "Integrations", "Download"). Google AI Overviews and Bing Copilot specifically extract content where the H2 is a question or descriptive statement followed by a direct answer paragraph.
+
+**Fix:** Rewrite section headings as question-based or descriptive statements:
+- "Features" → "What makes Bearby quantum-resistant?"
+- "Security" → "How does Bearby protect your private keys?"
+- "Integrations" → "Which blockchains does Bearby support?"
+
+Follow each heading with a 50-word direct answer paragraph, then expand into detail below.
+
+**Effort:** Low
+**Impact:** Medium (primarily affects Google AI Overviews eligibility)
+
+---
+
+### M5 — No OAI-SearchBot or ChatGPT-User in robots.txt
+
+robots.txt explicitly allows `GPTBot` (OpenAI's training crawler) but not `OAI-SearchBot` (ChatGPT's web search crawler) or `ChatGPT-User` (the browsing plugin agent). The `User-agent: * Allow: /` catch-all technically permits them, but explicit allowance is a quality signal.
+
+**Fix:** Add to robots.txt:
+
+```
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+```
+
+**Effort:** 10 minutes
+**Impact:** Medium (signals active opt-in to ChatGPT indexing)
+
+---
+
+### M6 — Meta Description Too Short
+
+Current meta description: 100 characters (ideal: 150-160). The description undersells the product and misses the opportunity to include supported blockchains, the open-source nature, and the specific quantum threat being addressed.
+
+**Current:** `"Quantum-resistant, non-custodial crypto wallet with on-device key storage and zero data collection."`
+
+**Improved example:** `"Bearby is a quantum-resistant, non-custodial wallet using NTRU Prime cryptography. Supports Bitcoin, Ethereum, and EVM chains. Open-source Rust core. Zero data collection."`
+
+**Effort:** 5 minutes
+**Impact:** Low-Medium
+
+---
+
+## Low Priority Issues
+
+### L1 — speakable Property Missing From Homepage
+
+The `speakable` property is correctly implemented on `/security` (targeting `h1` and `.security-page__subtitle`) but is absent from the homepage SoftwareApplication schema. This is a direct AI readability signal.
+
+**Fix:** Add to the existing SoftwareApplication JSON-LD block:
+```json
+"speakable": {
+  "@type": "SpeakableSpecification",
+  "cssSelector": ["h1", ".hero__description", ".features__list"]
+}
+```
+Update CSS selectors to match actual class names.
+
+---
+
+### L2 — inLanguage Missing From Russian Page Schemas
+
+All schemas on `/ru/` are identical English-language copies of the homepage schemas. The `inLanguage` property is absent, and descriptions are in English on a Russian URL.
+
+**Fix:** Add `"inLanguage": "ru"` to all schema blocks on `/ru/` and localize the `description` values.
+
+---
+
+### L3 — Trailing Slash Inconsistency
+
+`/ru/` uses a trailing slash while `/security`, `/terms`, `/privacy-policy` do not. If canonical tags are not properly resolving this in server-rendered HTML, crawlers may index both variants.
+
+---
+
+### L4 — No Resource Hints for Performance
+
+No `<link rel="preconnect">`, `<link rel="dns-prefetch">`, or `<link rel="preload">` hints confirmed in server-rendered HTML. For a Vue SPA, preloading the main bundle and preconnecting to CDN origins meaningfully reduces LCP on mobile.
+
+---
+
+### L5 — SearchAction Target URL May Be Non-Functional
+
+The WebSite schema includes a `SearchAction` with target `https://bearby.io/?q={search_term_string}`. If bearby.io has no working site search endpoint at this URL, Google will ignore the SearchAction. Verify or remove.
 
 ---
 
 ## Category Deep Dives
 
-### AI Citability — 68/100
+### AI Citability (54/100)
 
-**Strongest citability passages:**
+**Best-performing content blocks:**
 
-| Passage | Page | Citability Score |
+| Block | Page | Score | Why It Works |
+|---|---|---|---|
+| Download stats (100K+, 40K+, 30K+, 4.8/5 from 1,200) | Homepage | 82/100 | Specific, labelled numbers — structurally perfect for AI extraction |
+| Argon2id vs GPU brute-force ("billions vs thousands") | /security | 79/100 | Self-contained quantified contrast — citation-ready |
+| NTRU Prime design rationale (1996 lineage, module lattice) | /security | 71/100 | Original proprietary reasoning not found in generic sources |
+| Harvest-now-decrypt-later threat + NIST 10-15yr timeline | /security | 70/100 | NIST citation gives credibility; quantified claim |
+
+**Worst-performing areas:**
+- Homepage hero copy — generic marketing language, no question-answering structure (~28/100)
+- Privacy claims ("zero data collection") — identical language found on dozens of wallets; AI will not preferentially cite Bearby (~57/100)
+- Blockchain support list — unstructured with no context about why those chains (~35/100)
+
+**Structural penalties applied:**
+- Only 5 pages total (-8 pts): Almost no content surface area
+- No blog or articles (-6 pts): AI models preferentially cite tutorial/explainer content
+- No named author on security content (-4 pts): "Bearby Security Team" bypasses E-E-A-T entirely
+- No llms.txt (-3 pts): No structured content prioritization signal
+- Security page only ~950 words (-2 pts): Thin for a topic warranting 3,000+ words
+- No comparison content (-2 pts): "Bearby vs X" queries will surface competitors
+
+---
+
+### Brand Authority (29/100)
+
+| Platform | Score | Status |
 |---|---|---|
-| NIST quantum timeline claim ("10-15 years") | /security | 82/100 |
-| Dual-encryption defense-in-depth rationale | /security | 79/100 |
-| Argon2id definition with PHC reference | /security | 76/100 |
-| NTRU Prime vs CRYSTALS-Kyber selection rationale | /security | 74/100 |
-| Download statistics (100k+ Play, 4.8/5 × 1,200) | / | 71/100 |
+| Wikipedia | 0/30 | Absent — most critical gap |
+| Reddit | 8/20 | Likely minimal organic mentions; no official presence |
+| YouTube | 4/15 | No official channel confirmed |
+| LinkedIn | 0/10 | Absent |
+| GitHub | 12/25 | Confirmed (bearbywallet); engagement depth unknown |
+| Industry/Press/Reviews | 5/25 | No crypto press coverage; review aggregate not linked to source |
 
-**Weakest citability areas:**
-- Hero copy (marketing labels, not answer-format) — 22/100
-- Privacy policy (outdated legal boilerplate) — 12/100
-- Terms of service (standard legal clauses) — 10/100
-- Supported chains list (no per-chain elaboration) — 28/100
+Without Wikipedia, Bearby does not exist as a recognized entity in the knowledge graphs that power ChatGPT, Gemini, and Perplexity. Brands that cannot be verified against Wikipedia are treated as unconfirmed entities.
 
-The /security page is carrying the entire citability load for the site. One additional technical article would double the citation surface area.
+**Path to improving Brand Authority (in order):**
+1. Secure 2–3 crypto press mentions (CoinDesk, Decrypt, The Block) — these become Wikipedia notability citations
+2. Create LinkedIn company page
+3. Create a Trustpilot or G2 profile and link to it from the homepage
+4. Submit Wikipedia article using press coverage as notability sources
+5. Name and link to the GitHub repo star/fork count — high-star repos are strong authenticity signals
 
 ---
 
-### Brand Authority — 22/100
+### Content E-E-A-T (48/100)
 
-| Platform | Status | Notes |
+| Dimension | Score | Key Findings |
 |---|---|---|
-| Wikipedia | Absent | No article exists. Critical gap. |
-| Wikidata | Absent | Only entry is a Japanese manga series. |
-| Reddit | Unknown | Could not confirm presence. GitHub signal suggests low community engagement. |
-| GitHub | Minimal | 29 org followers; top repos have 13, 3, and 1 stars respectively. |
-| YouTube | Unknown | No confirmed tutorials or reviews found. |
-| LinkedIn | Absent | 404 at `/company/bearby`. |
-| Product Hunt | Absent | No listing found. |
-| CoinGecko | Absent | No wallet listing found. |
-| Chrome Web Store | Present | 30,000+ installs claimed. |
-| App Stores | Present | 100,000+ Play downloads, 4.8/5 × 1,200+ ratings. |
-| CoinDesk / Decrypt / CoinTelegraph | Not found | No press coverage located. |
+| Experience | 9/25 | Download stats demonstrate adoption; no first-hand case studies, no engineering journey narratives, no original research |
+| Expertise | 14/25 | Correct use of sntrup761, Argon2id, GOST R 34.12-2015 signals genuine technical knowledge; no named individual expert |
+| Authoritativeness | 10/25 | Open-source GitHub and app store presence; no press coverage, no Wikipedia, no external backlinks |
+| Trustworthiness | 15/25 | HTTPS, privacy policy, legal entity registration (DUNS: 506873901), open-source code; no independent security audit |
 
-App store presence with 100k+ downloads is a genuine signal. The gap between user adoption and external web presence is the central brand authority problem.
+**Most critical E-E-A-T gap:** No published third-party security audit. For a financial YMYL product claiming quantum resistance, a published audit from Trail of Bits, Cure53, or NCC Group is the single most credible trust signal and is entirely absent.
+
+**AI content assessment:** The security page reads as "Likely Human-Edited AI" — technically accurate with specific standard citations (sntrup761, GOST R 34.12-2015, Argon2id hybrid rationale) but lacking authorial voice, first-hand narrative, or original data. This is functional but not citable by AI systems seeking authoritative expert sources.
 
 ---
 
-### Content E-E-A-T — 44/100 (YMYL-adjusted)
+### Technical GEO (61/100)
 
-| Dimension | Score | Key Gap |
+| Component | Score | Status |
 |---|---|---|
-| Experience | 12/25 | No testimonials, case studies, or user stories in body content |
-| Expertise | 16/25 | Strong /security content but zero named authors anywhere |
-| Authoritativeness | 8/25 | No security audits, no media coverage, no institutional backing |
-| Trustworthiness | 8/25 | 2020 privacy policy, no contact form, unverified AggregateRating |
+| Server-Side Rendering | 55/100 | CRITICAL — Vue SPA, content JS-rendered |
+| Meta Tags & Indexability | 65/100 | Some tags likely JS-injected |
+| Crawlability | 85/100 | Excellent robots.txt; all AI crawlers allowed |
+| Security Headers | 40/100 | HTTPS confirmed; HSTS/CSP/X-Frame unverifiable |
+| Core Web Vitals Risk | 60/100 | Vue SPA elevates LCP and INP risk |
+| Mobile Optimization | 75/100 | Good; degraded by SPA rendering on slow connections |
+| URL Structure | 90/100 | Clean, short, descriptive slugs |
 
-This is a YMYL product (cryptocurrency wallet) held to the highest E-E-A-T standards. The 2020 privacy policy alone would cause a quality evaluator to flag this site for manual review.
+**Standout positive:** robots.txt is exemplary. Explicit allow rules for GPTBot, ClaudeBot, PerplexityBot, Googlebot-Extended, and anthropic-ai demonstrate awareness of the AI crawler ecosystem. This is better than most crypto wallet sites.
 
----
-
-### Technical GEO — 74/100
-
-**What's working well:**
-- SvelteKit SSR confirmed — all content, metadata, and schema is in initial HTML response
-- HTTP/2, Vercel TLS, 2-year HSTS with preload
-- Complete Open Graph and Twitter Card tags
-- `robots: index, follow, max-snippet:-1, max-image-preview:large`
-- hreflang for en/ru/x-default correctly declared
-- llms.txt present and valid format
-
-**Key issues:**
-- `/ru` canonical incorrectly points to English root (indexing suppression)
-- CSP `unsafe-inline` on scripts weakens XSS protection
-- No `Sitemap:` directive in robots.txt
-- llms-full.txt absent
-- Trailing slash inconsistency between sitemap and hreflang
+**Standout negative:** Client-side-only rendering is a GEO disqualifier. AI crawlers read the JSON-LD metadata but not the body content. The open door leads to an empty room.
 
 ---
 
-### Schema & Structured Data — 62/100
+### Schema & Structured Data (63/100)
 
-**Schemas found:**
+**What's present:** SoftwareApplication, WebSite+SearchAction, Organization, FAQPage (×2), TechArticle, BreadcrumbList (×3), WebPage (×2) — all in JSON-LD, all server-rendered. speakable is implemented on /security.
 
-| Page | Schema Type | Status |
+**Critical schema issues:**
+
+| Issue | Severity | Fix |
 |---|---|---|
-| / | SoftwareApplication | Partial — offers.priceCurrency is "AED", availability invalid |
-| / | WebSite + SearchAction | Warn — verify search endpoint works |
-| / | Organization | Partial — missing foundingDate, contactPoint, LinkedIn/Wikipedia sameAs |
-| / | FAQPage | Valid — 5 high-quality Q&As; not generating rich results (Aug 2023 restriction) but strong for AI extraction |
-| /security | TechArticle | Partial — missing mainEntityOfPage, articleSection, wordCount; author should be Person not Organization |
-| /privacy-policy | — | No schema |
-| /terms | — | No schema |
+| TechArticle author is `Person` named "Bearby Security Team" | Critical | Change to `Organization` or a named real Person |
+| Organization sameAs has 3 app store links instead of authority platforms | High | Remove app stores from sameAs; add LinkedIn, Wikipedia, Wikidata |
+| `datePublished: "2023-01-01"` appears to be a placeholder | Medium | Replace with actual publication dates |
+| `ratingCount: "1200"` is a quoted string, should be integer | Low | Remove quotes |
+| SearchAction target URL may be non-functional | Low | Verify or remove |
+| /ru/ schemas lack `inLanguage: "ru"` and Russian descriptions | Low | Add inLanguage, localize |
 
-**GEO-critical missing schemas:**
-- `speakable` — not present on any page; direct AI assistant readability signal
-- `BreadcrumbList` — missing on all inner pages
-- `WebPage` with `dateModified` — missing on /privacy-policy and /terms
-- `Person` schema for any team member
-
-**Priority schema fixes:**
-
-```json
-// Fix 1: SoftwareApplication — correct offers block
-"offers": {
-  "@type": "Offer",
-  "price": "0",
-  "priceCurrency": "USD",
-  "availability": "https://schema.org/InStock"
-},
-"softwareVersion": "[current version number]",
-"screenshot": {
-  "@type": "ImageObject",
-  "url": "https://bearby.io/img/screenshot-wallet.webp",
-  "caption": "Bearby quantum-resistant wallet interface"
-}
-
-// Fix 2: Organization — add missing sameAs platforms
-"sameAs": [
-  "https://github.com/bearbywallet",
-  "https://x.com/BearbyPro",
-  "https://chromewebstore.google.com/detail/bearby/klnepcnofpcagllmbcplocjpkhnpjhhb",
-  "https://play.google.com/store/apps/details?id=com.zilpay.bearby",
-  "https://apps.apple.com/us/app/bearby-wallet/id1612716382",
-  "[https://www.linkedin.com/company/bearby — once created]",
-  "[https://en.wikipedia.org/wiki/Bearby — once created]"
-],
-"foundingDate": "[year]",
-"contactPoint": {
-  "@type": "ContactPoint",
-  "contactType": "customer support",
-  "email": "support@bearby.io"
-}
-
-// Fix 3: TechArticle on /security — add missing properties
-"mainEntityOfPage": "https://bearby.io/security",
-"articleSection": "Cryptography",
-"wordCount": 950,
-"author": {
-  "@type": "Person",
-  "name": "[Engineer Name]",
-  "worksFor": { "@type": "Organization", "name": "Bearby" }
-},
-"speakable": {
-  "@type": "SpeakableSpecification",
-  "cssSelector": ["h1", ".security-summary"]
-}
-
-// Fix 4: BreadcrumbList for /security
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bearby.io" },
-    { "@type": "ListItem", "position": 2, "name": "Security", "item": "https://bearby.io/security" }
-  ]
-}
-```
+**FAQPage note:** FAQPage rich results are restricted to government and health authority sites since August 2023. Bearby will not get FAQ rich results in Google SERP. The schema still provides semantic value for AI comprehension — retain it, but do not prioritize expanding it.
 
 ---
 
-### Platform Optimization — 49/100
+### Platform Optimization (52/100)
 
-| Platform | Score | Key Blocker |
-|---|---|---|
-| Google AI Overviews | 62/100 | Navigation-label H2s instead of question-format headings; no HowTo schema |
-| Perplexity AI | 53/100 | No community validation (Reddit, forums); no blog/freshness signals |
-| ChatGPT Web Search | 44/100 | No Wikipedia entity; no named author; llms.txt not structured for GPT extraction |
-| Google Gemini | 48/100 | Not in Knowledge Graph; no YouTube content; only 5 pages (no topical clustering) |
-| Bing Copilot | 38/100 | No LinkedIn; no IndexNow; msvalidate.01 missing from HTML |
+| Platform | Score | Key Strength | Key Weakness |
+|---|---|---|---|
+| Google AI Overviews | 61/100 | FAQPage schema on 2 pages, TechArticle with citations | Navigation-label H2s, no answer-target paragraphs |
+| Bing Copilot | 58/100 | GitHub (Microsoft ecosystem), strong /security structure | No LinkedIn, no IndexNow, no enterprise content |
+| Google Gemini | 50/100 | Technical depth on /security | No YouTube, no topical cluster, no Knowledge Graph entry |
+| Perplexity AI | 48/100 | FAQPage direct Q&A extraction, fresh dateModified | No Reddit presence, SPA may block full content parse |
+| ChatGPT Web Search | 44/100 | Body content extractable via JSON-LD fields | No Wikipedia, no OAI-SearchBot explicit entry, no entity graph |
+
+**Single action with broadest cross-platform impact:** Create a Wikipedia article for Bearby with citations to independent press coverage. Affects ChatGPT (+15 pts), Perplexity (+8 pts), Gemini (+12 pts), Bing Copilot (+5 pts).
 
 ---
 
-## Quick Wins (This Week)
+## Quick Wins (Implement This Week)
 
-These 5 actions require less than 1 hour each and produce immediate GEO improvements:
+1. **Deploy llms.txt** (30 min) — Place the template above at `https://bearby.io/llms.txt`. No technical dependencies, immediate AI discoverability signal.
 
-1. **Fix SoftwareApplication schema** — Change `priceCurrency` from `"AED"` to `"USD"` and `availability` from `"OnlineOnly"` to `"https://schema.org/InStock"`. File: wherever JSON-LD is generated in the SvelteKit routes.
+2. **Fix TechArticle author schema** (15 min) — Change `@type: "Person"` with `name: "Bearby Security Team"` to `@type: "Organization"`. One JSON-LD property change eliminates a semantic validity error affecting E-E-A-T.
 
-2. **Add msvalidate.01 meta tag** — Add `<meta name="msvalidate.01" content="6CAD5331F323DF4BBA962F2CB902687F">` to `src/routes/+layout.svelte`. Activates Bing Copilot crawl-priority signals.
+3. **Fix Organization sameAs** (20 min) — Remove the 3 app store URLs from `sameAs`; add LinkedIn company page URL and Telegram channel URL once created. This is the primary mechanism AI entity graphs use to resolve brand identity.
 
-3. **Fix /ru canonical** — Change the canonical on the `/ru` route from `https://bearby.io` to `https://bearby.io/ru`. Unlocks Russian-language indexing.
+4. **Add hreflang tags** (30 min) — Add English/Russian/x-default hreflang tags to both `/` and `/ru/`. Prevents wrong-language indexing and signals structural awareness to search engines.
 
-4. **Add Sitemap directive to robots.txt** — Add `Sitemap: https://bearby.io/sitemap.xml` as the last line of robots.txt.
+5. **Add OAI-SearchBot and ChatGPT-User to robots.txt** (10 min) — Explicit opt-in to ChatGPT's search crawler and browsing agent, separate from the training crawler (GPTBot) already listed.
 
-5. **Add link descriptions to llms.txt** — Update all 6 links in `llms.txt` to include `: Description` text. Add `/security` if it is not listed.
+6. **Fix ratingCount to integer and link review sources** (20 min) — Change `"ratingCount": "1200"` to `"ratingCount": 1200`, add `"reviewCount": 1200`, and make the download count badges link directly to the respective app store review pages.
+
+7. **Expand meta description to 150-160 chars** (5 min) — Include supported blockchains and open-source nature in the description.
 
 ---
 
 ## 30-Day Action Plan
 
-### Week 1: Fix Foundations
-- [ ] Fix SoftwareApplication schema (priceCurrency AED→USD, availability)
-- [ ] Add msvalidate.01 meta tag to layout
-- [ ] Fix /ru canonical tag
-- [ ] Add Sitemap directive to robots.txt
-- [ ] Add explicit AI crawler Allow rules to robots.txt (GPTBot, ClaudeBot, PerplexityBot)
-- [ ] Update llms.txt with link descriptions and add /security, /terms pages
-- [ ] Create LinkedIn company page for Bearby
-- [ ] Begin privacy policy update (draft due end of week)
+### Week 1: Schema & Technical Quick Fixes
+- [ ] Deploy `llms.txt` at domain root
+- [ ] Fix TechArticle `author` (Person → Organization or named individual)
+- [ ] Rebuild Organization `sameAs` (remove app stores, prepare slots for authority platforms)
+- [ ] Add hreflang tags to homepage and `/ru/`
+- [ ] Add `OAI-SearchBot` and `ChatGPT-User` to robots.txt
+- [ ] Fix `ratingCount` string → integer; add `reviewCount`; link download badges to app stores
+- [ ] Fix `datePublished` placeholders on SoftwareApplication and TechArticle
+- [ ] Expand meta description to 150-160 characters
+- [ ] Add `speakable` to homepage SoftwareApplication schema
+- [ ] Add `inLanguage: "ru"` and Russian-language descriptions to `/ru/` schemas
+- [ ] Verify via `view-source:` that canonical, OG, and Twitter tags are in server-rendered HTML (not JS-injected)
 
-### Week 2: Content & Authority
-- [ ] Publish updated privacy policy with 2026 effective date
-- [ ] Publish first technical article (recommended: "How NTRU Prime Protects Against Quantum Attacks")
-- [ ] Create `/llms-full.txt` (1,500–3,000 words of structured product content)
-- [ ] Add named author with bio and credentials to /security page
-- [ ] Update TechArticle schema: mainEntityOfPage, articleSection, Person author, speakable
-- [ ] Add FAQPage schema to /security page
+### Week 2: Content Creation — Foundation
+- [ ] Create named author page (e.g., `/team/[name]`) for the security page lead
+- [ ] Add named Person schema to `/security` page TechArticle
+- [ ] Publish post-quantum cryptography explainer page (non-technical audience, 1,500+ words)
+- [ ] Publish "Bearby vs traditional wallets" comparison page (1,500+ words)
+- [ ] Create a changelog/release notes page; document recent versions back to v3.0
+- [ ] Rewrite homepage H2 headings from navigation labels to question-based format
 
-### Week 3: Entity & Platform Coverage
-- [ ] Draft and submit Wikipedia article for Bearby wallet
-- [ ] Create Wikidata Q-item for Bearby
-- [ ] Add Wikipedia + Wikidata + LinkedIn URLs to Organization schema sameAs
-- [ ] Submit to CoinGecko wallet directory
-- [ ] Submit to Product Hunt
-- [ ] Implement IndexNow (generate key, add file, add deployment ping)
+### Week 3: Brand Authority — External Presence
+- [ ] Create LinkedIn company page for Bearby; add to Organization sameAs
+- [ ] Create Trustpilot or G2 profile; link from homepage rating section
+- [ ] Draft press release / product story for crypto media outreach (CoinDesk, Decrypt, The Block)
+- [ ] Commission third-party security audit (Trail of Bits, Cure53, NCC Group, or equivalent)
+- [ ] Engage r/CryptoCurrency and r/netsec with substantive technical posts (not promotional)
+- [ ] Create or verify YouTube channel; record one technical explainer video
 
-### Week 4: Schema & Technical Polish
-- [ ] Add BreadcrumbList to /security, /privacy-policy, /terms
-- [ ] Add WebPage schema with dateModified to /privacy-policy and /terms
-- [ ] Add missing Organization fields: foundingDate, contactPoint
-- [ ] Add screenshot and softwareVersion to SoftwareApplication schema
-- [ ] Add Organization sameAs completeness check
-- [ ] Fix trailing slash inconsistency (sitemap /ru vs hreflang /ru/)
-- [ ] Verify or remove WebSite SearchAction endpoint
-- [ ] Convert 2–3 homepage section headings to question format with direct-answer paragraphs
+### Week 4: Technical Architecture — SSR Migration Planning
+- [ ] Audit which meta tags and content are currently JS-rendered vs. server-rendered
+- [ ] Evaluate Nuxt.js migration path (or Vite SSG) for full server-side rendering
+- [ ] Implement IndexNow and submit to Bing Webmaster Tools
+- [ ] Audit HTTP security headers via curl; add HSTS, X-Frame-Options, X-Content-Type-Options if missing
+- [ ] Begin Nuxt.js migration or implement SSR for critical content paths
 
 ---
 
 ## Appendix: Pages Analyzed
 
-| URL | Title | Status | Key GEO Issues |
+| URL | Title | Schema Types | GEO Issues |
 |---|---|---|---|
-| https://bearby.io | Bearby — Quantum-Resistant Crypto Wallet | 200 | Schema errors (AED, OnlineOnly); no query-format H2s |
-| https://bearby.io/security | Security Architecture — Bearby Wallet | 200 | No named author; TechArticle incomplete; no FAQPage |
-| https://bearby.io/privacy-policy | Privacy Policy - Bearby | 200 | Last updated 2020; no schema; no meta description |
-| https://bearby.io/terms | Terms of Service — Bearby Wallet | 200 | No schema; no meta description |
-| https://bearby.io/ru | (Russian version) | 200 | Canonical points to English root — suppresses indexing |
+| https://bearby.io | Bearby — Quantum-Resistant Crypto Wallet | SoftwareApplication, WebSite, Organization, FAQPage | JS rendering (C1), sameAs misconfig (H5), nav-label H2s (M4), ratingCount string (M3), datePublished placeholder (M2) |
+| https://bearby.io/security | Security Architecture — Bearby Wallet | TechArticle, FAQPage, BreadcrumbList | Invalid Person author (H3), datePublished placeholder (M2), ~950 words (thin) |
+| https://bearby.io/privacy-policy | Privacy Policy — Bearby Wallet | WebPage, BreadcrumbList | No issues beyond general site-level gaps |
+| https://bearby.io/terms | Terms of Service — Bearby Wallet | WebPage, BreadcrumbList | No issues beyond general site-level gaps |
+| https://bearby.io/ru/ | Bearby — Quantum-Resistant Crypto Wallet | SoftwareApplication, Organization, FAQPage, WebSite | Missing hreflang (H4), missing inLanguage on schemas (L2), English descriptions on Russian page |
 
-**Pages not found / not crawled:**
-- `/llms-full.txt` — 404, needs to be created
-- `/changelog` — does not exist
-- `/blog` — does not exist
-- `/about` — does not exist as a standalone page (only homepage anchor)
-- `/sitemap_index.xml` — not present (single sitemap only, appropriate for 5 pages)
+### Fetch Status
+
+| URL | Status | Notes |
+|---|---|---|
+| https://bearby.io | 200 OK | Full content accessible |
+| https://bearby.io/robots.txt | 200 OK | Well-configured; all AI crawlers allowed |
+| https://bearby.io/sitemap.xml | 200 OK | 5 URLs; all lastmod 2026-04-13 |
+| https://bearby.io/security | 200 OK | Full content accessible |
+| https://bearby.io/privacy-policy | 200 OK | Full content accessible |
+| https://bearby.io/terms | 200 OK | Full content accessible |
+| https://bearby.io/ru/ | 200 OK | Full content accessible |
+| https://bearby.io/llms.txt | 404 Not Found | Missing — create this file |

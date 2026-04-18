@@ -46,7 +46,7 @@
 			name: 'Bearby',
 			url: SITE_URL
 		},
-		datePublished: '2023-01-01',
+		datePublished: '2022-12-01',
 		dateModified: new Date().toISOString().split('T')[0],
 		softwareVersion: '3.8.29',
 		screenshot: {
@@ -63,7 +63,8 @@
 		aggregateRating: {
 			'@type': 'AggregateRating',
 			ratingValue: '4.8',
-			ratingCount: '1200',
+			ratingCount: 1200,
+			reviewCount: 1200,
 			bestRating: '5',
 			worstRating: '1'
 		}
