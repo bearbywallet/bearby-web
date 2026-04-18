@@ -9,7 +9,6 @@
 	import ExtraFeatures from '$lib/components/sections/About.svelte';
 	import Integrations from '$lib/components/sections/Integrations.svelte';
 	import Downloads from '$lib/components/sections/Downloads.svelte';
-	import Footer from '$lib/components/layout/Footer.svelte';
 	import { reveal } from '$lib/actions/reveal';
 
 	import { SITE_URL } from '$lib/constants';
@@ -203,7 +202,6 @@
 	<div use:reveal><Security /></div>
 	<div use:reveal><ExtraFeatures /></div>
 	<div use:reveal><Integrations /></div>
-	<div use:reveal={{ y: 24 }}><Footer /></div>
 </main>
 
 <style>

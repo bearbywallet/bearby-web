@@ -2,6 +2,7 @@
 	import { page } from '$app/state';
 	import Nav from '$lib/components/layout/Nav.svelte';
 	import LocaleSwitcher from '$lib/components/layout/LocaleSwitcher.svelte';
+	import Footer from '$lib/components/layout/Footer.svelte';
 	import { initTheme, type Theme } from '$lib/stores/theme.svelte';
 	import '../app.css';
 
@@ -37,3 +38,5 @@
 <main id="main-content">
 	{@render children()}
 </main>
+
+<Footer />
