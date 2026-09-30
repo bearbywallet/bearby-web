@@ -23,6 +23,11 @@
 	"card_success_title": "You're on the list!",
 	"card_success_text": "Thanks! We'll email you as soon as the Bearby Card is available.",
 	"card_privacy_note": "No spam. Unsubscribe anytime.",
+	"card_mining": "Verifying you are human… {percent}%",
+	"card_submitting": "Joining…",
+	"card_retry_btn": "Try again",
+	"card_error_title": "Something went wrong",
+	"card_error_text": "We couldn't add you to the waitlist. Please try again.",
 
 	"wallet_title": "Why Can't Bearby Be Seized, Frozen, or Shut Down?",
 	"wallet_desc": "Bearby is non-custodial: your private keys are generated and stored exclusively on your device. No company, server, or authority can freeze your funds. The wallet connects to dozens of independent blockchain nodes simultaneously — eliminating the single points of failure that centralized wallets rely on.",

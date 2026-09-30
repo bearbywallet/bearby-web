@@ -1,14 +1,27 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages';
 	import Button from '$lib/components/ui/Button.svelte';
+	import { join_waitlist } from '$lib/waitlist';
 
 	let email = $state('');
-	let submitted = $state(false);
+	let status = $state<'idle' | 'mining' | 'sending' | 'done' | 'error'>('idle');
+	let progress = $state(0);
 
-	function handle_submit(e: SubmitEvent) {
+	async function handle_submit(e: SubmitEvent) {
 		e.preventDefault();
-		// TODO: POST `email` to the real waitlist endpoint (Formspree, Loops, ...) here.
-		submitted = true;
+
+		if (status === 'mining' || status === 'sending') return;
+
+		status = 'mining';
+		progress = 0;
+
+		const result = await join_waitlist(email, (percent) => (progress = percent));
+
+		if (result.ok) {
+			status = 'done';
+		} else {
+			status = 'error';
+		}
 	}
 </script>
 
@@ -20,7 +33,7 @@
 				<h2>{m.card_title()}</h2>
 				<p class="description">{m.card_description()}</p>
 
-				{#if submitted}
+				{#if status === 'done'}
 					<div class="success" role="status">
 						<strong>{m.card_success_title()}</strong>
 						<span>{m.card_success_text()}</span>
@@ -51,9 +64,26 @@
 									required
 								/>
 							</div>
-							<Button type="submit">{m.card_submit_btn()}</Button>
+							<Button type="submit">
+								{#if status === 'mining'}
+									{m.card_mining({ percent: progress })}
+								{:else if status === 'sending'}
+									{m.card_submitting()}
+								{:else if status === 'error'}
+									{m.card_retry_btn()}
+								{:else}
+									{m.card_submit_btn()}
+								{/if}
+							</Button>
 						</div>
 						<small>{m.card_privacy_note()}</small>
+
+						{#if status === 'error'}
+							<div class="error" role="alert">
+								<strong>{m.card_error_title()}</strong>
+								<span>{m.card_error_text()}</span>
+							</div>
+						{/if}
 					</form>
 				{/if}
 			</div>
@@ -203,6 +233,25 @@
 	}
 
 	.success span {
+		color: var(--text-secondary);
+	}
+
+	.error {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		margin-top: 16px;
+		padding: 16px 20px;
+		background: rgba(224, 92, 92, 0.1);
+		border: 1px solid #e05c5c;
+		border-radius: var(--border-radius-md);
+	}
+
+	.error strong {
+		color: var(--text-primary);
+	}
+
+	.error span {
 		color: var(--text-secondary);
 	}
 
