@@ -1,11 +1,15 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages';
 	import Button from '$lib/components/ui/Button.svelte';
-	import { join_waitlist } from '$lib/waitlist';
+	import { join_waitlist, confirm_waitlist } from '$lib/waitlist';
 
 	let email = $state('');
-	let status = $state<'idle' | 'mining' | 'sending' | 'done' | 'error'>('idle');
+	let code = $state('');
+	let status = $state<
+		'idle' | 'mining' | 'sending' | 'awaiting' | 'confirming' | 'done' | 'error'
+	>('idle');
 	let progress = $state(0);
+	let code_error = $state('');
 
 	async function handle_submit(e: SubmitEvent) {
 		e.preventDefault();
@@ -18,7 +22,32 @@
 		const result = await join_waitlist(email, (percent) => (progress = percent));
 
 		if (result.ok) {
+			status = 'awaiting';
+			code = '';
+			code_error = '';
+		} else {
+			status = 'error';
+		}
+	}
+
+	async function handle_confirm(e: SubmitEvent) {
+		e.preventDefault();
+
+		if (status !== 'awaiting') return;
+
+		status = 'confirming';
+		code_error = '';
+
+		const result = await confirm_waitlist(email, code.trim());
+
+		if (result.ok) {
 			status = 'done';
+		} else if (result.error === 'wrong') {
+			code_error = 'wrong';
+			status = 'awaiting';
+		} else if (result.error === 'expired' || result.error === 'too_many') {
+			code_error = result.error;
+			status = 'awaiting';
 		} else {
 			status = 'error';
 		}
@@ -38,6 +67,42 @@
 						<strong>{m.card_success_title()}</strong>
 						<span>{m.card_success_text()}</span>
 					</div>
+				{:else if status === 'awaiting' || status === 'confirming'}
+					<form class="confirm-form" onsubmit={handle_confirm}>
+						<label for="card-code">{m.card_code_label()}</label>
+						<p class="code-hint">{m.card_code_hint({ email })}</p>
+						<input
+							id="card-code"
+							class="code-input"
+							type="text"
+							inputmode="numeric"
+							autocomplete="one-time-code"
+							maxlength="6"
+							pattern="[0-9]{6}"
+							bind:value={code}
+							placeholder={m.card_code_placeholder()}
+							required
+						/>
+						<Button type="submit">
+							{status === 'confirming' ? m.card_confirming() : m.card_confirm_btn()}
+						</Button>
+
+						{#if code_error}
+							<div class="error" role="alert">
+								<span>
+									{code_error === 'wrong'
+										? m.card_code_wrong()
+										: code_error === 'expired'
+											? m.card_code_expired()
+											: m.card_code_too_many()}
+								</span>
+							</div>
+						{/if}
+
+						<button type="button" class="link" onclick={() => (status = 'idle')}>
+							{m.card_change_email()}
+						</button>
+					</form>
 				{:else}
 					<form onsubmit={handle_submit}>
 						<label for="card-email">{m.card_email_label()}</label>
@@ -253,6 +318,44 @@
 
 	.error span {
 		color: var(--text-secondary);
+	}
+
+	.confirm-form {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		margin-top: 32px;
+	}
+
+	.code-hint {
+		margin: 0;
+		font-size: 0.9rem;
+		color: var(--text-secondary);
+	}
+
+	.code-input {
+		text-align: center;
+		font-size: 1.6rem;
+		letter-spacing: 0.5em;
+		font-variant-numeric: tabular-nums;
+		padding: 14px 16px;
+	}
+
+	.confirm-form :global(.btn) {
+		width: 100%;
+		margin-top: 4px;
+	}
+
+	.link {
+		margin-top: 8px;
+		background: none;
+		border: none;
+		padding: 0;
+		font: inherit;
+		font-size: 0.9rem;
+		color: var(--brand-purple);
+		text-decoration: underline;
+		cursor: pointer;
 	}
 
 	/* ---- visual stage ---- */

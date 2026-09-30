@@ -224,3 +224,23 @@ export async function join_waitlist(
 		return { ok: false, error: 'network' };
 	}
 }
+
+/** Verifies the 6-digit code that was emailed to the user. */
+export async function confirm_waitlist(email: string, code: string): Promise<{ ok: boolean; error?: string }> {
+	const normalized = email.trim().toLowerCase();
+
+	try {
+		const res = await fetch(
+			`${API_URL}/api/v1/waitlist/confirm?email=${encodeURIComponent(normalized)}&code=${encodeURIComponent(code)}`
+		);
+
+		if (res.ok) return { ok: true };
+
+		const data = (await res.json().catch(() => null)) as { code?: number } | null;
+		const error =
+			data?.code === -7 ? 'wrong' : data?.code === -8 ? 'expired' : data?.code === -9 ? 'too_many' : 'server';
+		return { ok: false, error };
+	} catch {
+		return { ok: false, error: 'network' };
+	}
+}
