@@ -11,7 +11,7 @@ const SECURITY_HEADERS: Record<string, string> = {
 	'X-XSS-Protection': '1; mode=block',
 	'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload',
 	'Content-Security-Policy':
-		"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' ${API_URL};"
+		`default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' ${API_URL};`
 };
 
 const handleSecurity: Handle = async ({ event, resolve }) => {
