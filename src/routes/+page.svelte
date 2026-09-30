@@ -9,6 +9,7 @@
 	import ExtraFeatures from '$lib/components/sections/About.svelte';
 	import Integrations from '$lib/components/sections/Integrations.svelte';
 	import Downloads from '$lib/components/sections/Downloads.svelte';
+	import CardWaitlist from '$lib/components/sections/CardWaitlist.svelte';
 	import { reveal } from '$lib/actions/reveal';
 
 	import { SITE_URL } from '$lib/constants';
@@ -193,6 +194,7 @@
 
 <main class="page-wrapper">
 	<Downloads />
+	<div use:reveal><CardWaitlist /></div>
 	<Hero />
 	<div use:reveal><WalletSection /></div>
 	<div use:reveal={{ delay: 50 }}><Features /></div>

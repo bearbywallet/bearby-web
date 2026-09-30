@@ -6,7 +6,8 @@
 		rel,
 		variant = 'primary',
 		class: className = '',
-		onclick
+		onclick,
+		type = 'button'
 	}: {
 		children: () => any;
 		href?: string;
@@ -15,6 +16,7 @@
 		variant?: string;
 		class?: string;
 		onclick?: () => void;
+		type?: 'button' | 'submit';
 	} = $props();
 </script>
 
@@ -23,7 +25,7 @@
 		{@render children()}
 	</a>
 {:else}
-	<button {onclick} class="btn btn-{variant} {className}">
+	<button type={type} {onclick} class="btn btn-{variant} {className}">
 		{@render children()}
 	</button>
 {/if}
@@ -54,6 +56,17 @@
 	.btn-outline:hover {
 		background: var(--bg-card-hover);
 		border-color: var(--border-hover);
+	}
+
+	.btn-primary {
+		background: var(--brand-purple);
+		color: #fff;
+		border: 1px solid transparent;
+		box-shadow: var(--shadow-glow);
+	}
+
+	.btn-primary:hover {
+		filter: brightness(1.12);
 	}
 
 	.btn-secondary {
