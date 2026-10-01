@@ -35,10 +35,14 @@
 
 		if (status !== 'awaiting') return;
 
+		const clean = code.trim();
+
+		if (!/^\d{6}$/.test(clean)) return;
+
 		status = 'confirming';
 		code_error = '';
 
-		const result = await confirm_waitlist(email, code.trim());
+		const result = await confirm_waitlist(email, clean);
 
 		if (result.ok) {
 			status = 'done';
@@ -78,10 +82,9 @@
 							inputmode="numeric"
 							autocomplete="one-time-code"
 							maxlength="6"
-							pattern="[0-9]{6}"
 							bind:value={code}
+							oninput={() => (code = code.replace(/\D/g, '').slice(0, 6))}
 							placeholder={m.card_code_placeholder()}
-							required
 						/>
 						<Button type="submit">
 							{status === 'confirming' ? m.card_confirming() : m.card_confirm_btn()}
