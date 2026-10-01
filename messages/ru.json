@@ -23,7 +23,7 @@
 	"card_success_title": "Вы в списке!",
 	"card_success_text": "Спасибо! Мы напишем вам, как только карта Bearby станет доступна.",
 	"card_privacy_note": "Без спама. Отписка в любое время.",
-	"card_mining": "Проверяем, что вы человек… {percent}%",
+	"card_verifying": "Проверяем, что вы человек…",
 	"card_submitting": "Присоединяемся…",
 	"card_retry_btn": "Попробовать снова",
 	"card_error_title": "Что-то пошло не так",

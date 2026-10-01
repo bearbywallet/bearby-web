@@ -23,7 +23,7 @@
 	"card_success_title": "You're on the list!",
 	"card_success_text": "Thanks! We'll email you as soon as the Bearby Card is available.",
 	"card_privacy_note": "No spam. Unsubscribe anytime.",
-	"card_mining": "Verifying you are human… {percent}%",
+	"card_verifying": "Verifying you are human…",
 	"card_submitting": "Joining…",
 	"card_retry_btn": "Try again",
 	"card_error_title": "Something went wrong",

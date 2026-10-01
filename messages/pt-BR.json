@@ -20,7 +20,7 @@
 	"card_success_title": "Você está na lista!",
 	"card_success_text": "Obrigado! Enviaremos um e-mail assim que o Cartão Bearby estiver disponível.",
 	"card_privacy_note": "Sem spam. Cancele quando quiser.",
-	"card_mining": "Verificando que você é humano… {percent}%",
+	"card_verifying": "Verificando que você é humano…",
 	"card_submitting": "Entrando…",
 	"card_retry_btn": "Tentar novamente",
 	"card_error_title": "Algo deu errado",

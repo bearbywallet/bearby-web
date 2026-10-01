@@ -2,6 +2,12 @@
 	import * as m from '$lib/paraglide/messages';
 	import Button from '$lib/components/ui/Button.svelte';
 	import { join_waitlist, confirm_waitlist } from '$lib/waitlist';
+	import { slide } from 'svelte/transition';
+
+	const reduce_motion =
+		typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+	const dur = (ms: number) => (reduce_motion ? 0 : ms);
+	let shaking = $state(false);
 
 	let email = $state('');
 	let code = $state('');
@@ -49,6 +55,7 @@
 		} else if (result.error === 'wrong') {
 			code_error = 'wrong';
 			status = 'awaiting';
+			shaking = true;
 		} else if (result.error === 'expired' || result.error === 'too_many') {
 			code_error = result.error;
 			status = 'awaiting';
@@ -67,23 +74,43 @@
 				<p class="description">{m.card_description()}</p>
 
 				{#if status === 'done'}
-					<div class="success" role="status">
+					<div class="success" role="status" transition:slide={{ duration: dur(280) }}>
+						<svg
+							class="success-icon"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2.2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							aria-hidden="true"
+						>
+							<circle cx="12" cy="12" r="10" />
+							<path d="m8 12.5 2.7 2.7L16 9.5" />
+						</svg>
 						<strong>{m.card_success_title()}</strong>
 						<span>{m.card_success_text()}</span>
 					</div>
 				{:else if status === 'awaiting' || status === 'confirming'}
-					<form class="confirm-form" onsubmit={handle_confirm}>
+					<form
+						class="confirm-form"
+						onsubmit={handle_confirm}
+						transition:slide={{ duration: dur(280) }}
+					>
 						<label for="card-code">{m.card_code_label()}</label>
 						<p class="code-hint">{m.card_code_hint({ email })}</p>
 						<input
 							id="card-code"
 							class="code-input"
+							class:invalid={code_error !== ''}
+							class:shaking
 							type="text"
 							inputmode="numeric"
 							autocomplete="one-time-code"
 							maxlength="6"
 							bind:value={code}
 							oninput={() => (code = code.replace(/\D/g, '').slice(0, 6))}
+							onanimationend={() => (shaking = false)}
 							placeholder={m.card_code_placeholder()}
 						/>
 						<Button type="submit">
@@ -91,7 +118,7 @@
 						</Button>
 
 						{#if code_error}
-							<div class="error" role="alert">
+							<div class="error" role="alert" transition:slide={{ duration: dur(200) }}>
 								<span>
 									{code_error === 'wrong'
 										? m.card_code_wrong()
@@ -107,7 +134,7 @@
 						</button>
 					</form>
 				{:else}
-					<form onsubmit={handle_submit}>
+					<form onsubmit={handle_submit} transition:slide={{ duration: dur(280) }}>
 						<label for="card-email">{m.card_email_label()}</label>
 						<div class="row">
 							<div class="input-wrap">
@@ -132,9 +159,12 @@
 									required
 								/>
 							</div>
-							<Button type="submit">
+							<Button type="submit" disabled={status === 'mining' || status === 'sending'}>
+								{#if status === 'mining' || status === 'sending'}
+									<span class="spinner" aria-hidden="true"></span>
+								{/if}
 								{#if status === 'mining'}
-									{m.card_mining({ percent: progress })}
+									{m.card_verifying()}
 								{:else if status === 'sending'}
 									{m.card_submitting()}
 								{:else if status === 'error'}
@@ -144,10 +174,25 @@
 								{/if}
 							</Button>
 						</div>
+						{#if status === 'mining'}
+							<div class="progress" transition:slide={{ duration: dur(200) }}>
+								<div
+									class="progress-track"
+									role="progressbar"
+									aria-label={m.card_verifying()}
+									aria-valuemin={0}
+									aria-valuemax={100}
+									aria-valuenow={progress}
+								>
+									<div class="progress-fill" style:width="{progress}%"></div>
+								</div>
+								<span class="progress-label">{progress}%</span>
+							</div>
+						{/if}
 						<small>{m.card_privacy_note()}</small>
 
 						{#if status === 'error'}
-							<div class="error" role="alert">
+							<div class="error" role="alert" transition:slide={{ duration: dur(200) }}>
 								<strong>{m.card_error_title()}</strong>
 								<span>{m.card_error_text()}</span>
 							</div>
@@ -285,6 +330,52 @@
 		color: var(--text-muted);
 	}
 
+	.progress {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		margin-top: 12px;
+	}
+
+	.progress-track {
+		flex: 1;
+		height: 4px;
+		border-radius: 999px;
+		background: rgba(172, 89, 255, 0.15);
+		overflow: hidden;
+	}
+
+	.progress-fill {
+		height: 100%;
+		border-radius: inherit;
+		background: var(--brand-purple);
+		transition: width 0.25s ease-out;
+	}
+
+	.progress-label {
+		min-width: 4ch;
+		text-align: right;
+		font-size: 0.8rem;
+		font-variant-numeric: tabular-nums;
+		color: var(--text-muted);
+	}
+
+	.spinner {
+		flex-shrink: 0;
+		width: 16px;
+		height: 16px;
+		border-radius: 50%;
+		border: 2px solid rgba(255, 255, 255, 0.35);
+		border-top-color: #fff;
+		animation: spin 0.7s linear infinite;
+	}
+
+	@keyframes spin {
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
 	.success {
 		display: flex;
 		flex-direction: column;
@@ -302,6 +393,12 @@
 
 	.success span {
 		color: var(--text-secondary);
+	}
+
+	.success-icon {
+		width: 28px;
+		height: 28px;
+		color: var(--brand-purple);
 	}
 
 	.error {
@@ -342,6 +439,33 @@
 		letter-spacing: 0.5em;
 		font-variant-numeric: tabular-nums;
 		padding: 14px 16px;
+	}
+
+	.code-input.invalid {
+		border-color: #e05c5c;
+	}
+
+	.code-input.shaking {
+		animation: shake 0.4s ease;
+	}
+
+	@keyframes shake {
+		0%,
+		100% {
+			transform: translateX(0);
+		}
+		20% {
+			transform: translateX(-6px);
+		}
+		40% {
+			transform: translateX(6px);
+		}
+		60% {
+			transform: translateX(-4px);
+		}
+		80% {
+			transform: translateX(4px);
+		}
 	}
 
 	.confirm-form :global(.btn) {
@@ -405,6 +529,10 @@
 
 	@media (prefers-reduced-motion: reduce) {
 		.card-img {
+			animation: none;
+		}
+
+		.code-input.shaking {
 			animation: none;
 		}
 	}
