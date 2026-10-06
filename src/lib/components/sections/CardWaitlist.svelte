@@ -16,6 +16,7 @@
 	>('idle');
 	let progress = $state(0);
 	let code_error = $state('');
+	let submit_error = $state<'server' | 'proton'>('server');
 
 	async function handle_submit(e: SubmitEvent) {
 		e.preventDefault();
@@ -32,6 +33,7 @@
 			code = '';
 			code_error = '';
 		} else {
+			submit_error = result.error === 'proton' ? 'proton' : 'server';
 			status = 'error';
 		}
 	}
@@ -193,8 +195,16 @@
 
 						{#if status === 'error'}
 							<div class="error" role="alert" transition:slide={{ duration: dur(200) }}>
-								<strong>{m.card_error_title()}</strong>
-								<span>{m.card_error_text()}</span>
+								<strong>
+									{submit_error === 'proton'
+										? m.card_error_proton_title()
+										: m.card_error_title()}
+								</strong>
+								<span>
+									{submit_error === 'proton'
+										? m.card_error_proton_text()
+										: m.card_error_text()}
+								</span>
 							</div>
 						{/if}
 					</form>

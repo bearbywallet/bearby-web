@@ -28,6 +28,8 @@
 	"card_retry_btn": "Try again",
 	"card_error_title": "Something went wrong",
 	"card_error_text": "We couldn't add you to the waitlist. Please try again.",
+	"card_error_proton_title": "Using Proton Mail?",
+	"card_error_proton_text": "We're currently experiencing delivery issues with Proton Mail. Please use another email address to join the waitlist for now.",
 	"card_code_label": "Confirmation code",
 	"card_code_hint": "We sent a 6-digit code to {email}. Enter it below to confirm your address.",
 	"card_code_placeholder": "000000",

@@ -219,7 +219,7 @@ export async function join_waitlist(
 		if (res.ok) return { ok: true };
 
 		const data = (await res.json().catch(() => null)) as { code?: number } | null;
-		return { ok: false, error: data?.code === -3 ? 'pow' : 'server' };
+		return { ok: false, error: data?.code === -4 ? 'proton' : data?.code === -3 ? 'pow' : 'server' };
 	} catch {
 		return { ok: false, error: 'network' };
 	}

@@ -25,6 +25,8 @@
 	"card_retry_btn": "Inténtalo de nuevo",
 	"card_error_title": "Algo salió mal",
 	"card_error_text": "No pudimos añadirte a la lista de espera. Inténtalo de nuevo.",
+	"card_error_proton_title": "¿Usas Proton Mail?",
+	"card_error_proton_text": "Actualmente estamos teniendo problemas de entrega con Proton Mail. Por ahora, usa otra dirección de correo para unirte a la lista de espera.",
 	"card_code_label": "Código de confirmación",
 	"card_code_hint": "Enviamos un código de 6 dígitos a {email}. Introdúcelo abajo para confirmar tu dirección.",
 	"card_code_placeholder": "000000",
