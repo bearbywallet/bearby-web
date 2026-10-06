@@ -126,16 +126,16 @@
 	}
 
 	.title {
-		font-size: clamp(2rem, 4vw, 3.25rem);
+		font-size: var(--text-h2);
 		font-weight: 600;
-		line-height: 1.2;
+		line-height: var(--line-height-title);
 		color: var(--text-primary);
 		font-family: var(--font-secondary);
 	}
 
 	.description {
-		font-size: 1.125rem;
-		line-height: 1.6;
+		font-size: var(--text-body);
+		line-height: var(--line-height-body);
 		color: var(--text-secondary);
 	}
 
@@ -160,7 +160,7 @@
 	}
 
 	.feature-title {
-		font-size: 1.125rem;
+		font-size: var(--text-h3);
 		font-weight: 600;
 		font-family: var(--font-secondary);
 		color: var(--text-primary);

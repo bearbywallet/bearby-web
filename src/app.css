@@ -43,7 +43,33 @@
 	--card-radius: 48px;
 	--section-max-width: 1140px;
 
+	/* Type scale: desktop / tablet (≤1199.98px) / mobile (≤809.98px) */
+	--text-h1: 56px;
+	--text-h2: 44px;
+	--text-h3: 22px;
+	--text-body: 18px;
+	--line-height-title: 1.1;
+	--line-height-body: 1.5;
+
 	--focus-ring: var(--brand-purple);
+}
+
+@media (max-width: 1199.98px) {
+	:root {
+		--text-h1: 48px;
+		--text-h2: 38px;
+		--text-h3: 20px;
+		--text-body: 17px;
+	}
+}
+
+@media (max-width: 809.98px) {
+	:root {
+		--text-h1: 36px;
+		--text-h2: 32px;
+		--text-h3: 18px;
+		--text-body: 16px;
+	}
 }
 
 [data-theme='light'] {
@@ -90,7 +116,7 @@ h5,
 h6 {
 	font-family: var(--font-primary);
 	font-weight: 500;
-	line-height: 1.2;
+	line-height: var(--line-height-title);
 }
 
 a {

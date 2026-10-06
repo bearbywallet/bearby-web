@@ -36,18 +36,18 @@
 
 <style>
 	.footer {
-		padding: 0 0 48px 0;
+		padding: 96px 0 48px 0;
 		overflow: hidden;
 	}
 
 	.footer-giant {
-		font-size: clamp(4rem, 15vw, 16rem);
+		font-size: 220px;
 		font-weight: 500;
 		line-height: 0.8;
 		color: var(--text-primary);
 		text-align: center;
 		letter-spacing: -0.04em;
-		margin-bottom: 64px;
+		margin-bottom: 96px;
 		font-family: var(--font-primary);
 	}
 
@@ -109,6 +109,18 @@
 
 	.footer-link:hover {
 		color: var(--text-primary);
+	}
+
+	@media (max-width: 1199.98px) {
+		.footer-giant {
+			font-size: 160px;
+		}
+	}
+
+	@media (max-width: 560px) {
+		.footer-giant {
+			font-size: clamp(64px, 29vw, 160px);
+		}
 	}
 
 	@media (max-width: 768px) {

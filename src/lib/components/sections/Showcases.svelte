@@ -100,17 +100,17 @@
 
 	h3 {
 		font-family: var(--font-secondary);
-		font-size: clamp(24px, 4vw, 52px);
+		font-size: var(--text-h3);
 		font-weight: 600;
-		line-height: 1.2em;
+		line-height: var(--line-height-title);
 		color: var(--text-primary);
 	}
 
 	p {
 		font-family: var(--font-secondary);
-		font-size: clamp(14px, 2.5vw, 18px);
+		font-size: var(--text-body);
 		font-weight: 400;
-		line-height: 1.4em;
+		line-height: var(--line-height-body);
 		color: var(--text-secondary);
 	}
 
@@ -131,15 +131,11 @@
 		.image-wrap {
 			max-width: 280px;
 			flex: 0 1 auto;
-			max-height: 400px;
 		}
 
-		h3 {
-			font-size: 24px;
-		}
-
-		p {
-			font-size: 14px;
+		.image-wrap img {
+			width: 100%;
+			height: auto;
 		}
 	}
 </style>

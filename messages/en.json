@@ -53,8 +53,8 @@
 
 	"feature_key_storage_title": "On-Device Key Storage",
 	"feature_key_storage_desc": "Bearby stores your keys directly on your device, ensuring full control and security without external dependencies.",
-	"feature_zero_data_title": "Zero Data Collection",
-	"feature_zero_data_desc": "Bearby collects no user data whatsoever, prioritizing your privacy and autonomy at every step.",
+	"feature_zero_data_title": "No wallet secrets collected",
+	"feature_zero_data_desc": "Bearby never collects or stores your private key or secret phrase. Limited information you provide may be processed to operate, secure, and support the service.",
 	"feature_encryption_title": "Unmatched Encryption Standards",
 	"feature_encryption_desc": "Leverage top-tier encryption with NTRU Prime, AES-256, Kuznechik, and Argon2 for unmatched security of your assets.",
 	"feature_signing_title": "Local Transaction Signing",
@@ -76,7 +76,7 @@
 	"chain_solana": "Solana",
 
 	"showcase_dapps_title": "In app dApps and browsers",
-	"showcase_dapps_desc": "Summarize long texts in seconds or generate professional content from scratch. Perfect for professionals!",
+	"showcase_dapps_desc": "Browse and interact with dApps and Web3 sites without leaving your wallet.",
 	"showcase_bitcoin_title": "Native Bitcoin Support",
 	"showcase_bitcoin_desc": "Native Bitcoin support to store and trade your bitcoin securely, with post-quantum encrypted key storage.",
 

@@ -120,21 +120,21 @@
 
 	.feature-title {
 		font-family: var(--font-secondary);
-		font-size: 18px;
+		font-size: var(--text-h3);
 		font-weight: 500;
 		font-style: normal;
 		color: var(--text-primary);
-		line-height: 1.4em;
+		line-height: var(--line-height-title);
 		letter-spacing: 0em;
 	}
 
 	.feature-desc {
 		font-family: var(--font-secondary);
-		font-size: 14px;
+		font-size: var(--text-body);
 		font-weight: 400;
 		font-style: normal;
 		color: var(--text-secondary);
-		line-height: 1.6em;
+		line-height: var(--line-height-body);
 		letter-spacing: 0em;
 	}
 

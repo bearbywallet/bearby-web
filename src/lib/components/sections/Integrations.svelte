@@ -87,16 +87,16 @@
 
 	.integrations-title {
 		font-family: var(--font-primary);
-		font-size: clamp(1.75rem, 3vw, 2.5rem);
+		font-size: var(--text-h2);
 		font-weight: 500;
 		color: var(--text-primary);
-		line-height: 1.15;
+		line-height: var(--line-height-title);
 	}
 
 	.integrations-body {
-		font-size: 0.9375rem;
+		font-size: var(--text-body);
 		color: var(--text-secondary);
-		line-height: 1.6;
+		line-height: var(--line-height-body);
 	}
 
 	.integrations-columns {
