@@ -166,6 +166,13 @@ img {
 	padding: 0 24px;
 }
 
+/* phones: cards run nearly edge-to-edge */
+@media (max-width: 809.98px) {
+	.container {
+		padding: 0 10px;
+	}
+}
+
 .text-gradient {
 	background: linear-gradient(to right, var(--brand-pink), var(--brand-purple), var(--brand-blue));
 	-webkit-background-clip: text;

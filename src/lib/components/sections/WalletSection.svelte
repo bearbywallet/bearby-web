@@ -88,7 +88,7 @@
 
 <style>
 	.wallet-section {
-		padding: 8px 8px 0;
+		padding: 8px 0 0;
 	}
 
 	.wallet-card {

@@ -107,7 +107,7 @@
 
 <style>
 	.security-section {
-		padding: 0 8px;
+		padding: 0;
 	}
 
 	.container {
@@ -356,10 +356,6 @@
 	}
 
 	@media (max-width: 809.98px) {
-		.security-section {
-			padding: 0 8px;
-		}
-
 		.hero-card {
 			flex-direction: column;
 			padding: 40px 28px;

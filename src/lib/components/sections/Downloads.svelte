@@ -85,7 +85,7 @@
 
 <style>
 	.downloads-section {
-		padding: 120px 8px 0;
+		padding: 120px 0 0;
 	}
 
 	.container {
