@@ -124,6 +124,7 @@
 		}
 
 		.card {
+			flex: 0 0 auto;
 			padding: 30px 20px;
 			border-radius: 24px;
 		}
