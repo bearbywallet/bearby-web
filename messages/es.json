@@ -92,6 +92,7 @@
 	"crypto_kuznechik_desc": "Estándar ruso de encriptación que añade una capa independiente de seguridad criptográfica.",
 	"crypto_argon2_label": "Derivación de Claves",
 	"crypto_argon2_desc": "Función resistente a memoria para hashing seguro de contraseñas, resistente a ataques GPU y ASIC.",
+	"dl_badge": "Monedero no custodiario",
 	"dl_title": "Descarga Bearby",
 	"dl_subtitle": "Descarga Bearby para crear un nuevo monedero o importar uno existente y empezar.",
 	"dl_google_play": "Google Playstore",

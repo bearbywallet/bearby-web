@@ -40,6 +40,7 @@
 <section id="downloads" class="downloads-section">
 	<div class="container">
 		<header class="dl-header">
+			<span class="dl-badge">{m.dl_badge()}</span>
 			<h2 class="dl-heading">{m.dl_title()}</h2>
 			<p class="dl-subtitle">{m.dl_subtitle()}</p>
 		</header>
@@ -101,9 +102,23 @@
 	.dl-header {
 		display: flex;
 		flex-direction: column;
-		gap: 12px;
+		align-items: center;
+		gap: 14px;
 		text-align: center;
 		margin-bottom: 30px;
+	}
+
+	.dl-badge {
+		font-family: var(--font-secondary);
+		font-size: 0.8125rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		background: linear-gradient(90deg, var(--brand-pink), var(--brand-purple));
+		-webkit-background-clip: text;
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+		color: transparent;
 	}
 
 	.dl-heading {
