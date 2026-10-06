@@ -92,6 +92,8 @@
 	"crypto_kuznechik_desc": "Padrão de cifragem federal russo adicionando uma camada independente de segurança criptográfica.",
 	"crypto_argon2_label": "Derivação de Chave",
 	"crypto_argon2_desc": "Função que consome memória para hash seguro de senhas resistente a ataques de GPU e ASIC.",
+	"dl_title": "Baixe o Bearby",
+	"dl_subtitle": "Baixe o Bearby para criar uma nova carteira ou importar uma carteira existente e começar.",
 	"dl_google_play": "Google Playstore",
 	"dl_app_store": "App Store",
 	"dl_chrome": "Google Chrome",

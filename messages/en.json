@@ -102,6 +102,8 @@
 	"crypto_argon2_label": "Key Derivation",
 	"crypto_argon2_desc": "Memory-hard function for secure password hashing resistant to GPU and ASIC attacks.",
 
+	"dl_title": "Download Bearby",
+	"dl_subtitle": "Download Bearby to create a new wallet or import an existing wallet to get started.",
 	"dl_google_play": "Google Playstore",
 	"dl_app_store": "App Store",
 	"dl_chrome": "Google Chrome",

@@ -39,6 +39,10 @@
 
 <section id="downloads" class="downloads-section">
 	<div class="container">
+		<header class="dl-header">
+			<h2 class="dl-heading">{m.dl_title()}</h2>
+			<p class="dl-subtitle">{m.dl_subtitle()}</p>
+		</header>
 		{#each [primaryDownloads.slice(0, 3), primaryDownloads.slice(3)].filter((row) => row.length > 0) as row, idx (idx)}
 			<div class="downloads-row">
 				{#each row as dl (dl.platform)}
@@ -92,6 +96,32 @@
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
+	}
+
+	.dl-header {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		text-align: center;
+		margin-bottom: 30px;
+	}
+
+	.dl-heading {
+		font-family: var(--font-primary);
+		font-size: var(--text-h2);
+		font-weight: 500;
+		color: var(--text-primary);
+		line-height: var(--line-height-title);
+	}
+
+	.dl-subtitle {
+		max-width: 560px;
+		margin: 0 auto;
+		font-family: var(--font-secondary);
+		font-size: var(--text-body);
+		font-weight: 400;
+		color: var(--text-secondary);
+		line-height: var(--line-height-body);
 	}
 
 	.downloads-row {

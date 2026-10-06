@@ -102,6 +102,8 @@
 	"crypto_argon2_label": "Деривация ключей",
 	"crypto_argon2_desc": "Функция с высокими требованиями к памяти для безопасного хеширования паролей, устойчивая к GPU и ASIC атакам.",
 
+	"dl_title": "Скачайте Bearby",
+	"dl_subtitle": "Скачайте Bearby, чтобы создать новый кошелёк или импортировать существующий и начать работу.",
 	"dl_google_play": "Google Playstore",
 	"dl_app_store": "App Store",
 	"dl_chrome": "Google Chrome",
