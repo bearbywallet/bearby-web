@@ -5,8 +5,8 @@
 
 	const tabs = [
 		{ label: m.about_tab_language(), image: '/img/phone-dapps.webp', w: 1024, h: 557 },
-		{ label: m.about_tab_bitcoin(), image: '/img/bitoin-support.webp', w: 2048, h: 1113 },
-		{ label: m.about_tab_dapps(), image: '/img/browser.webp', w: 2095, h: 1139 }
+		{ label: m.about_tab_bitcoin(), image: '/img/bitoin-support.webp', w: 1000, h: 543 },
+		{ label: m.about_tab_dapps(), image: '/img/browser.webp', w: 1000, h: 544 }
 	];
 </script>
 
@@ -138,6 +138,7 @@
 		position: relative;
 		overflow: hidden;
 		border-radius: calc(var(--card-radius) - 20px);
+		background: var(--bg-subtle);
 	}
 
 	.image-wrapper {

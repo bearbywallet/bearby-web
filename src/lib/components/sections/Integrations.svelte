@@ -79,6 +79,10 @@
 		align-items: center;
 	}
 
+	.integrations-inner > * {
+		min-width: 0;
+	}
+
 	.integrations-text {
 		display: flex;
 		flex-direction: column;
@@ -107,6 +111,7 @@
 
 	.ticker-col {
 		flex: 1;
+		min-width: 0;
 		overflow: hidden;
 		-webkit-mask-image: linear-gradient(transparent 0%, #000 15%, #000 85%, transparent 100%);
 		mask-image: linear-gradient(transparent 0%, #000 15%, #000 85%, transparent 100%);
@@ -175,6 +180,8 @@
 		font-weight: 500;
 		color: var(--text-primary);
 		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	@media (max-width: 900px) {
@@ -190,6 +197,33 @@
 
 		.integrations-columns {
 			height: 300px;
+		}
+	}
+
+	@media (max-width: 600px) {
+		:global(.integrations-card) {
+			padding: 24px !important;
+		}
+
+		/* a single full-width ticker keeps chain names readable on phones */
+		.ticker-col:nth-child(2) {
+			display: none;
+		}
+
+		.chain-card {
+			gap: 12px;
+			padding: 14px 16px;
+			height: 68px;
+			border-radius: 16px;
+		}
+
+		.chain-icon {
+			width: 36px;
+			height: 36px;
+		}
+
+		.chain-name {
+			font-size: 0.9375rem;
 		}
 	}
 </style>

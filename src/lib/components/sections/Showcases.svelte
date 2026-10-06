@@ -15,8 +15,8 @@
 						src="/img/phone-dapps-vertical.webp"
 						alt="In app dApps browser"
 						loading="lazy"
-						width="1667"
-						height="2268"
+						width="900"
+						height="1224"
 					/>
 				</div>
 			</div>
@@ -30,8 +30,8 @@
 						src="/img/phone-bitcoin.webp"
 						alt="Native Bitcoin Support"
 						loading="lazy"
-						width="1652"
-						height="2048"
+						width="900"
+						height="1116"
 					/>
 				</div>
 			</div>
@@ -89,6 +89,8 @@
 		overflow: hidden;
 		flex: 1 1 auto;
 		min-height: 0;
+		background: var(--bg-subtle);
+		border-radius: 24px;
 	}
 
 	.image-wrap img {
@@ -132,6 +134,7 @@
 		.image-wrap {
 			max-width: 280px;
 			flex: 0 1 auto;
+			border-radius: 16px;
 		}
 
 		.image-wrap img {

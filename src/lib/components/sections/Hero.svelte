@@ -4,7 +4,7 @@
 </script>
 
 <div class="hero">
-	<section id="about" class="hero-cta">
+	<section class="hero-cta">
 		<div class="cta-card">
 			<div class="icon-wrap">
 				<img
