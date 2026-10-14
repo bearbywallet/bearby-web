@@ -1,6 +1,7 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages';
 	import { page } from '$app/state';
+	import { onMount } from 'svelte';
 	import Hero from '$lib/components/sections/Hero.svelte';
 	import WalletSection from '$lib/components/sections/WalletSection.svelte';
 	import Features from '$lib/components/sections/Features.svelte';
@@ -13,6 +14,12 @@
 	import { reveal } from '$lib/actions/reveal';
 
 	import { SITE_URL } from '$lib/constants';
+	import { capture_utm_source } from '$lib/utm';
+
+	// Keep the first utm_source a visitor arrived with until signup.
+	onMount(() => {
+		capture_utm_source();
+	});
 
 	const canonicalUrl = $derived(
 		page.url.pathname.startsWith('/ru') ? `${SITE_URL}/ru` : SITE_URL

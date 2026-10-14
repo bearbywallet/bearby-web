@@ -1,7 +1,10 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages';
+	import { getLocale } from '$lib/paraglide/runtime';
 	import Button from '$lib/components/ui/Button.svelte';
-	import { join_waitlist, confirm_waitlist } from '$lib/waitlist';
+	import { join_waitlist, complete_waitlist } from '$lib/waitlist';
+	import { stored_utm_source } from '$lib/utm';
+	import { country_options } from '$lib/countries';
 	import { slide } from 'svelte/transition';
 
 	const reduce_motion =
@@ -9,10 +12,14 @@
 	const dur = (ms: number) => (reduce_motion ? 0 : ms);
 	let shaking = $state(false);
 
+	const options = country_options(getLocale());
+
 	let email = $state('');
 	let code = $state('');
+	let country = $state('');
+	let country_error = $state(false);
 	let status = $state<
-		'idle' | 'mining' | 'sending' | 'awaiting' | 'confirming' | 'done' | 'error'
+		'idle' | 'mining' | 'sending' | 'awaiting' | 'confirming' | 'already' | 'done' | 'error'
 	>('idle');
 	let progress = $state(0);
 	let code_error = $state('');
@@ -26,12 +33,18 @@
 		status = 'mining';
 		progress = 0;
 
-		const result = await join_waitlist(email, (percent) => (progress = percent));
+		const result = await join_waitlist(email, stored_utm_source(), (percent) => (progress = percent));
 
 		if (result.ok) {
+			// The IP-based country is only a default for the select — the user
+			// can change it before confirming.
+			country = result.suggested_country;
+			country_error = false;
 			status = 'awaiting';
 			code = '';
 			code_error = '';
+		} else if (result.error === 'already') {
+			status = 'already';
 		} else {
 			submit_error = result.error === 'proton' ? 'proton' : 'server';
 			status = 'error';
@@ -47,10 +60,16 @@
 
 		if (!/^\d{6}$/.test(clean)) return;
 
+		// Country of residence is required to qualify.
+		if (!country) {
+			country_error = true;
+			return;
+		}
+
 		status = 'confirming';
 		code_error = '';
 
-		const result = await confirm_waitlist(email, clean);
+		const result = await complete_waitlist(email, clean, country);
 
 		if (result.ok) {
 			status = 'done';
@@ -93,6 +112,11 @@
 						<strong>{m.card_success_title()}</strong>
 						<span>{m.card_success_text()}</span>
 					</div>
+				{:else if status === 'already'}
+					<div class="notice" role="status" transition:slide={{ duration: dur(280) }}>
+						<strong>{m.card_already_title()}</strong>
+						<span>{m.card_already_text()}</span>
+					</div>
 				{:else if status === 'awaiting' || status === 'confirming'}
 					<form
 						class="confirm-form"
@@ -115,9 +139,46 @@
 							onanimationend={() => (shaking = false)}
 							placeholder={m.card_code_placeholder()}
 						/>
+
+						<div class="country">
+							<label for="card-country">{m.card_country_label()}</label>
+							<p class="code-hint">{m.card_country_hint()}</p>
+							<div class="select-wrap">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									aria-hidden="true"
+								>
+									<path d="m6 9 6 6 6-6" />
+								</svg>
+								<select
+									id="card-country"
+									class:invalid={country_error}
+									bind:value={country}
+									onchange={() => (country_error = false)}
+								>
+									<option value="" disabled>{m.card_country_placeholder()}</option>
+									{#each options as option (option.code)}
+										<option value={option.code}>{option.name}</option>
+									{/each}
+								</select>
+							</div>
+						</div>
+
 						<Button type="submit">
-							{status === 'confirming' ? m.card_confirming() : m.card_confirm_btn()}
+							{status === 'confirming' ? m.card_confirming() : m.card_confirm_join_btn()}
 						</Button>
+
+						{#if country_error}
+							<p class="country-required" role="alert" transition:slide={{ duration: dur(200) }}>
+								{m.card_country_required()}
+							</p>
+						{/if}
 
 						{#if code_error}
 							<div class="error" role="alert" transition:slide={{ duration: dur(200) }}>
@@ -191,7 +252,12 @@
 								<span class="progress-label">{progress}%</span>
 							</div>
 						{/if}
-						<small>{m.card_privacy_note()}</small>
+						<small>
+							{m.card_privacy_note()} ·
+							<a class="privacy-link" href="/privacy-policy#card-waitlist">
+								{m.card_privacy_link()}
+							</a>
+						</small>
 
 						{#if status === 'error'}
 							<div class="error" role="alert" transition:slide={{ duration: dur(200) }}>
@@ -340,6 +406,17 @@
 		color: var(--text-muted);
 	}
 
+	.privacy-link {
+		color: var(--text-muted);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+		transition: color 0.2s ease;
+	}
+
+	.privacy-link:hover {
+		color: var(--brand-purple);
+	}
+
 	.progress {
 		display: flex;
 		align-items: center;
@@ -428,6 +505,86 @@
 
 	.error span {
 		color: var(--text-secondary);
+	}
+
+	/* Informational (non-error) amber notice: already on the waitlist. */
+	.notice {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		margin-top: 32px;
+		padding: 20px;
+		background: rgba(240, 180, 41, 0.08);
+		border: 1px solid rgba(240, 180, 41, 0.6);
+		border-radius: var(--border-radius-md);
+	}
+
+	.notice strong {
+		color: var(--text-primary);
+	}
+
+	.notice span {
+		color: var(--text-secondary);
+	}
+
+	.country {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		margin-top: 12px;
+	}
+
+	.country label {
+		margin-bottom: 0;
+	}
+
+	.select-wrap {
+		position: relative;
+	}
+
+	.select-wrap svg {
+		position: absolute;
+		right: 14px;
+		top: 50%;
+		width: 18px;
+		height: 18px;
+		transform: translateY(-50%);
+		color: var(--text-muted);
+		pointer-events: none;
+	}
+
+	select {
+		appearance: none;
+		width: 100%;
+		padding: 14px 44px 14px 16px;
+		background: var(--bg-subtle);
+		border: 1px solid var(--border-color);
+		border-radius: var(--border-radius-md);
+		color: var(--text-primary);
+		font-size: 1rem;
+		font-family: inherit;
+		cursor: pointer;
+		transition: border-color 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	select option[value=''] {
+		color: var(--text-muted);
+	}
+
+	select:focus {
+		outline: none;
+		border-color: var(--brand-purple);
+		box-shadow: 0 0 0 3px rgba(172, 89, 255, 0.2);
+	}
+
+	select.invalid {
+		border-color: #e05c5c;
+	}
+
+	.country-required {
+		margin: 0;
+		font-size: 0.85rem;
+		color: var(--text-muted);
 	}
 
 	.confirm-form {

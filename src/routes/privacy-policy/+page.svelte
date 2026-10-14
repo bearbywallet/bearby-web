@@ -11,9 +11,9 @@
 		name: 'Privacy Policy — Bearby Wallet',
 		url,
 		description:
-			'Bearby collects zero user data. No accounts, no analytics, no server-side key storage. Last updated April 2026.',
-		dateModified: '2026-04-13',
-		lastReviewed: '2026-04-13',
+			'Bearby collects zero user data. No accounts, no analytics, no server-side key storage. Last updated October 2026.',
+		dateModified: '2026-10-07',
+		lastReviewed: '2026-10-07',
 		inLanguage: 'en'
 	};
 
@@ -63,6 +63,7 @@
 		{ id: 'choices-title', title: m.privacy_sub_title36(), content: m.privacy_p37() },
 		{ id: 'rights', content: m.privacy_p38() },
 		{ id: 'exercise', content: m.privacy_p39() },
+		{ id: 'card-waitlist', title: m.privacy_sub_title41(), content: m.privacy_p42() },
 		{ id: 'contact', content: m.privacy_p40() }
 	];
 
@@ -71,7 +72,7 @@
 
 <svelte:head>
 	<title>{m.privacy_page_title()}</title>
-	<meta name="description" content="Bearby collects zero user data. Learn how Bearby's non-custodial wallet protects your privacy: no accounts, no analytics, no server-side storage. Effective April 2026." />
+	<meta name="description" content="Bearby collects zero user data. Learn how Bearby's non-custodial wallet protects your privacy: no accounts, no analytics, no server-side storage. Effective October 2026." />
 	<link rel="canonical" href={url} />
 
 	<meta property="og:type" content="website" />

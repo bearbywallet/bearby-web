@@ -195,10 +195,22 @@ export async function mine_pow(
 	}
 }
 
+export type JoinError = 'already' | 'proton' | 'pow' | 'server' | 'network';
+
+export type JoinResult =
+	| { ok: true; suggested_country: string }
+	| { ok: false; error: JoinError };
+
+/**
+ * Joins the waitlist: mines the PoW, then POSTs the email together with the
+ * captured utm_source. A confirmed duplicate answers with code -10 — an
+ * informational "already on the waitlist" state, not an error.
+ */
 export async function join_waitlist(
 	email: string,
+	source = '',
 	onprogress?: (percent: number) => void
-): Promise<{ ok: boolean; error?: string }> {
+): Promise<JoinResult> {
 	const normalized = email.trim().toLowerCase();
 
 	let nonce: string;
@@ -213,26 +225,48 @@ export async function join_waitlist(
 		const res = await fetch(`${API_URL}/api/v1/waitlist`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ email: normalized, nonce })
+			body: JSON.stringify({ email: normalized, nonce, source })
 		});
 
-		if (res.ok) return { ok: true };
+		const data = (await res.json().catch(() => null)) as {
+			code?: number;
+			suggested_country?: string;
+		} | null;
 
-		const data = (await res.json().catch(() => null)) as { code?: number } | null;
-		return { ok: false, error: data?.code === -4 ? 'proton' : data?.code === -3 ? 'pow' : 'server' };
+		if (data?.code === -10) return { ok: false, error: 'already' };
+
+		if (res.ok && data?.code === 0) {
+			return { ok: true, suggested_country: data.suggested_country ?? '' };
+		}
+
+		return {
+			ok: false,
+			error: data?.code === -4 ? 'proton' : data?.code === -3 ? 'pow' : 'server'
+		};
 	} catch {
 		return { ok: false, error: 'network' };
 	}
 }
 
-/** Verifies the 6-digit code that was emailed to the user. */
-export async function confirm_waitlist(email: string, code: string): Promise<{ ok: boolean; error?: string }> {
+export type CompleteError = 'wrong' | 'expired' | 'too_many' | 'server' | 'network';
+
+/**
+ * Verifies the 6-digit code together with the required country of residence.
+ * Only a successful completion creates the qualified waitlist record.
+ */
+export async function complete_waitlist(
+	email: string,
+	code: string,
+	country: string
+): Promise<{ ok: boolean; error?: CompleteError }> {
 	const normalized = email.trim().toLowerCase();
 
 	try {
-		const res = await fetch(
-			`${API_URL}/api/v1/waitlist/confirm?email=${encodeURIComponent(normalized)}&code=${encodeURIComponent(code)}`
-		);
+		const res = await fetch(`${API_URL}/api/v1/waitlist/complete`, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ email: normalized, code, country })
+		});
 
 		if (res.ok) return { ok: true };
 
@@ -242,5 +276,20 @@ export async function confirm_waitlist(email: string, code: string): Promise<{ o
 		return { ok: false, error };
 	} catch {
 		return { ok: false, error: 'network' };
+	}
+}
+
+/** Unsubscribes via the purpose-specific token from the email link. */
+export async function unsubscribe_by_token(token: string): Promise<boolean> {
+	try {
+		const res = await fetch(`${API_URL}/api/v1/waitlist/unsubscribe`, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ token })
+		});
+
+		return res.ok;
+	} catch {
+		return false;
 	}
 }
