@@ -1,6 +1,13 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { decodeBool, decodeUint, decodeUintPair, decodeSlot0, SELECTORS } from '$lib/web3/abi';
+import {
+	decodeBool,
+	decodeInt,
+	decodeUint,
+	decodeUintPair,
+	decodeSlot0,
+	SELECTORS
+} from '$lib/web3/abi';
 import {
 	ABLP_DECIMALS,
 	POOL,
@@ -108,8 +115,8 @@ export const GET: RequestHandler = async () => {
 	const slot0 = slot0Hex ? decodeSlot0(slot0Hex) : null;
 	const totalSupply = supplyHex ? decodeUint(supplyHex) : null;
 	const amounts = totalsHex ? decodeUintPair(totalsHex) : null;
-	const tickLower = lowerHex ? decodeUint(lowerHex) : null;
-	const tickUpper = upperHex ? decodeUint(upperHex) : null;
+	const tickLower = lowerHex ? decodeInt(lowerHex) : null;
+	const tickUpper = upperHex ? decodeInt(upperHex) : null;
 	const lastRebalance = rebalanceHex ? decodeUint(rebalanceHex) : null;
 	const paused = pausedHex ? decodeBool(pausedHex) : null;
 

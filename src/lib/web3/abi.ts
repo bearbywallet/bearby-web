@@ -76,6 +76,13 @@ export function decodeUint(hex: string): bigint | null {
 	return asBigInt(words(hex)[0]);
 }
 
+/** First word as a two's-complement signed integer (`int24` ticks etc.). */
+export function decodeInt(hex: string): bigint | null {
+	const raw = decodeUint(hex);
+	if (raw === null) return null;
+	return raw >= 1n << 255n ? raw - (1n << 256n) : raw;
+}
+
 /** First word as a boolean; `null` when the result is empty. */
 export function decodeBool(hex: string): boolean | null {
 	const raw = decodeUint(hex);
