@@ -25,12 +25,11 @@ export const ABLP_DECIMALS = 18;
 /**
  * AutoBaseVault — the ABLP share token (source: `autobase/src/AutoBaseVault.sol`).
  *
- * Not deployed yet, so this stays `null` and the page shows its "coming soon"
- * state. Once the vault is live, paste the mainnet address here: this constant is
- * the single switch — the stats endpoint, the RPC allowlist and the deposit /
- * withdraw panels all read it, no environment variable or other edit needed.
+ * Deployed on mainnet at block 26221220. This constant is the single switch — the
+ * stats endpoint, the RPC allowlist and the deposit / withdraw panels all read it,
+ * no environment variable or other edit needed.
  */
-export const VAULT: string | null = null;
+export const VAULT: string | null = '0xb68852E2B545CDC8ec9B4ADEe72c029DB3635958';
 
 const ADDRESS_PATTERN = /^0x[0-9a-fA-F]{40}$/;
 
