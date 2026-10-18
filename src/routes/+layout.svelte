@@ -20,6 +20,10 @@
 			: page.url.pathname
 	);
 
+	// The farm page is unlisted and renders its own chrome (no Nav/Footer/switcher).
+	let localeFreePath = $derived(page.url.pathname.replace(/^\/(?:ru|es|pt-BR)(?=\/|$)/, ''));
+	let isFarm = $derived(localeFreePath === '/farm' || localeFreePath.startsWith('/farm/'));
+
 	let enUrl = $derived(basePath === '/' ? SITE_URL + '/' : SITE_URL + basePath);
 	let ruUrl = $derived(basePath === '/' ? SITE_URL + '/ru/' : SITE_URL + '/ru' + basePath);
 	let ptBrUrl = $derived(basePath === '/' ? SITE_URL + '/pt-BR/' : SITE_URL + '/pt-BR' + basePath);
@@ -29,18 +33,24 @@
 <svelte:head>
 	<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
-	<link rel="alternate" hreflang="x-default" href={enUrl} />
-	<link rel="alternate" hreflang="en" href={enUrl} />
-	<link rel="alternate" hreflang="ru" href={ruUrl} />
-	<link rel="alternate" hreflang="pt-BR" href={ptBrUrl} />
-	<link rel="alternate" hreflang="es" href={esUrl} />
+	{#if !isFarm}
+		<link rel="alternate" hreflang="x-default" href={enUrl} />
+		<link rel="alternate" hreflang="en" href={enUrl} />
+		<link rel="alternate" hreflang="ru" href={ruUrl} />
+		<link rel="alternate" hreflang="pt-BR" href={ptBrUrl} />
+		<link rel="alternate" hreflang="es" href={esUrl} />
+	{/if}
 </svelte:head>
 
-<Nav />
-<LocaleSwitcher />
+{#if !isFarm}
+	<Nav />
+	<LocaleSwitcher />
+{/if}
 
 <main id="main-content">
 	{@render children()}
 </main>
 
-<Footer />
+{#if !isFarm}
+	<Footer />
+{/if}

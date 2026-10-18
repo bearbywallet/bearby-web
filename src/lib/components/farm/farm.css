@@ -1,0 +1,45 @@
+/* Shared visual language for the farm page.
+   Imported once by the page; component styles stay scoped. */
+
+.farm-card {
+	background: var(--bg-card);
+	border: 1px solid var(--border-color);
+	border-radius: var(--card-radius);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	padding: 32px;
+}
+
+.farm-panel-title {
+	font-family: var(--font-primary);
+	font-size: var(--text-h3);
+	font-weight: 500;
+	color: var(--text-primary);
+	margin: 0;
+}
+
+.farm-label {
+	font-family: var(--font-secondary);
+	font-size: 13px;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: var(--text-muted);
+}
+
+.farm-num {
+	font-family: var(--font-primary);
+	font-variant-numeric: tabular-nums;
+	font-feature-settings: 'tnum' 1;
+}
+
+/* Full-width action button inside Button.svelte. */
+.farm-action {
+	width: 100%;
+}
+
+@media (max-width: 809.98px) {
+	.farm-card {
+		border-radius: var(--border-radius-xl);
+		padding: 24px;
+	}
+}
