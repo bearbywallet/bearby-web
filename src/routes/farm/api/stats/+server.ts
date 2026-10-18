@@ -1,6 +1,5 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { env } from '$env/dynamic/private';
 import { decodeBool, decodeUint, decodeUintPair, decodeSlot0, SELECTORS } from '$lib/web3/abi';
 import {
 	ABLP_DECIMALS,
@@ -17,6 +16,13 @@ import { ethCall } from '$lib/server/rpc';
 
 const BOT_TIMEOUT_MS = 4000;
 const NO_STORE = { 'cache-control': 'no-store' };
+
+// Bot API (read-only observability endpoints only). Server-only module — never
+// import this into client-side code, or the key ships to every visitor's browser.
+// Rotation: change API_KEY in /etc/autobase-bot.env on the bot box, restart, then
+// update this constant and redeploy.
+const BOT_URL = 'https://farm.bearby.io';
+const BOT_KEY = '94524e65ee1159cb82d9c9ccaa61c133078c42b9875b69d3f0b8ee28c9689c5c';
 
 /** `eth_call` that swallows failures so each stat degrades independently. */
 async function read(to: string, data: string): Promise<string | null> {
@@ -45,13 +51,11 @@ function stringField(source: unknown, key: string): string | null {
 	return typeof value === 'string' ? value : null;
 }
 
-/** `GET {FARM_BOT_URL}{path}` with bearer auth; resolves to `null` on any failure. */
+/** `GET {BOT_URL}{path}` with bearer auth; resolves to `null` on any failure. */
 async function readBot(path: string): Promise<unknown> {
-	const base = (env.FARM_BOT_URL ?? '').trim();
-	if (!base) return null;
 	try {
-		const response = await fetch(base.replace(/\/$/, '') + path, {
-			headers: { authorization: `Bearer ${env.FARM_BOT_KEY ?? ''}` },
+		const response = await fetch(BOT_URL.replace(/\/$/, '') + path, {
+			headers: { authorization: `Bearer ${BOT_KEY}` },
 			signal: AbortSignal.timeout(BOT_TIMEOUT_MS)
 		});
 		if (!response.ok) return null;
@@ -66,8 +70,6 @@ async function readBot(path: string): Promise<unknown> {
  * (0.12) and become percentages, `fees_value1` becomes XAUT.
  */
 async function loadBot(): Promise<BotStats | null> {
-	const base = (env.FARM_BOT_URL ?? '').trim();
-	if (!base) return null;
 	const [rewards, strategy] = await Promise.all([
 		readBot('/rewards?days=30'),
 		readBot('/strategy')
