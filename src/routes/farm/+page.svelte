@@ -8,10 +8,12 @@
 	import PositionPanel from '$lib/components/farm/PositionPanel.svelte';
 	import '$lib/components/farm/farm.css';
 	import { initWallet, wallet } from '$lib/web3/wallet.svelte';
+	import { getLocale } from '$lib/paraglide/runtime';
 	import {
 		EXPLORER,
 		POOL,
 		VAULT_ADDRESS,
+		currencyForLocale,
 		loadUserData,
 		parseStats,
 		type FarmStats,
@@ -31,7 +33,10 @@
 
 	async function loadStats(): Promise<void> {
 		try {
-			const response = await fetch('/farm/api/stats', { cache: 'no-store' });
+			const currency = currencyForLocale(getLocale());
+			const response = await fetch(`/farm/api/stats?currency=${currency}`, {
+				cache: 'no-store'
+			});
 			if (!response.ok) return;
 			const parsed = parseStats(await response.json());
 			if (parsed) stats = parsed;

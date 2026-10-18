@@ -15,9 +15,11 @@ import {
 	WBTC_DECIMALS,
 	XAUT_DECIMALS,
 	fromWei,
+	isFiatCurrency,
 	priceXautPerBtc,
 	type BotStats,
-	type FarmStats
+	type FarmStats,
+	type FiatRate
 } from '$lib/web3/farm';
 import { ethCall } from '$lib/server/rpc';
 
@@ -30,6 +32,9 @@ const NO_STORE = { 'cache-control': 'no-store' };
 // update this constant and redeploy.
 const BOT_URL = 'https://farm.bearby.io';
 const BOT_KEY = '94524e65ee1159cb82d9c9ccaa61c133078c42b9875b69d3f0b8ee28c9689c5c';
+
+// Fetched here, not in the browser: CSP `connect-src` does not allow this host.
+const RATES_URL = 'https://rates.bearby.io/convert';
 
 /** `eth_call` that swallows failures so each stat degrades independently. */
 async function read(to: string, data: string): Promise<string | null> {
@@ -97,10 +102,30 @@ async function loadBot(): Promise<BotStats | null> {
 	};
 }
 
-export const GET: RequestHandler = async () => {
-	const vault = VAULT_ADDRESS;
+/** XAUT price in `currency`; `null` on any failure. Response is `[{ from, to, rate }]`. */
+async function loadFiat(currency: string): Promise<FiatRate | null> {
+	try {
+		const response = await fetch(`${RATES_URL}?to=${currency}&for=XAUT`, {
+			signal: AbortSignal.timeout(BOT_TIMEOUT_MS)
+		});
+		if (!response.ok) return null;
+		const entries: unknown = await response.json();
+		if (!Array.isArray(entries)) return null;
+		const entry = entries.find(
+			(item) => stringField(item, 'from') === 'XAUT' && stringField(item, 'to') === currency
+		);
+		const xautRate = numericField(entry, 'rate');
+		return xautRate !== null && xautRate > 0 ? { currency, xautRate } : null;
+	} catch {
+		return null;
+	}
+}
 
-	const [slot0Hex, supplyHex, totalsHex, lowerHex, upperHex, rebalanceHex, pausedHex, bot] =
+export const GET: RequestHandler = async ({ url }) => {
+	const vault = VAULT_ADDRESS;
+	const currency = url.searchParams.get('currency') ?? '';
+
+	const [slot0Hex, supplyHex, totalsHex, lowerHex, upperHex, rebalanceHex, pausedHex, bot, fiat] =
 		await Promise.all([
 			read(POOL, SELECTORS.slot0),
 			vault ? read(vault, SELECTORS.totalSupply) : null,
@@ -109,7 +134,8 @@ export const GET: RequestHandler = async () => {
 			vault ? read(vault, SELECTORS.tickUpper) : null,
 			vault ? read(vault, SELECTORS.lastRebalance) : null,
 			vault ? read(vault, SELECTORS.paused) : null,
-			loadBot()
+			loadBot(),
+			isFiatCurrency(currency) ? loadFiat(currency) : null
 		]);
 
 	const slot0 = slot0Hex ? decodeSlot0(slot0Hex) : null;
@@ -158,6 +184,7 @@ export const GET: RequestHandler = async () => {
 		tvlWbtc,
 		tvlXaut,
 		sharePriceXaut,
+		fiat,
 		bot
 	};
 

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages';
-	import { formatAmount, type FarmStats } from '$lib/web3/farm';
+	import { getLocale } from '$lib/paraglide/runtime';
+	import { formatAmount, formatFiat, type FarmStats } from '$lib/web3/farm';
 
 	let { stats, loading }: { stats: FarmStats | null; loading: boolean } = $props();
 
@@ -39,6 +40,8 @@
 		return new Date(seconds * 1000).toLocaleString();
 	});
 	let bot = $derived(stats?.bot ?? null);
+	let fiat = $derived(stats?.fiat ?? null);
+	const locale = getLocale();
 </script>
 
 <section class="grid" aria-busy={loading}>
@@ -57,6 +60,7 @@
 				≈ {stats?.tvlWbtc === null || stats?.tvlWbtc === undefined
 					? NOT_AVAILABLE
 					: formatAmount(stats.tvlWbtc, 4)} WBTC
+				{#if fiat}· ≈ {formatFiat(stats?.tvlXaut ?? null, fiat, locale)}{/if}
 			</p>
 		{/if}
 	</article>
@@ -88,6 +92,7 @@
 				{bot?.feesValue1 === null || bot?.feesValue1 === undefined
 					? NOT_AVAILABLE
 					: formatAmount(bot.feesValue1, 2)} XAUT fees
+				{#if fiat}· ≈ {formatFiat(bot?.feesValue1 ?? null, fiat, locale)}{/if}
 			</p>
 		{/if}
 	</article>

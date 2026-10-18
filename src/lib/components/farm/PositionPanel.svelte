@@ -1,5 +1,6 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages';
+	import { getLocale } from '$lib/paraglide/runtime';
 	import Button from '$lib/components/ui/Button.svelte';
 	import TxFeedback from './TxFeedback.svelte';
 	import type { TxStatus } from './status';
@@ -18,6 +19,7 @@
 		XAUT_DECIMALS,
 		buildWithdrawCalldata,
 		formatAmount,
+		formatFiat,
 		fromWei,
 		parseAmount,
 		planWithdraw,
@@ -56,6 +58,7 @@
 	);
 	let sharePrice = $derived(stats?.sharePriceXaut ?? null);
 	let myValue = $derived(sharePrice === null ? null : sharesBalance * sharePrice);
+	let myValueFiat = $derived(stats?.fiat ? formatFiat(myValue, stats.fiat, getLocale()) : null);
 	let lockedUntil = $derived(user?.lockedUntil ?? null);
 	let locked = $derived(lockedUntil !== null && lockedUntil > now);
 	let vault = $derived(stats?.vaultAddress ?? null);
@@ -137,6 +140,9 @@
 				{myValue === null ? NOT_AVAILABLE : formatAmount(myValue, 4)}
 				<span class="unit">XAUT</span>
 			</p>
+			{#if myValueFiat}
+				<p class="fiat farm-num">≈ {myValueFiat}</p>
+			{/if}
 		</div>
 	</div>
 
@@ -219,6 +225,13 @@
 		font-size: 22px;
 		color: var(--text-primary);
 		font-variant-numeric: tabular-nums;
+	}
+
+	.fiat {
+		margin: 4px 0 0;
+		font-family: var(--font-secondary);
+		font-size: 13px;
+		color: var(--text-muted);
 	}
 
 	.unit {

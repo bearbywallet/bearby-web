@@ -107,6 +107,37 @@ export function priceXautPerBtc(sqrtPriceX96: bigint): number {
 export const priceAtTick = (tick: number): number =>
 	Math.pow(1.0001, tick) * 10 ** (WBTC_DECIMALS - XAUT_DECIMALS);
 
+/** Fiat currency shown for each UI locale; also the allowlist for `?currency=`. */
+const CURRENCY_BY_LOCALE: Record<string, string> = {
+	en: 'USD',
+	ru: 'RUB',
+	'pt-BR': 'BRL',
+	es: 'BRL'
+};
+const DEFAULT_CURRENCY = 'CNY';
+
+export const currencyForLocale = (locale: string): string =>
+	CURRENCY_BY_LOCALE[locale] ?? DEFAULT_CURRENCY;
+
+export const isFiatCurrency = (value: string): boolean =>
+	value === DEFAULT_CURRENCY || Object.values(CURRENCY_BY_LOCALE).includes(value);
+
+/** Price of one whole XAUT in `currency`, from rates.bearby.io. */
+export interface FiatRate {
+	currency: string;
+	xautRate: number;
+}
+
+/** XAUT amount converted to fiat in the page locale, e.g. `$416.20` / `R$ 416,20`. */
+export function formatFiat(xaut: number | null, fiat: FiatRate | null, locale: string): string {
+	if (xaut === null || fiat === null || !Number.isFinite(xaut)) return '—';
+	return new Intl.NumberFormat(locale, {
+		style: 'currency',
+		currency: fiat.currency,
+		maximumFractionDigits: 2
+	}).format(xaut * fiat.xautRate);
+}
+
 export interface BotStats {
 	feeApr: number | null;
 	timeInRange: number | null;
@@ -131,6 +162,7 @@ export interface FarmStats {
 	tvlWbtc: number | null;
 	tvlXaut: number | null;
 	sharePriceXaut: number | null;
+	fiat: FiatRate | null;
 	bot: BotStats | null;
 }
 
@@ -172,6 +204,14 @@ export function parseStats(payload: unknown): FarmStats | null {
 			}
 		: null;
 
+	const fiatSource = asRecord(source.fiat);
+	const currency = strOrNull(fiatSource?.currency);
+	const xautRate = numOrNull(fiatSource?.xautRate);
+	const fiat: FiatRate | null =
+		currency !== null && isFiatCurrency(currency) && xautRate !== null && xautRate > 0
+			? { currency, xautRate }
+			: null;
+
 	return {
 		configured: source.configured === true,
 		vaultAddress: strOrNull(source.vaultAddress),
@@ -188,6 +228,7 @@ export function parseStats(payload: unknown): FarmStats | null {
 		tvlWbtc: numOrNull(source.tvlWbtc),
 		tvlXaut: numOrNull(source.tvlXaut),
 		sharePriceXaut: numOrNull(source.sharePriceXaut),
+		fiat,
 		bot
 	};
 }
