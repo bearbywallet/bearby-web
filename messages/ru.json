@@ -249,6 +249,7 @@
 	"farm_view_explorer": "Смотреть в Etherscan",
 	"farm_my_shares": "Мои доли",
 	"farm_my_value": "Моя стоимость",
+	"farm_withdraw_amount": "Сумма вывода",
 	"farm_locked_until": "Заблокировано до {time}",
 	"farm_min_deposit_note": "Минимальный депозит: эквивалент 0.1 XAUT",
 	"farm_slippage_note": "Защита от проскальзывания: 2%",

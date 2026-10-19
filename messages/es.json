@@ -235,6 +235,7 @@
 	"farm_view_explorer": "Ver en Etherscan",
 	"farm_my_shares": "Mis participaciones",
 	"farm_my_value": "Mi valor",
+	"farm_withdraw_amount": "Cantidad a retirar",
 	"farm_locked_until": "Bloqueado hasta {time}",
 	"farm_min_deposit_note": "Depósito mínimo: equivalente a 0.1 XAUT",
 	"farm_slippage_note": "Protección de slippage: 2%",

@@ -23,7 +23,6 @@
 		fromWei,
 		parseAmount,
 		planWithdraw,
-		toWei,
 		type FarmStats,
 		type UserFarmData
 	} from '$lib/web3/farm';
@@ -41,8 +40,9 @@
 	} = $props();
 
 	const NOT_AVAILABLE = '—';
+	const PRESETS = [25, 50, 75, 100];
 
-	let sharesInput = $state('');
+	let percentInput = $state('');
 	let status = $state<TxStatus>('idle');
 	let txHash = $state<string | null>(null);
 	let failure = $state<string | null>(null);
@@ -53,22 +53,24 @@
 		return () => clearInterval(timer);
 	});
 
-	let sharesBalance = $derived(
-		user?.ablpBalance ? fromWei(BigInt(user.ablpBalance), ABLP_DECIMALS) : 0
-	);
+	let balanceWei = $derived(user?.ablpBalance ? BigInt(user.ablpBalance) : 0n);
+	let sharesBalance = $derived(fromWei(balanceWei, ABLP_DECIMALS));
 	let sharePrice = $derived(stats?.sharePriceXaut ?? null);
 	let myValue = $derived(sharePrice === null ? null : sharesBalance * sharePrice);
 	let myValueFiat = $derived(stats?.fiat ? formatFiat(myValue, stats.fiat, getLocale()) : null);
 	let lockedUntil = $derived(user?.lockedUntil ?? null);
 	let locked = $derived(lockedUntil !== null && lockedUntil > now);
 	let vault = $derived(stats?.vaultAddress ?? null);
-	let sharesAmount = $derived(parseAmount(sharesInput));
-	let sharesWei = $derived(toWei(sharesAmount, ABLP_DECIMALS));
+	// ABLP has 18 decimals but ~1e12 share-wei per XAUT, so raw share counts are unreadable
+	// (≈1e-6 ABLP per XAUT). Users pick a percent; shares are derived exactly in bigint, and
+	// 100% is the exact on-chain balance so a full exit leaves no dust.
+	let percent = $derived(parseAmount(percentInput));
+	let sharesWei = $derived(
+		percent >= 100 ? balanceWei : (balanceWei * BigInt(Math.floor(percent * 100))) / 10000n
+	);
 	let plan = $derived(sharesWei > 0n ? planWithdraw(sharesWei, stats) : null);
 	let busy = $derived(status === 'pending' || status === 'mining');
-	let disabled = $derived(
-		busy || locked || sharesWei === 0n || sharesAmount > sharesBalance || vault === null
-	);
+	let disabled = $derived(busy || locked || sharesWei === 0n || percent > 100 || vault === null);
 
 	let countdown = $derived.by(() => {
 		if (!locked || lockedUntil === null) return '';
@@ -107,7 +109,7 @@
 			status = 'mining';
 			await waitForTx(hash);
 			status = 'done';
-			sharesInput = '';
+			percentInput = '';
 			await onrefresh();
 		} catch (error) {
 			status = 'error';
@@ -129,12 +131,6 @@
 
 	<div class="summary">
 		<div>
-			<p class="farm-label">{m.farm_my_shares()}</p>
-			<p class="value farm-num">
-				{formatAmount(sharesBalance, 4)} <span class="unit">ABLP</span>
-			</p>
-		</div>
-		<div>
 			<p class="farm-label">{m.farm_my_value()}</p>
 			<p class="value farm-num">
 				{myValue === null ? NOT_AVAILABLE : formatAmount(myValue, 4)}
@@ -154,20 +150,27 @@
 
 	<div class="field">
 		<div class="field-top">
-			<span class="token-name">{m.farm_my_shares()}</span>
-			<button class="max" type="button" onclick={() => (sharesInput = String(sharesBalance))}>
-				{m.farm_max()}
-			</button>
+			<span class="token-name">{m.farm_withdraw_amount()}</span>
+			<div class="presets">
+				{#each PRESETS as preset (preset)}
+					<button class="max" type="button" onclick={() => (percentInput = String(preset))}>
+						{preset === 100 ? m.farm_max() : `${preset}%`}
+					</button>
+				{/each}
+			</div>
 		</div>
-		<input
-			class="input farm-num"
-			type="text"
-			inputmode="decimal"
-			autocomplete="off"
-			placeholder="0.0"
-			bind:value={sharesInput}
-			aria-label={m.farm_my_shares()}
-		/>
+		<div class="input-row">
+			<input
+				class="input farm-num"
+				type="text"
+				inputmode="decimal"
+				autocomplete="off"
+				placeholder="0"
+				bind:value={percentInput}
+				aria-label={m.farm_withdraw_amount()}
+			/>
+			<span class="suffix farm-num">%</span>
+		</div>
 	</div>
 
 	<p class="expected farm-num">
@@ -290,6 +293,23 @@
 		font-size: 11px;
 		letter-spacing: 0.06em;
 		cursor: pointer;
+	}
+
+	.presets {
+		display: flex;
+		gap: 4px;
+	}
+
+	.input-row {
+		display: flex;
+		align-items: baseline;
+		gap: 6px;
+	}
+
+	.suffix {
+		font-family: var(--font-primary);
+		font-size: 26px;
+		color: var(--text-muted);
 	}
 
 	.max:hover {
