@@ -1,15 +1,23 @@
 /**
  * utm_source capture for the Bearby Card waitlist (source-only links).
  *
- * The source is read once on landing, sanitized, and kept in first-party
- * storage until signup. The FIRST source wins: later visits with a different
- * tag never overwrite it.
+ * The primary capture is server-side: `hooks.server.ts` writes the source
+ * into a first-party cookie on landing (utm tag first, external Referer as
+ * a fallback, both first-write-wins). The client only READS the cookies at
+ * signup time; the legacy localStorage entry below keeps returning visitors
+ * attributed.
  */
 
-const STORAGE_KEY = 'bearby_utm_source';
+export const UTM_COOKIE = 'bearby_utm_source';
+export const REF_COOKIE = 'bearby_ref_source';
+
+const STORAGE_KEY = 'bearby_utm_source'; // legacy pre-cookie storage
 const MAX_LEN = 32;
 
-function sanitize(raw: string): string {
+/** Keeps only a-z0-9_- and caps the length (safe for cookie/JSON/DB). */
+export function sanitize_source(raw: string | null | undefined): string {
+	if (!raw) return '';
+
 	return raw
 		.trim()
 		.toLowerCase()
@@ -26,7 +34,7 @@ export function capture_utm_source(): void {
 
 		if (!raw) return;
 
-		const source = sanitize(raw);
+		const source = sanitize_source(raw);
 
 		if (!source) return;
 		if (!localStorage.getItem(STORAGE_KEY)) localStorage.setItem(STORAGE_KEY, source);
@@ -35,12 +43,22 @@ export function capture_utm_source(): void {
 	}
 }
 
-/** The persisted source, or an empty string (= direct_or_unattributed). */
+function read_cookie(name: string): string {
+	const pair = document.cookie.split('; ').find((c) => c.startsWith(name + '='));
+	return pair ? pair.slice(name.length + 1) : '';
+}
+
+/** utm cookie → referer cookie → legacy localStorage, or '' (= direct). */
 export function stored_utm_source(): string {
 	if (typeof window === 'undefined') return '';
 
 	try {
-		return localStorage.getItem(STORAGE_KEY) ?? '';
+		return (
+			read_cookie(UTM_COOKIE) ||
+			read_cookie(REF_COOKIE) ||
+			localStorage.getItem(STORAGE_KEY) ||
+			''
+		);
 	} catch {
 		return '';
 	}
