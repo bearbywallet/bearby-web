@@ -257,7 +257,11 @@
 				<ul>
 					<li>A breach of any server cannot expose your keys — they never leave your device</li>
 					<li>Bearby cannot freeze, seize, or access your funds</li>
-					<li>Zero data collection: no account, no email, no analytics</li>
+					<li>
+						<strong>No wallet secrets collected</strong> — Bearby never collects or stores your
+						private key or secret phrase. Limited information you provide may be processed to
+						operate, secure, and support the service.
+					</li>
 				</ul>
 			</section>
 
