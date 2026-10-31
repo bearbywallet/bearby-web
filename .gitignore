@@ -29,3 +29,7 @@ project.inlang/cache/
 # ZCode
 .zcode/
 .zcodeignore
+
+# Pi agent state
+.pi/
+

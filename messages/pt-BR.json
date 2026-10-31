@@ -61,7 +61,7 @@
 	"feature_signing_title": "Assinatura Local de Transações",
 	"feature_signing_desc": "Todas as transações são assinadas diretamente no seu hardware, eliminando riscos de processamento remoto.",
 	"integrations_title": "Quais Blockchains e Redes o Bearby Suporta?",
-	"integrations_desc": "O Bearby suporta Bitcoin, Ethereum e todas as cadeias compatíveis com EVM — incluindo Polygon, Arbitrum, Optimism, Base, Avalanche, Linea, BNB Chain e Zilliqa. Redes adicionais podem ser adicionadas via RPC personalizado. O navegador de dApps integrados permite interação Web3 em todas as cadeias suportadas.",
+	"integrations_desc": "O Bearby suporta Bitcoin, Ethereum e todas as cadeias compatíveis com EVM — incluindo Polygon, Arbitrum, Optimism, Base, Avalanche, BNB Chain e Zilliqa. Redes adicionais podem ser adicionadas via RPC personalizado. O navegador de dApps integrados permite interação Web3 em todas as cadeias suportadas.",
 	"chain_bitcoin": "Bitcoin",
 	"chain_ethereum": "Ethereum",
 	"chain_binance": "Binance Chain",

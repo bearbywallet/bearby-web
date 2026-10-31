@@ -146,7 +146,7 @@
 				name: 'Which blockchain networks does Bearby support?',
 				acceptedAnswer: {
 					'@type': 'Answer',
-					text: 'Bearby supports Bitcoin, Ethereum, and all EVM-compatible chains including Polygon, Arbitrum, Optimism, Base, Avalanche, Linea, and Zilliqa. Additional EVM chains can be added manually via custom RPC configuration.'
+					text: 'Bearby supports Bitcoin, Ethereum, and all EVM-compatible chains including Polygon, Arbitrum, Optimism, Base, Avalanche, and Zilliqa. Additional EVM chains can be added manually via custom RPC configuration.'
 				}
 			},
 			{

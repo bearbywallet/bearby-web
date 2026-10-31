@@ -77,7 +77,7 @@ Bearby supports the following blockchain networks:
 
 - **Bitcoin** — native Bitcoin support with post-quantum encrypted key storage
 - **Ethereum** — full EIP-1193 provider compatible with all Ethereum dApps
-- **EVM-compatible chains** — Polygon, Arbitrum, Optimism, Base, Avalanche, Linea, BNB Chain, and all other EVM-compatible networks
+- **EVM-compatible chains** — Polygon, Arbitrum, Optimism, Base, Avalanche, BNB Chain, and all other EVM-compatible networks
 - **Zilliqa** — native Zilliqa chain support
 - **Custom RPC** — any additional EVM-compatible network can be added via custom RPC endpoint configuration
 
@@ -133,7 +133,7 @@ A: Bearby's cryptographic core is open-source and available for public review at
 A: When you create a password for your wallet, Bearby derives the encryption key using Argon2id rather than a simple hash. Argon2id requires a large amount of RAM to compute — a configurable parameter. This means an attacker trying to brute-force your password would need to run the memory-intensive function for every candidate password, making large-scale GPU attacks prohibitively expensive. A typical consumer GPU can run SHA-256 billions of times per second, but Argon2id (configured correctly) may only allow thousands of attempts per second per GPU.
 
 **Q: What blockchains can I use with Bearby?**
-A: Bitcoin, Ethereum, and all EVM-compatible chains (Polygon, Arbitrum, Optimism, Base, Avalanche, Linea, BNB Chain, Zilliqa, and any chain with a custom RPC endpoint). The in-app dApp browser supports Web3 interaction on all EVM chains.
+A: Bitcoin, Ethereum, and all EVM-compatible chains (Polygon, Arbitrum, Optimism, Base, Avalanche, BNB Chain, Zilliqa, and any chain with a custom RPC endpoint). The in-app dApp browser supports Web3 interaction on all EVM chains.
 
 **Q: Where are my private keys stored?**
 A: Exclusively on your device, encrypted with AES-256 and Kuznechik in a dual-layer encryption scheme, with the encryption key derived from your password via Argon2id. Keys never leave your device — not during setup, not during transaction signing, not during dApp interaction.

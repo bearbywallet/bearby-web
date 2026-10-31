@@ -39,7 +39,7 @@ NIST estimates that cryptographically relevant quantum computers (CRQCs) capable
 A non-custodial wallet means users — and only users — control their private keys. No company, server, or third party ever has access to keys or funds. Bearby generates and stores all keys locally on the device using on-device encryption. There is no account registration and zero data collection.
 
 **Which blockchain networks does Bearby support?**
-Bearby supports Bitcoin, Ethereum, and all EVM-compatible chains including Polygon, Arbitrum, Optimism, Base, Avalanche, Linea, and Zilliqa. Additional EVM chains can be added manually via custom RPC configuration.
+Bearby supports Bitcoin, Ethereum, and all EVM-compatible chains including Polygon, Arbitrum, Optimism, Base, Avalanche, and Zilliqa. Additional EVM chains can be added manually via custom RPC configuration.
 
 **Is Bearby open source?**
 Yes. Bearby's cryptographic core is written in Rust and published as open-source software at github.com/bearbywallet. The open-source model allows independent security researchers to audit the cryptographic implementation and key management logic.
