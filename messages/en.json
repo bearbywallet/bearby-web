@@ -67,8 +67,8 @@
 	"feature_signing_title": "Local Transaction Signing",
 	"feature_signing_desc": "All transactions are signed directly on your hardware, eliminating risks from remote processing.",
 
-	"integrations_title": "Which Blockchains and Networks Does Bearby Support?",
-	"integrations_desc": "Bearby supports Bitcoin, Ethereum, and all EVM-compatible chains — including Polygon, Arbitrum, Optimism, Base, Avalanche, BNB Chain, and Zilliqa. Additional networks can be added via custom RPC. The in-app dApp browser enables Web3 interaction across all supported chains.",
+	"integrations_title": "Blockchain supports",
+	"integrations_desc": "Bearby supports Bitcoin, Ethereum, Tron, BNB Chain, Arbitrum, Avalanche, Base, Kaia, Optimism, Polygon, Solana, Sonic, and Zilliqa—all in one wallet. Bitcoin, Solana, and Tron are available exclusively on mobile; the other networks are supported on both mobile and browser extension. Additional EVM-compatible networks can be added via custom RPC. The in-app dApp browser lets you connect to decentralized applications on supported networks.",
 	"chain_bitcoin": "Bitcoin",
 	"chain_ethereum": "Ethereum",
 	"chain_binance": "Binance Chain",

@@ -67,8 +67,8 @@
 	"feature_signing_title": "Локальная подпись транзакций",
 	"feature_signing_desc": "Все транзакции подписываются непосредственно на вашем устройстве, исключая риски удалённой обработки.",
 
-	"integrations_title": "Какие блокчейны и сети поддерживает Bearby?",
-	"integrations_desc": "Bearby поддерживает Bitcoin, Ethereum и все EVM-совместимые сети — включая Polygon, Arbitrum, Optimism, Base, Avalanche, BNB Chain и Zilliqa. Дополнительные сети можно добавить через пользовательский RPC. Встроенный браузер dApp обеспечивает взаимодействие с Web3 во всех поддерживаемых сетях.",
+	"integrations_title": "Поддерживаемые блокчейны",
+	"integrations_desc": "Bearby поддерживает Bitcoin, Ethereum, Tron, BNB Chain, Arbitrum, Avalanche, Base, Kaia, Optimism, Polygon, Solana, Sonic и Zilliqa — всё в одном кошельке. Bitcoin, Solana и Tron доступны исключительно на мобильных устройствах; остальные сети поддерживаются как на мобильных устройствах, так и в расширении для браузера. Дополнительные EVM-совместимые сети можно добавить через пользовательский RPC. Встроенный браузер dApp позволяет подключаться к децентрализованным приложениям в поддерживаемых сетях.",
 	"chain_bitcoin": "Bitcoin",
 	"chain_ethereum": "Ethereum",
 	"chain_binance": "Binance Chain",
