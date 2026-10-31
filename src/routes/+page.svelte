@@ -182,7 +182,7 @@
 	<meta property="og:image" content={OG_IMAGE} />
 	<meta property="og:image:alt" content="Bearby Wallet Interface and Branding" />
 	<meta property="og:image:width" content="1200" />
-	<meta property="og:image:height" content="630" />
+	<meta property="og:image:height" content="900" />
 	<meta property="og:site_name" content="Bearby" />
 
 	<meta name="twitter:card" content="summary_large_image" />
