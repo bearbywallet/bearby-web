@@ -60,7 +60,7 @@
 	"feature_encryption_desc": "Aprovecha encriptación de primer nivel con NTRU Prime, AES-256, Kuznechik y Argon2 para una seguridad insuperable de tus activos.",
 	"feature_signing_title": "Firma de Transacciones Local",
 	"feature_signing_desc": "Todas las transacciones se firman directamente en tu hardware, eliminando riesgos del procesamiento remoto.",
-	"integrations_title": "Blockchains compatibles",
+	"integrations_title": "Redes compatibles",
 	"integrations_desc": "Bearby soporta Bitcoin, Ethereum, Tron, BNB Chain, Arbitrum, Avalanche, Base, Kaia, Optimism, Polygon, Solana, Sonic y Zilliqa: todo en un solo monedero. Bitcoin, Solana y Tron están disponibles exclusivamente en móvil; las demás redes son compatibles tanto en móvil como en la extensión de navegador. Se pueden agregar redes EVM-compatibles adicionales mediante RPC personalizado. El navegador dApp integrado te permite conectarte a aplicaciones descentralizadas en las redes compatibles.",
 	"chain_bitcoin": "Bitcoin",
 	"chain_ethereum": "Ethereum",
