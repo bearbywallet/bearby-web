@@ -21,6 +21,7 @@ export async function GET() {
 
 - [Chrome Extension](https://chromewebstore.google.com/detail/bearby/klnepcnofpcagllmbcplocjpkmnpjhhb): Bearby browser extension for Chrome and Chromium-based browsers — non-custodial wallet directly in the browser.
 - [Android App](https://play.google.com/store/apps/details?id=com.zilpay.bearby): Bearby on Google Play — 100,000+ downloads, 4.8/5 rating from 1,200+ reviews.
+- [Linux Desktop](https://github.com/bearbywallet/Bearby/releases/latest): Bearby desktop application for Linux — download the latest AppImage release from GitHub.
 - [iOS App](https://apps.apple.com/us/app/bearby-wallet/id1612716382): Bearby on the Apple App Store — non-custodial mobile wallet for iPhone and iPad.
 
 ## Source Code

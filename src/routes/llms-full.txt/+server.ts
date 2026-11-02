@@ -90,7 +90,7 @@ The wallet's in-app dApp browser enables interaction with decentralized applicat
 - **Chrome Extension** — available on the Chrome Web Store with 30,000+ installs; compatible with all Chromium-based browsers (Brave, Edge, Opera)
 - **Android** — available on Google Play with 100,000+ downloads and a 4.8/5 rating from 1,200+ reviews
 - **iOS** — available on the Apple App Store
-- **Desktop** — the mobile application also supports macOS and Linux builds
+- **Desktop** — desktop builds for Windows, macOS and Linux (AppImage); grab the latest release on GitHub: https://github.com/bearbywallet/Bearby/releases/latest
 
 ---
 

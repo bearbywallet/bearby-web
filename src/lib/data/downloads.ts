@@ -57,6 +57,14 @@ export function getDownloads(): Download[] {
 			secondary: true
 		},
 		{
+			label: m.dl_linux(),
+			href: 'https://github.com/bearbywallet/Bearby/releases/latest',
+			platform: 'linux',
+			count: m.dl_count_direct(),
+			action: m.dl_action_appimage(),
+			secondary: true
+		},
+		{
 			label: m.dl_massa_chrome(),
 			href: 'https://chromewebstore.google.com/detail/bearbylegacy/papngmkmknnmfhabbckobgfpihpdgplk',
 			platform: 'massa-chrome',

@@ -1,4 +1,5 @@
 import { redirect, type Handle, type RequestEvent } from '@sveltejs/kit';
+import { building } from '$app/environment';
 import { sequence } from '@sveltejs/kit/hooks';
 import { paraglideMiddleware } from '$lib/paraglide/server';
 import { API_URL } from '$lib/constants';
@@ -102,6 +103,10 @@ function request_host(event: RequestEvent): string {
 const handleUtmCookie: Handle = ({ event, resolve }) => {
 	const { cookies, url } = event;
 
+	// During `vite build` the prerender pass runs server hooks; touching
+	// `url.searchParams` on a prerendered page throws "Cannot access
+	// url.searchParams..." and fails the build. Skip attribution there.
+	if (building) return resolve(event);
 	// An explicit utm_source is the strongest signal and sticks first-write:
 	// the original campaign attribution is never overwritten.
 	const utm = sanitize_source(url.searchParams.get('utm_source'));
