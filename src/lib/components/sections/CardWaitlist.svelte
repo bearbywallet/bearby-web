@@ -1,28 +1,19 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages';
-	import { getLocale } from '$lib/paraglide/runtime';
 	import Button from '$lib/components/ui/Button.svelte';
-	import { join_waitlist, complete_waitlist } from '$lib/waitlist';
+	import { join_waitlist } from '$lib/waitlist';
 	import { stored_utm_source } from '$lib/utm';
-	import { country_options } from '$lib/countries';
 	import { slide } from 'svelte/transition';
 
 	const reduce_motion =
 		typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
 	const dur = (ms: number) => (reduce_motion ? 0 : ms);
-	let shaking = $state(false);
-
-	const options = country_options(getLocale());
 
 	let email = $state('');
-	let code = $state('');
-	let country = $state('');
-	let country_error = $state(false);
 	let status = $state<
-		'idle' | 'mining' | 'sending' | 'awaiting' | 'confirming' | 'already' | 'done' | 'error'
+		'idle' | 'mining' | 'sending' | 'awaiting' | 'already' | 'done' | 'error'
 	>('idle');
 	let progress = $state(0);
-	let code_error = $state('');
 	let submit_error = $state<'server' | 'proton'>('server');
 
 	async function handle_submit(e: SubmitEvent) {
@@ -36,13 +27,7 @@
 		const result = await join_waitlist(email, stored_utm_source(), (percent) => (progress = percent));
 
 		if (result.ok) {
-			// The IP-based country is only a default for the select — the user
-			// can change it before confirming.
-			country = result.suggested_country;
-			country_error = false;
 			status = 'awaiting';
-			code = '';
-			code_error = '';
 		} else if (result.error === 'already') {
 			status = 'already';
 		} else {
@@ -51,39 +36,6 @@
 		}
 	}
 
-	async function handle_confirm(e: SubmitEvent) {
-		e.preventDefault();
-
-		if (status !== 'awaiting') return;
-
-		const clean = code.trim();
-
-		if (!/^\d{6}$/.test(clean)) return;
-
-		// Country of residence is required to qualify.
-		if (!country) {
-			country_error = true;
-			return;
-		}
-
-		status = 'confirming';
-		code_error = '';
-
-		const result = await complete_waitlist(email, clean, country);
-
-		if (result.ok) {
-			status = 'done';
-		} else if (result.error === 'wrong') {
-			code_error = 'wrong';
-			status = 'awaiting';
-			shaking = true;
-		} else if (result.error === 'expired' || result.error === 'too_many') {
-			code_error = result.error;
-			status = 'awaiting';
-		} else {
-			status = 'error';
-		}
-	}
 </script>
 
 <section id="card" class="card-waitlist">
@@ -117,85 +69,11 @@
 						<strong>{m.card_already_title()}</strong>
 						<span>{m.card_already_text()}</span>
 					</div>
-				{:else if status === 'awaiting' || status === 'confirming'}
-					<form
-						class="confirm-form"
-						onsubmit={handle_confirm}
-						transition:slide={{ duration: dur(280) }}
-					>
-						<label for="card-code">{m.card_code_label()}</label>
-						<p class="code-hint">{m.card_code_hint({ email })}</p>
-						<input
-							id="card-code"
-							class="code-input"
-							class:invalid={code_error !== ''}
-							class:shaking
-							type="text"
-							inputmode="numeric"
-							autocomplete="one-time-code"
-							maxlength="6"
-							bind:value={code}
-							oninput={() => (code = code.replace(/\D/g, '').slice(0, 6))}
-							onanimationend={() => (shaking = false)}
-							placeholder={m.card_code_placeholder()}
-						/>
-
-						<div class="country">
-							<label for="card-country">{m.card_country_label()}</label>
-							<p class="code-hint">{m.card_country_hint()}</p>
-							<div class="select-wrap">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									aria-hidden="true"
-								>
-									<path d="m6 9 6 6 6-6" />
-								</svg>
-								<select
-									id="card-country"
-									class:invalid={country_error}
-									bind:value={country}
-									onchange={() => (country_error = false)}
-								>
-									<option value="" disabled>{m.card_country_placeholder()}</option>
-									{#each options as option (option.code)}
-										<option value={option.code}>{option.name}</option>
-									{/each}
-								</select>
-							</div>
-						</div>
-
-						<Button type="submit">
-							{status === 'confirming' ? m.card_confirming() : m.card_confirm_join_btn()}
-						</Button>
-
-						{#if country_error}
-							<p class="country-required" role="alert" transition:slide={{ duration: dur(200) }}>
-								{m.card_country_required()}
-							</p>
-						{/if}
-
-						{#if code_error}
-							<div class="error" role="alert" transition:slide={{ duration: dur(200) }}>
-								<span>
-									{code_error === 'wrong'
-										? m.card_code_wrong()
-										: code_error === 'expired'
-											? m.card_code_expired()
-											: m.card_code_too_many()}
-								</span>
-							</div>
-						{/if}
-
-						<button type="button" class="link" onclick={() => (status = 'idle')}>
-							{m.card_change_email()}
-						</button>
-					</form>
+				{:else if status === 'awaiting'}
+					<div class="notice" role="status" transition:slide={{ duration: dur(280) }}>
+						<strong>{m.card_check_title()}</strong>
+						<span>{m.card_check_text({ email })}</span>
+					</div>
 				{:else}
 					<form onsubmit={handle_submit} transition:slide={{ duration: dur(280) }}>
 						<label for="card-email">{m.card_email_label()}</label>
@@ -527,131 +405,6 @@
 		color: var(--text-secondary);
 	}
 
-	.country {
-		display: flex;
-		flex-direction: column;
-		gap: 8px;
-		margin-top: 12px;
-	}
-
-	.country label {
-		margin-bottom: 0;
-	}
-
-	.select-wrap {
-		position: relative;
-	}
-
-	.select-wrap svg {
-		position: absolute;
-		right: 14px;
-		top: 50%;
-		width: 18px;
-		height: 18px;
-		transform: translateY(-50%);
-		color: var(--text-muted);
-		pointer-events: none;
-	}
-
-	select {
-		appearance: none;
-		width: 100%;
-		padding: 14px 44px 14px 16px;
-		background: var(--bg-subtle);
-		border: 1px solid var(--border-color);
-		border-radius: var(--border-radius-md);
-		color: var(--text-primary);
-		font-size: 1rem;
-		font-family: inherit;
-		cursor: pointer;
-		transition: border-color 0.2s ease, box-shadow 0.2s ease;
-	}
-
-	select option[value=''] {
-		color: var(--text-muted);
-	}
-
-	select:focus {
-		outline: none;
-		border-color: var(--brand-purple);
-		box-shadow: 0 0 0 3px rgba(172, 89, 255, 0.2);
-	}
-
-	select.invalid {
-		border-color: #e05c5c;
-	}
-
-	.country-required {
-		margin: 0;
-		font-size: 0.85rem;
-		color: var(--text-muted);
-	}
-
-	.confirm-form {
-		display: flex;
-		flex-direction: column;
-		gap: 8px;
-		margin-top: 32px;
-	}
-
-	.code-hint {
-		margin: 0;
-		font-size: 0.9rem;
-		color: var(--text-secondary);
-	}
-
-	.code-input {
-		text-align: center;
-		font-size: 1.6rem;
-		letter-spacing: 0.5em;
-		font-variant-numeric: tabular-nums;
-		padding: 14px 16px;
-	}
-
-	.code-input.invalid {
-		border-color: #e05c5c;
-	}
-
-	.code-input.shaking {
-		animation: shake 0.4s ease;
-	}
-
-	@keyframes shake {
-		0%,
-		100% {
-			transform: translateX(0);
-		}
-		20% {
-			transform: translateX(-6px);
-		}
-		40% {
-			transform: translateX(6px);
-		}
-		60% {
-			transform: translateX(-4px);
-		}
-		80% {
-			transform: translateX(4px);
-		}
-	}
-
-	.confirm-form :global(.btn) {
-		width: 100%;
-		margin-top: 4px;
-	}
-
-	.link {
-		margin-top: 8px;
-		background: none;
-		border: none;
-		padding: 0;
-		font: inherit;
-		font-size: 0.9rem;
-		color: var(--brand-purple);
-		text-decoration: underline;
-		cursor: pointer;
-	}
-
 	/* ---- visual stage ---- */
 
 	.visual {
@@ -696,10 +449,6 @@
 
 	@media (prefers-reduced-motion: reduce) {
 		.card-img {
-			animation: none;
-		}
-
-		.code-input.shaking {
 			animation: none;
 		}
 	}
