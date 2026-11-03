@@ -2,7 +2,7 @@
 	import * as m from '$lib/paraglide/messages';
 	import { page } from '$app/state';
 	import { getLocale } from '$lib/paraglide/runtime';
-	import { complete_waitlist } from '$lib/waitlist';
+	import { check_waitlist, complete_waitlist } from '$lib/waitlist';
 	import { country_options } from '$lib/countries';
 	import Button from '$lib/components/ui/Button.svelte';
 
@@ -13,6 +13,8 @@
 	let country = $state('');
 	let country_error = $state(false);
 	let submitting = $state(false);
+	/** Whole minutes left before the link expires, when the backend told us. */
+	let expires_min = $state<number | null>(null);
 	let phase = $state<'form' | 'done' | 'used' | 'invalid' | 'expired' | 'too_many' | 'error'>(
 		'form'
 	);
@@ -20,7 +22,26 @@
 	$effect(() => {
 		email = page.url.searchParams.get('email') ?? '';
 		code = page.url.searchParams.get('code') ?? '';
-		if (!email || !code) phase = 'invalid';
+		if (!email || !code) {
+			phase = 'invalid';
+			return;
+		}
+
+		// Preflight: probe the link on page load so already-used, expired and
+		// tampered links land on their dedicated screens immediately. The
+		// probe never consumes the code, and network/server hiccups fail open:
+		// the form's submit will surface the precise server error instead.
+		check_waitlist(email, code).then(({ status, expires_in }) => {
+			if (status === 'valid') {
+				if (expires_in && expires_in > 0) {
+					expires_min = Math.max(1, Math.ceil(expires_in / 60));
+				}
+				return;
+			}
+			if (status === 'invalid' || status === 'wrong') phase = 'invalid';
+			else if (status === 'used') phase = 'used';
+			else if (status === 'expired') phase = 'expired';
+		});
 	});
 
 	// Confirmation links are one-shot: strip the reusable secret (email+code)
@@ -47,6 +68,12 @@
 			history.replaceState(history.state, '', page.url.pathname);
 		} else if (result.error === 'used') {
 			phase = 'used';
+		} else if (result.error === 'expired') {
+			phase = 'expired';
+		} else if (result.error === 'invalid' || result.error === 'wrong') {
+			// 'wrong' here means the emailed code no longer matches the stored
+			// one (a newer code was issued) — same UX as a broken link.
+			phase = 'invalid';
 		} else if (result.error === 'too_many') {
 			phase = 'too_many';
 		} else {
@@ -68,6 +95,9 @@
 			<form class="confirmed__form" onsubmit={handle_confirm}>
 				<h1>{m.confirmed_form_title()}</h1>
 				<p class="confirmed__hint">{m.confirmed_form_hint({ email })}</p>
+				{#if expires_min !== null}
+					<p class="confirmed__hint">{m.confirmed_expires_hint({ minutes: expires_min })}</p>
+				{/if}
 
 				<label for="confirmed-country">{m.card_country_label()}</label>
 				<p class="confirmed__hint">{m.card_country_hint()}</p>

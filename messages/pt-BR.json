@@ -40,6 +40,7 @@
 	"confirmed_page_title": "Confirmar inscrição — Bearby",
 	"confirmed_form_title": "Confirme sua inscrição",
 	"confirmed_form_hint": "Quase lá! Vamos confirmar a inscrição de {email}. Selecione seu país de residência para finalizar.",
+	"confirmed_expires_hint": "Este link ficará ativo por cerca de {minutes} min.",
 	"confirmed_confirm_btn": "Confirmar inscrição",
 	"confirmed_success_text": "Seu e-mail está confirmado. Você está inscrito na lista de espera do Bearby Card — avisaremos assim que o cartão estiver disponível.",
 	"confirmed_invalid_title": "Link de confirmação inválido",

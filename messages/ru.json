@@ -43,6 +43,7 @@
 	"confirmed_page_title": "Подтверждение подписки — Bearby",
 	"confirmed_form_title": "Подтвердите подписку",
 	"confirmed_form_hint": "Почти готово! Подтверждаем подписку для {email}. Выберите страну проживания, чтобы завершить.",
+	"confirmed_expires_hint": "Ссылка активна ещё примерно {minutes} мин.",
 	"confirmed_confirm_btn": "Подтвердить подписку",
 	"confirmed_success_text": "Ваш адрес подтверждён. Вы подписаны на список ожидания Bearby Card — мы сообщим, как только карта станет доступна.",
 	"confirmed_invalid_title": "Неверная ссылка",

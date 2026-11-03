@@ -246,7 +246,14 @@ export async function join_waitlist(
 	}
 }
 
-export type CompleteError = 'wrong' | 'expired' | 'used' | 'too_many' | 'server' | 'network';
+export type CompleteError =
+	| 'wrong'
+	| 'invalid'
+	| 'expired'
+	| 'used'
+	| 'too_many'
+	| 'server'
+	| 'network';
 
 /**
  * Verifies the 6-digit code together with the required country of residence.
@@ -269,7 +276,7 @@ export async function complete_waitlist(
 		if (res.ok) return { ok: true };
 
 		const data = (await res.json().catch(() => null)) as { code?: number } | null;
-		const error =
+		const error: CompleteError =
 			data?.code === -7
 				? 'wrong'
 				: data?.code === -8
@@ -278,10 +285,55 @@ export async function complete_waitlist(
 						? 'too_many'
 						: data?.code === -12
 							? 'used'
-							: 'server';
+							: // -13 / -2: the link points at no known subscriber or was
+							// tampered with — show "invalid link", not "wrong code"
+							data?.code === -13 || data?.code === -2
+								? 'invalid'
+								: 'server';
 		return { ok: false, error };
 	} catch {
 		return { ok: false, error: 'network' };
+	}
+}
+
+export type LinkStatus = 'valid' | 'invalid' | 'used' | 'expired' | 'wrong' | 'network' | 'server';
+
+/**
+ * Page-load probe for the confirmation link: asks the backend whether the
+ * emailed code is still usable without consuming it. Lets the page jump
+ * straight to used/expired/invalid states instead of waiting for a submit.
+ */
+export async function check_waitlist(
+	email: string,
+	code: string
+): Promise<{ status: LinkStatus; expires_in?: number }> {
+	const normalized = email.trim().toLowerCase();
+
+	try {
+		const res = await fetch(
+			`${API_URL}/api/v1/waitlist/check?email=${encodeURIComponent(normalized)}&code=${encodeURIComponent(code)}`
+		);
+		const data = (await res.json().catch(() => null)) as
+			| { code?: number; expires_in?: number }
+			| null;
+
+		if (res.ok && data?.code === 0) {
+			return { status: 'valid', expires_in: data.expires_in };
+		}
+		const status: LinkStatus =
+			data?.code === -12
+				? 'used'
+				: data?.code === -8
+					? 'expired'
+					: data?.code === -6
+						? 'wrong'
+						: // -13 / -2: unknown subscriber or tampered link
+						data?.code === -13 || data?.code === -2
+							? 'invalid'
+							: 'server';
+		return { status };
+	} catch {
+		return { status: 'network' };
 	}
 }
 

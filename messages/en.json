@@ -43,6 +43,7 @@
 	"confirmed_page_title": "Confirm subscription — Bearby",
 	"confirmed_form_title": "Confirm your subscription",
 	"confirmed_form_hint": "Almost done! Confirming the subscription for {email}. Select your country of residence to finish.",
+	"confirmed_expires_hint": "This link is active for about {minutes} min.",
 	"confirmed_confirm_btn": "Confirm subscription",
 	"confirmed_success_text": "Your email is confirmed. You're subscribed to the Bearby Card waitlist — we'll email you as soon as the Bearby Card becomes available.",
 	"confirmed_invalid_title": "Invalid confirmation link",
