@@ -197,9 +197,7 @@ export async function mine_pow(
 
 export type JoinError = 'already' | 'proton' | 'pow' | 'server' | 'network';
 
-export type JoinResult =
-	| { ok: true; suggested_country: string }
-	| { ok: false; error: JoinError };
+export type JoinResult = { ok: true; suggested_country: string } | { ok: false; error: JoinError };
 
 /**
  * Joins the waitlist: mines the PoW, then POSTs the email together with the
@@ -248,7 +246,7 @@ export async function join_waitlist(
 	}
 }
 
-export type CompleteError = 'wrong' | 'expired' | 'too_many' | 'server' | 'network';
+export type CompleteError = 'wrong' | 'expired' | 'used' | 'too_many' | 'server' | 'network';
 
 /**
  * Verifies the 6-digit code together with the required country of residence.
@@ -272,7 +270,15 @@ export async function complete_waitlist(
 
 		const data = (await res.json().catch(() => null)) as { code?: number } | null;
 		const error =
-			data?.code === -7 ? 'wrong' : data?.code === -8 ? 'expired' : data?.code === -9 ? 'too_many' : 'server';
+			data?.code === -7
+				? 'wrong'
+				: data?.code === -8
+					? 'expired'
+					: data?.code === -9
+						? 'too_many'
+						: data?.code === -12
+							? 'used'
+							: 'server';
 		return { ok: false, error };
 	} catch {
 		return { ok: false, error: 'network' };

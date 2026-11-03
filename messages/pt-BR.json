@@ -46,6 +46,8 @@
 	"confirmed_invalid_text": "Faltam dados necessários neste link. Abra o link do e-mail de confirmação ou entre novamente na lista de espera.",
 	"confirmed_expired_title": "Link expirado",
 	"confirmed_expired_text": "Este link de confirmação expirou. Entre novamente na lista de espera para receber um novo.",
+	"confirmed_used_title": "Link já utilizado",
+	"confirmed_used_text": "Este link de confirmação já foi utilizado e não pode ser reutilizado.",
 	"confirmed_too_many_title": "Muitas tentativas",
 	"confirmed_too_many_text": "Muitas tentativas de confirmação. Entre novamente na lista de espera para receber um novo link.",
 	"confirmed_server_title": "Algo deu errado",

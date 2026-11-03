@@ -46,6 +46,8 @@
 	"confirmed_invalid_text": "A este enlace le faltan datos necesarios. Abre el enlace de tu correo de confirmación o únete de nuevo a la lista de espera.",
 	"confirmed_expired_title": "Enlace caducado",
 	"confirmed_expired_text": "Este enlace de confirmación ha caducado. Únete de nuevo a la lista de espera para recibir uno nuevo.",
+	"confirmed_used_title": "Enlace ya utilizado",
+	"confirmed_used_text": "Este enlace de confirmación ya fue utilizado y no puede volver a usarse.",
 	"confirmed_too_many_title": "Demasiados intentos",
 	"confirmed_too_many_text": "Demasiados intentos de confirmación. Únete de nuevo a la lista de espera para recibir un enlace nuevo.",
 	"confirmed_server_title": "Algo salió mal",

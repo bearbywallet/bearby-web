@@ -13,13 +13,19 @@
 	let country = $state('');
 	let country_error = $state(false);
 	let submitting = $state(false);
-	let phase = $state<'form' | 'done' | 'invalid' | 'expired' | 'too_many' | 'error'>('form');
+	let phase = $state<'form' | 'done' | 'used' | 'invalid' | 'expired' | 'too_many' | 'error'>(
+		'form'
+	);
 
 	$effect(() => {
 		email = page.url.searchParams.get('email') ?? '';
 		code = page.url.searchParams.get('code') ?? '';
 		if (!email || !code) phase = 'invalid';
 	});
+
+	// Confirmation links are one-shot: strip the reusable secret (email+code)
+	// from the address bar after a successful confirm so it cannot be reused
+	// or forwarded.
 
 	async function handle_confirm(e: SubmitEvent) {
 		e.preventDefault();
@@ -38,8 +44,9 @@
 
 		if (result.ok) {
 			phase = 'done';
-		} else if (result.error === 'expired') {
-			phase = 'expired';
+			history.replaceState(history.state, '', page.url.pathname);
+		} else if (result.error === 'used') {
+			phase = 'used';
 		} else if (result.error === 'too_many') {
 			phase = 'too_many';
 		} else {
@@ -147,6 +154,23 @@
 			</div>
 			<h1>{m.confirmed_expired_title()}</h1>
 			<p>{m.confirmed_expired_text()}</p>
+		{:else if phase === 'used'}
+			<div class="confirmed__icon confirmed__icon--err" aria-hidden="true">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				>
+					<circle cx="12" cy="12" r="10" />
+					<path d="m8 12.5 2.7 2.7L16 9.5" />
+				</svg>
+			</div>
+			<h1>{m.confirmed_used_title()}</h1>
+			<p>{m.confirmed_used_text()}</p>
 		{:else if phase === 'too_many'}
 			<div class="confirmed__icon confirmed__icon--err" aria-hidden="true">
 				<svg
@@ -291,7 +315,9 @@
 		font-size: 1rem;
 		font-family: inherit;
 		cursor: pointer;
-		transition: border-color 0.2s ease, box-shadow 0.2s ease;
+		transition:
+			border-color 0.2s ease,
+			box-shadow 0.2s ease;
 	}
 
 	.confirmed__form select option[value=''] {

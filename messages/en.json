@@ -49,6 +49,8 @@
 	"confirmed_invalid_text": "This link is missing required data. Please open the link from your confirmation email, or join the waitlist again.",
 	"confirmed_expired_title": "Link expired",
 	"confirmed_expired_text": "This confirmation link has expired. Please join the waitlist again to receive a new one.",
+	"confirmed_used_title": "Link already used",
+	"confirmed_used_text": "This confirmation link has already been used and can no longer be reused.",
 	"confirmed_too_many_title": "Too many attempts",
 	"confirmed_too_many_text": "Too many confirmation attempts. Please join the waitlist again to receive a new link.",
 	"confirmed_server_title": "Something went wrong",
